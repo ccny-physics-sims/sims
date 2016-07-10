@@ -27,10 +27,10 @@ function setup() {
   onoff.mouseClicked(turnonoff);
   onoff.position(650,30);
   onoff.class("sim-button")
-   equation = createP("<p>n = 1</p>");
-   equation.position(500, 70);
-      equation1 = createP("<p>n = 1</p>");
-      equation1.position(200, 70);
+  equation = createP("<p>n = 1</p>");
+  equation.position(500, 70);
+  equation1 = createP("<p>n = 1</p>");
+  equation1.position(200, 70);
 
   omegaSliderLabel = createP("Frequency");
   omegaSliderLabel.position(150,0);
