@@ -1,1 +1,1 @@
-# a plot
+# Sum of Two Waves
