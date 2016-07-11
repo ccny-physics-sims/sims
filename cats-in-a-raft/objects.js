@@ -75,7 +75,7 @@ Raft.prototype.draw = function(){
   fill(100,3,200,200);
   noStroke();
   this.arrow.update();
-  this.arrow.display();
+//  this.arrow.display();
 
   //draw cats
   push();
