@@ -25,6 +25,7 @@ function setup() {
   rateSlider.parent('sketch-holder');
   rateSlider.position(20, 60);
   rateSlider.style('width', '150px');
+  rateSlider.class("sim-slider red");
 
   //let's start walking from the center of the canvas
   startPoint = createVector(width / 2, height / 2);

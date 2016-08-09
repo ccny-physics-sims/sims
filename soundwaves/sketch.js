@@ -16,7 +16,8 @@ function setup() {
   vslider = createSlider(1, 2, 1);
    vslider.elt.step = .01;
   vslider.position(width/2, height-30);
-  vslider.parent('sketch-holder')
+  vslider.parent('sketch-holder');
+  vslider.class("sim-slider");
   //noLoop();
   // Create objects
   loop();

@@ -4,7 +4,8 @@
 
 
 function setup(){
-  createCanvas(800,600);
+  canvas = createCanvas(800,600);
+  canvas.parent("sketch-holder");
 
   cat_img = loadImage("mrTibbles.png");
   imageMode(CORNER);
@@ -16,13 +17,17 @@ function setup(){
   b1 = new Raft(v1);
   //b1.throwCat(v2);
 
-  catslider = createSlider(1,40,4);
+  catslider = createSlider(1,40,10);
   catslider.position(20,500);
+  catslider.class("sim-slider gray");
+  catslider.parent
   raftslider = createSlider(5,150,10);
   raftslider.position(20,550);
+  raftslider.class("sim-slider gray");
+  raftslider.parent
 
   // handlers for trails left by cats so you can see where they have been
-  trailTimer_MAX = 20;
+  trailTimer_MAX = 10;
   trailTimer = trailTimer_MAX;
   trailHandler = [];
 };
@@ -69,14 +74,15 @@ function draw(){
 
 
   //labels for sliders
-  stroke(0);
+  push();
+  noStroke();
+  fill(0);
   text("Mass of Cats",150,500);
   text("Mass of Raft",150,550);
-
   //text value of slider
-  text(raftslider.value().toString(),100,575);
-  text(catslider.value().toString(),100,525);
-
+  text(raftslider.value().toString(),100,550);
+  text(catslider.value().toString(),100,500);
+  pop();
 };
 function mouseClicked(){
   var s = createVector(mouseX-b1.pos.x,mouseY-b1.pos.y);

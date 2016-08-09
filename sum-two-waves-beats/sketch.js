@@ -21,7 +21,8 @@ function setup() {
 
   phaseSlider = createSlider(0, .2, 0);
   phaseSlider.elt.step = .001;
-  phaseSlider.position(300,50);
+  phaseSlider.position(300,30);
+  phaseSlider.class("sim-slider gray");
   phaseLabel = createP();
   phaseLabel.position(300,0);
   phaseLabel.parent('sketch-holder');
