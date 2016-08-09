@@ -26,27 +26,32 @@ function setup() {
   play = true;
 
   //Create sliders and buttons
-  playButton = createButton('play/pause');
+  playButton = createButton('pause');
   playButton.position(20,25);
   playButton.mousePressed(togglePlayButton);
   playButton.value = true;
+  playButton.class("sim-button gray");
 
   mSlider = createSlider(1, 21, mass);
   mSlider.position(20, height-40);
   mSlider.mousePressed(stopAn);
   mSlider.mouseReleased(startAn);
+  mSlider.class("sim-slider gray");
   kSlider = createSlider(1, 11, springk);
   kSlider.position(165, height-40);
   kSlider.mousePressed(stopAn);
   kSlider.mouseReleased(startAn);
+  kSlider.class("sim-slider gray");
   aSlider = createSlider(-10, 10, amplitude);
   aSlider.position(310, height-40);
   aSlider.mousePressed(stopAn);
   aSlider.mouseReleased(startAn);
+  aSlider.class("sim-slider gray");
   muSlider = createSlider(0, 10, mu);
   muSlider.position(455, height-40);
   muSlider.mousePressed(stopAn);
   muSlider.mouseReleased(startAn);
+  muSlider.class("sim-slider gray");
 
   //Create a default Spring
   spring = new Spring(createVector(20,height/2),springk,mass,308,amplitude/10,mu);
@@ -70,7 +75,7 @@ function draw() {
   text("Mass: "+mass+" kg", 20, 305);
   text("Spring K: "+springk+" N/m", 165, 305);
   text("Amplitude: "+(amplitude/2)+" m", 310, 305);
-  text("Mu: "+ mu +" ",455,305);
+  text("Damping: "+ mu +" ",455,305);
 
   //Draw number lines
   push();
@@ -129,12 +134,22 @@ function updateVars(){
 function togglePlayButton(){
   playButton.value = !playButton.value;
   play = !play;
+  if (play) {
+    playButton.html("pause");
+  }
+  if (!play){
+    playButton.html("play");
+
+  }
 }
 function stopAn(){
   play = false;
+
+
 }
 function startAn() {
   if (playButton.value){
     play = true;
   }
+
 }

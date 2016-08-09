@@ -39,8 +39,10 @@ function setup() {
   wavelengthSlider = createSlider(1, 3, 1);
   wavelengthSlider.elt.step=0.1;
   wavelengthSlider.position(450,40);
+  wavelengthSlider.class("sim-slider");
   omegaSlider = createSlider(-20, 20, 4);
   omegaSlider.position(150,40);
+  omegaSlider.class("sim-slider");
 
   w = width;
 

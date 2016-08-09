@@ -26,9 +26,9 @@ function setup() {
   onoff = createButton("stop");
   onoff.mouseClicked(turnonoff);
   onoff.position(650,30);
-  onoff.class("pure-button")
+  onoff.class("sim-button")
   equation = createP("y  = sin( k x + &omega; t)");
-  equation.position(50, 40);
+  equation.position(50, 60);
   ampSliderLabel = createP("Amplitude");
   ampSliderLabel.position(450,0);
   omegaSliderLabel = createP("Angular Frequency");
@@ -37,11 +37,14 @@ function setup() {
   wavelengthSliderLabel.position(50,0);
   wavelengthSlider = createSlider(10, 80, 25);
   wavelengthSlider.position(50,40);
+  wavelengthSlider.class("sim-slider");
   omegaSlider = createSlider(-10, 10, 2);
   omegaSlider.position(250,40);
+  omegaSlider.class("sim-slider");
   amplitudeSlider = createSlider(0, 10, 7.5);
   amplitudeSlider.elt.step = 0.1;
   amplitudeSlider.position(450,40);
+  amplitudeSlider.class("sim-slider");
   //
 
   w = width;

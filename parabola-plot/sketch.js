@@ -38,22 +38,25 @@ function setup() {
   cSlider = createSlider(-40, 40, 0);
   cSlider.position(50,80);
   cSlider.parent('sketch-holder')
+  cSlider.class("sim-slider gray");
   bSlider = createSlider(-20, 20, 1);
   bSlider.position(50,120);
   bSlider.parent('sketch-holder')
+  bSlider.class("sim-slider gray");
   aSlider = createSlider(-2, 2, 1);
   aSlider.elt.step = 0.1;
   aSlider.position(50,160);
   aSlider.parent('sketch-holder')
+  aSlider.class("sim-slider gray");
 
   cSliderLabel = createP("c");
-  cSliderLabel.position(30,64);
+  cSliderLabel.position(30,74);
   cSliderLabel.parent('sketch-holder')
   bSliderLabel = createP("b");
-  bSliderLabel.position(30,104);
+  bSliderLabel.position(30,114);
   bSliderLabel.parent('sketch-holder')
   aSliderLabel = createP("a");
-  aSliderLabel.position(30,144);
+  aSliderLabel.position(30,154);
   aSliderLabel.parent('sketch-holder')
 
 

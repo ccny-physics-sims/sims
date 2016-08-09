@@ -44,8 +44,9 @@ function setup()  {
   //create the start/stop button
   onoff = createButton("start");
   onoff.mouseClicked(turnonoff);
-  onoff.position(100,300);
-  onoff.class("pure-button");
+  onoff.position(50,300);
+  onoff.class("sim-button gray");
+
 
   noLoop();
   calcWave();

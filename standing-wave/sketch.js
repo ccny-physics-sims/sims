@@ -1,52 +1,41 @@
-var xspacing = 12;    // Distance between each horizontal location
+var xspacing = 10;    // Distance between each horizontal location
 var w;                // Width of entire wave
-var theta = 0.0;      // Start angle at 0
 var amplitude = 75.0; // Height of wave
-var period = 200.0;   // How many pixels before the wave repeats
+var wavelength = 30;   // How many pixels before the wave repeats
 var dx;               // Value for incrementing x
 var yvalues;  // Using an array to store height values for the wave
-var phaseSlider;
-var phase;
-var phaseLabel;
+var k = 2*Math.PI/wavelength;
+var omega = 1;
 
 function setup() {
 
-  frameRate(10);
+  frameRate(30);
   canvas = createCanvas(710, 400);
   canvas.parent('sketch-holder');
   w = width+12;
 
-  dx = (TWO_PI / period) * xspacing;
+  dx = (TWO_PI / wavelength) * xspacing;
   yvalues = new Array(floor(w/xspacing));
-
-  phaseSlider = createSlider(0, TWO_PI, HALF_PI);
-  phaseSlider.elt.step = .01;
-  phaseSlider.position(300,50);
-  phaseSlider.class("sim-slider gray");
-
-  phaseLabel = createP();
-  phaseLabel.position(300,0);
-  phaseLabel.parent('sketch-holder');
 
 }
 
 function draw() {
   background(255);
-  phase = phaseSlider.value();
 
+  t = millis()/1000;
 
-  calcWave(0);
+  calcWave(1);
   renderWave(color(250,0,0),1);
 
-  calcWave(phase);
+  calcWave(-1);
   renderWave(color(0,0,250),1);
 
-  calcSum();
-  renderWave(color(250,0,250),2);
+  calcSum(1);
+  renderWave(color(0,0,0),2);
 
-  dx = (TWO_PI / period) * xspacing;
 
-  phaseLabel.html('phase difference: '+ phase);
+
+
   push();
   strokeWeight(1);
   stroke(0);
@@ -54,22 +43,22 @@ function draw() {
   pop();
 }
 
-function calcWave(phase_) {
+function calcWave(omega) {
 
-  var x = theta;
-
+  x = 0;
   for (var i = 0; i < yvalues.length; i++) {
-    yvalues[i] = sin(x+phase_)*amplitude;
+    yvalues[i] = Math.sin(k * x + omega * t)*amplitude;
     x+=dx;
   }
 }
 
-function calcSum() {
 
-  var x = theta;
+function calcSum(omega) {
+
+  x = 0;
 
   for (var i = 0; i < yvalues.length; i++) {
-    yvalues[i] = amplitude*(sin(x+phase)+sin(x));
+    yvalues[i] = Math.sin(k * x + omega * t)*amplitude + Math.sin(k * x - omega * t)*amplitude ;
     x+=dx;
   }
 }
