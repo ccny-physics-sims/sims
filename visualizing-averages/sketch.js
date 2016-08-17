@@ -80,11 +80,11 @@ function labelSliders() {
   //de flip so the text isn't upside down
   scale(1, -1);
   fill(rectSmall.color);
-  text("min: " + theMin, sliderAlignment, interdistanceY * 3 + 10);
+  text("min: " + theMin, sliderAlignment, interdistanceY * 3 + 17);
   fill(rectLarge.color);
-  text("max: " + theMax, sliderAlignment, interdistanceY * 2 + 10);
+  text("max: " + theMax, sliderAlignment, interdistanceY * 2 + 17);
   fill(rectAverage.color);
-  text("average: (" + theMin + "+" + theMax + ")/2 = " + theAverage, sliderAlignment, interdistanceY + 10);
+  text("average: (" + theMin + "+" + theMax + ")/2 = " + theAverage, sliderAlignment, interdistanceY + 17);
   pop();
 }
 
