@@ -16,7 +16,7 @@ var interdistanceY = -50;
 
 function setup() {
   canvas = createCanvas(canvasWidth, canvasHeight);
-  canvas.parent('sketch-holder');
+  canvas.parent('sketch-holder');
   
   // create sliders and set default fontsize
   spawnSliders();
@@ -26,7 +26,7 @@ function setup() {
 function draw() {
   clear();
   //scoot the origin to the bottom of the canvas
-  translate(10, canvasHeight);
+  translate(20, canvasHeight);
   // update values
   updateBars();
   //flip the bars so they grow bottom to top
