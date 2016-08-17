@@ -9,6 +9,8 @@
 }
 
 body {
+  <!-- these first two lines remove any default padding and style. you might only need one of these values set. -->
+  padding: 0;
   margin: 0;
   display: flex;
 
@@ -18,12 +20,9 @@ body {
   /* This centers our sketch vertically. */
   align-items: center;
 
-      font-family:Helvetica, Arial, Sans-serif;
+  font-family:Helvetica, Arial, Sans-serif;
 }
-  canvas {
-  border-radius:20px;
 
-  }
   </style>
   <!-- load the p5 libraries we need. At first, we'll try from a CDN, but if for some reason that doesn't work, then we can load it from our local copy. For most sketches, all we'll need is the p5 and p5.dom libs -->
 
@@ -38,20 +37,7 @@ body {
   <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/addons/p5.dom.min.js"></script>
 
   <!-- let's get our sketch! -->
-
-
   <script language="javascript" src="sketch.js"></script>
-
-  <!-- this line removes any default padding and style. you might only need one of these values set. -->
-  <style> body {padding: 0; margin: 0;} </style>
-<script language="javascript" >
-  window.addEventListener("keydown", function(e) {
-    // space and arrow keys
-    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-        e.preventDefault();
-    }
-}, false);
-</script>
 
   </head>
 
