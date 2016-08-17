@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <html >
   <head>
-    <meta charset="UTF-8">
     <title>Visualizing Averages</title>
+      <style>
+  html, body {
+  height: 100%;
+
+}
+
+body {
+  background-color: #aaa;
+  margin: 0;
+  display: flex;
+
+  /* This centers our sketch horizontally. */
+  justify-content: center;
+
+  /* This centers our sketch vertically. */
+  align-items: center;
+
+      font-family:Helvetica, Arial, Sans-serif;
+}
+  canvas {
+  border-radius:20px;
+
+  }
+  </style>
   </head>
 
   <body>
+    <div id="sketch-holder" style="position: relative;">
+      <!-- Our sketch will go here! -->
+    </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/p5.min.js'></script>
     <script src='https://cdn.jsdelivr.net/p5.js/0.4.21/addons/p5.dom.js'></script>
     <script src="sketch.js"></script>

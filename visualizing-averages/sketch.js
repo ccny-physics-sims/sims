@@ -1,5 +1,5 @@
 // set canvas dimensions 
-var canvasHeight = 500;
+var canvasHeight = 600;
 var canvasWidth = 600;
 // set default min, max, average, rectWidth, etc
 var theMin = 100;
@@ -15,7 +15,9 @@ var sliderAlignment = canvasWidth / 2 + 50;
 var interdistanceY = -50;
 
 function setup() {
-  createCanvas(canvasWidth, canvasHeight);
+  canvas = createCanvas(canvasWidth, canvasHeight);
+  canvas.parent('sketch-holder');
+  
   // create sliders and set default fontsize
   spawnSliders();
   textSize(fontSize);
@@ -66,8 +68,10 @@ function spawnSliders() {
   push();
   minSlider = createSlider(0, 450, theMin);
   maxSlider = createSlider(0, 450, theMax);
-  maxSlider.position(sliderAlignment + 100, canvasHeight + interdistanceY * 2);
+  minSlider.parent('sketch-holder');
+  maxSlider.parent('sketch-holder');
   minSlider.position(sliderAlignment + 100, canvasHeight + interdistanceY * 3);
+  maxSlider.position(sliderAlignment + 100, canvasHeight + interdistanceY * 2);
   pop();
 }
 
