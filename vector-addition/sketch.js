@@ -1,7 +1,7 @@
 aForceVector = [];
 
 function setup() {
-  createCanvas(800, 500);
+  createCanvas(500, 500);
 
 
   startPoint = createVector(width / 2, height / 2);
