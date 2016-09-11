@@ -14,7 +14,9 @@ var spring;
 
 function setup() {
   //Create Canvas
-  createCanvas(600, 350);
+  var mycanvas = createCanvas(600, 350);
+  mycanvas.parent('sketch-holder');
+  mycanvas.position(0,0);
   textSize(15);
   noStroke();
 
@@ -31,27 +33,33 @@ function setup() {
   playButton.mousePressed(togglePlayButton);
   playButton.value = true;
   playButton.class("sim-button gray");
+  playButton.parent('sketch-holder');
+
 
   mSlider = createSlider(1, 21, mass);
   mSlider.position(20, height-40);
   mSlider.mousePressed(stopAn);
   mSlider.mouseReleased(startAn);
   mSlider.class("sim-slider gray");
+  mSlider.parent('sketch-holder');
   kSlider = createSlider(1, 11, springk);
   kSlider.position(165, height-40);
   kSlider.mousePressed(stopAn);
   kSlider.mouseReleased(startAn);
   kSlider.class("sim-slider gray");
+  kSlider.parent('sketch-holder');
   aSlider = createSlider(-10, 10, amplitude);
   aSlider.position(310, height-40);
   aSlider.mousePressed(stopAn);
   aSlider.mouseReleased(startAn);
   aSlider.class("sim-slider gray");
+  aSlider.parent('sketch-holder');
   muSlider = createSlider(0, 10, mu);
   muSlider.position(455, height-40);
   muSlider.mousePressed(stopAn);
   muSlider.mouseReleased(startAn);
   muSlider.class("sim-slider gray");
+  muSlider.parent('sketch-holder');
 
   //Create a default Spring
   spring = new Spring(createVector(20,height/2),springk,mass,308,amplitude/10,mu);
