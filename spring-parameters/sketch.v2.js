@@ -69,7 +69,7 @@ function setup() {
 function draw() {
   push();
   //bacground rect
-  fill(130,160,50);
+  fill(130,160,150);
   rect(0,0,width,height);
   //blue sky rect
   fill(131,214,342);
