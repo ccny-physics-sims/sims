@@ -1,23 +1,19 @@
-// set canvas dimensions 
-var canvasHeight = 600;
-var canvasWidth = 600;
-// set default min, max, average, rectWidth, etc
-var theMin = 100;
-var theMax = 300;
-var theAverage = (theMax + theMin) / 2;
-var rectWidths = 100;
-var fontSize = 15;
-var textOffsetX = rectWidths / 2;
-var textOffsetY = 10;
-// horizontal alignment of sliders
-var sliderAlignment = canvasWidth / 2 + 50;
-// vertical distance between sliders
-var interdistanceY = -50;
-
 function setup() {
-  canvas = createCanvas(canvasWidth, canvasHeight);
+  // set canvas dimensions 
+  canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('sketch-holder');
-  
+  // set default min, max, average, rectWidth, etc
+  theMin = 100;
+  theMax = 300;
+  theAverage = (theMax + theMin) / 2;
+  rectWidths = 100;
+  fontSize = 16;
+  textOffsetX = rectWidths / 2;
+  textOffsetY = 10;
+  // horizontal alignment of sliders
+  sliderAlignment = windowWidth / 2 + 95;
+  // vertical distance between sliders
+  interdistanceY = -50;
   // create sliders and set default fontsize
   spawnSliders();
   textSize(fontSize);
@@ -26,7 +22,7 @@ function setup() {
 function draw() {
   clear();
   //scoot the origin to the bottom of the canvas
-  translate(20, canvasHeight);
+  translate(windowWidth / 2 - rectWidths * 2.5, windowHeight * .95);
   // update values
   updateBars();
   //flip the bars so they grow bottom to top
@@ -63,15 +59,16 @@ function Bar(x, y, color) {
   this.color = color;
 }
 
-
 function spawnSliders() {
   push();
-  minSlider = createSlider(0, 450, theMin);
-  maxSlider = createSlider(0, 450, theMax);
+  minSlider = createSlider(0, 450, theMin).class("sim-slider gray");;
+  maxSlider = createSlider(0, 450, theMax).class("sim-slider gray");;
+  //minSlider.class("sim-slider gray");
+  //maxSlider.class("sim-slider gray");
   minSlider.parent('sketch-holder');
   maxSlider.parent('sketch-holder');
-  minSlider.position(sliderAlignment + 100, canvasHeight + interdistanceY * 3);
-  maxSlider.position(sliderAlignment + 100, canvasHeight + interdistanceY * 2);
+  minSlider.position(sliderAlignment, windowHeight * .65);
+  maxSlider.position(sliderAlignment, windowHeight * .8);
   pop();
 }
 
@@ -80,11 +77,11 @@ function labelSliders() {
   //de flip so the text isn't upside down
   scale(1, -1);
   fill(rectSmall.color);
-  text("min: " + theMin, sliderAlignment, interdistanceY * 3 + 17);
+  text("a: " + theMin, 345, -windowHeight * .30);
   fill(rectLarge.color);
-  text("max: " + theMax, sliderAlignment, interdistanceY * 2 + 17);
+  text("b: " + theMax, 345, -windowHeight * .15);
   fill(rectAverage.color);
-  text("average: (" + theMin + "+" + theMax + ")/2 = " + theAverage, sliderAlignment, interdistanceY + 17);
+  text("average: (" + theMin + "+" + theMax + ")/2 = " + theAverage, 345, -windowHeight * .01);
   pop();
 }
 
@@ -108,7 +105,7 @@ function labelSmall() {
   scale(1, -1);
   fill('black');
   textAlign(CENTER);
-  text("min", offset + textOffsetX, -(rectSmall.y + textOffsetY));
+  text("a", offset + textOffsetX, -(rectSmall.y + textOffsetY));
   pop();
 }
 
@@ -118,8 +115,8 @@ function labelAverage() {
   fill('black');
   textAlign(CENTER);
   text("(min + max)", offset + textOffsetX, -(rectAverage.y + textOffsetY * 4));
-  text("_________",  offset + textOffsetX, -(rectAverage.y + textOffsetY * 3));
-  text("2",  offset + textOffsetX, -(rectAverage.y + textOffsetY * 1));
+  text("_________", offset + textOffsetX, -(rectAverage.y + textOffsetY * 3));
+  text("2", offset + textOffsetX, -(rectAverage.y + textOffsetY * 1));
   pop();
 }
 
@@ -138,6 +135,14 @@ function labelLarge() {
   scale(1, -1);
   fill('black');
   textAlign(CENTER);
-  text("max", offset + textOffsetX, -(rectLarge.y + textOffsetY));
+  text("b", offset + textOffsetX, -(rectLarge.y + textOffsetY));
   pop();
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  sliderAlignment = windowWidth / 2 + 95;
+  minSlider.position(sliderAlignment, windowHeight * .65);
+  maxSlider.position(sliderAlignment, windowHeight * .8);
+  labelSliders();
 }
