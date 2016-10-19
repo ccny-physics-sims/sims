@@ -1,0 +1,455 @@
+/*  CCNY Science Sims - http://sciencesims.com  */ 
+/*general*/
+html {overflow:hidden;}
+/*sliders*/
+
+input[type=range].sim-slider {
+  -webkit-appearance: none;
+    margin: 18px 0;
+}
+
+input[type=range].sim-slider:focus {
+  outline: none;
+}
+
+input[type=range].sim-slider::-webkit-slider-runnable-track {
+  /*width: 100%;*/
+  height: 8.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+  border-radius: 1.3px;
+  border: 0.2px solid #898989;
+}
+
+input[type=range].sim-slider::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 20px;
+  border-radius: 3px;
+  background: #94c6d8;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -12px;
+}
+
+input[type=range].sim-slider:focus::-webkit-slider-runnable-track {
+}
+input[type=range].sim-slider::-moz-range-track {
+  /*width: 100%;*/
+  height: 7.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+  border-radius: 1.3px;
+  border: 0.2px solid #898989;
+  background:white;
+}
+input[type=range].sim-slider::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 20px;
+  border-radius: 3px;
+  background: #94c6d8;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -12px;
+}
+input[type=range].sim-slider::-ms-track {
+  /*width: 100%;*/
+  height: 8.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px;
+  color: white;
+}
+input[type=range].sim-slider::-ms-fill-lower {
+  background: white;
+  border: 0.2px solid #898989;
+  border-radius: 1.3px;
+  box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+}
+input[type=range].sim-slider::-ms-fill-upper {
+  background: white;
+  border: 0.2px solid #898989;
+  border-radius: 1.3px;
+  box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+}
+input[type=range].sim-slider::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 20px;
+  border-radius: 3px;
+  background: #94c6d8;
+  cursor: pointer;
+}
+input[type=range].sim-slider:focus::-ms-fill-lower {
+  background: white;
+}
+input[type=range].sim-slider:focus::-ms-fill-upper {
+  background: white;
+}
+
+
+input[type=range].sim-slider.red::-webkit-slider-thumb{
+  background: #C67775;
+}
+
+input[type=range].sim-slider.red::-moz-range-thumb{
+  background: #C67775;
+}
+
+input[type=range].sim-slider.red::-ms-thumb{
+  background: #C67775;
+}
+
+input[type=range].sim-slider.gray::-webkit-slider-thumb{
+  background: #e6e6e6;
+}
+
+input[type=range].sim-slider.gray::-moz-range-thumb{
+  background: #e6e6e6;
+}
+
+input[type=range].sim-slider.gray::-ms-thumb{
+  background: #e6e6e6;
+}
+
+@media screen and (min-width: 40.5em) {
+  input[type=range].sim-slider {
+  -webkit-appearance: none;
+  margin: 18px 0;
+  /*width:400px;*//*adjust of slider here*/
+}
+
+input[type=range].sim-slider:focus {
+  outline: none;
+}
+
+input[type=range].sim-slider::-webkit-slider-runnable-track {
+  /*width: 100%;*/
+  height: 8.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+  border-radius: 1.3px;
+  border: 0.2px solid #898989;
+}
+
+input[type=range].sim-slider::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 25px;
+  width: 18px;
+  border-radius: 3px;
+  background: #94c6d8;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -10px;
+}
+
+input[type=range].sim-slider:focus::-webkit-slider-runnable-track {
+}
+
+input[type=range].sim-slider::-moz-range-track {
+  /*width: 100%;*/
+  height: 7.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+  border-radius: 1.3px;
+  border: 0.2px solid #898989;
+  background:white;
+}
+input[type=range].sim-slider::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 20px;
+  border-radius: 3px;
+  background: #94c6d8;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -12px;
+}
+input[type=range].sim-slider::-ms-track {
+  /*width: 100%;*/
+  height: 8.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px;
+  color: white;
+}
+input[type=range].sim-slider::-ms-fill-lower {
+  background: white;
+  border: 0.2px solid #898989;
+  border-radius: 1.3px;
+  box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+}
+input[type=range].sim-slider::-ms-fill-upper {
+  background: white;
+  border: 0.2px solid #898989;
+  border-radius: 1.3px;
+  box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+}
+input[type=range].sim-slider::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 20px;
+  border-radius: 3px;
+  background: #94c6d8;
+  cursor: pointer;
+}
+input[type=range].sim-slider:focus::-ms-fill-lower {
+  background: white;
+}
+input[type=range].sim-slider:focus::-ms-fill-upper {
+  background: white;
+}
+
+
+input[type=range].sim-slider.red::-webkit-slider-thumb{
+  background: #C67775;
+}
+
+input[type=range].sim-slider.red::-moz-range-thumb{
+  background: #C67775;
+}
+
+input[type=range].sim-slider.red::-ms-thumb{
+  background: #C67775;
+}
+
+input[type=range].sim-slider.gray::-webkit-slider-thumb{
+  background: #e6e6e6;
+}
+
+input[type=range].sim-slider.gray::-moz-range-thumb{
+  background: #e6e6e6;
+}
+
+input[type=range].sim-slider.gray::-ms-thumb{
+  background: #e6e6e6;
+}
+
+
+
+}
+
+
+input[type=range].sim-slider.vertical{
+transform: rotate(270deg);
+}
+/* SIM BUTTON */
+.sim-button {
+  width:100px;
+  padding: 15px 25px;
+  font-size: 15px;
+  font-family:Helvetica, sans-serif;
+  font-weight:bold;
+  cursor: pointer;
+  text-align: center;
+  outline: none;
+  color: #fff;
+  background-color: #94c6d8;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.sim-button:hover {
+  background-color: #80a7b5
+}
+
+.sim-button:active {
+  background-color: #80a7b5;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.sim-button.red {
+  background-color: #b27775;
+}
+
+.sim-button.red:hover{background-color: #9f4b48;}
+
+.sim-button.red:active {
+  background-color: #9f4b48;
+}
+
+.sim-button.gray{
+  background-color: #747474;
+}
+
+.sim-button.gray:hover{background-color: #58585a;}
+
+.sim-button.gray:active {
+  background-color: #58585a;
+}
+
+@media screen and (min-width: 40.5em) {
+.sim-button {
+  width:100px;
+  padding: 15px 25px;
+  font-size: 15px;
+  font-family:Helvetica, sans-serif;
+  font-weight:bold;
+  cursor: pointer;
+  text-align: center;
+  outline: none;
+  color: #fff;
+  background-color: #94c6d8;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  letter-spacing: 1px;
+}
+
+.sim-button:hover {background-color: #80a7b5;}
+
+.sim-button:active {
+  background-color: #80a7b5;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+}
+
+/*Switches (which are really just checkboxes)*/
+
+.sim-switch input[type=checkbox] {
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select: none;
+    letter-spacing: 2px;
+}
+.sim-switch input[type=checkbox] {
+    display: none;
+}
+
+.sim-switch input[type=checkbox] + label {
+  display: block;
+  overflow: hidden;
+
+  cursor: pointer;
+  border: 2px solid white;
+  border-radius: 8px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  font-size: 15px;
+  font-family:Helvetica, sans-serif;
+  font-weight:bold;
+  padding-top:3px;
+  padding-bottom: 3px;
+
+}
+
+.sim-switch input[type=checkbox] + label:before {
+  content: "";
+  padding-left: 9px;
+  padding-right: 9px;
+  background-color: #94c6d8; color: #FFFFFF;
+  display: block; width: 25px; margin: -6px;
+  background: #94c6d8;
+  position: absolute; top: 0; bottom: 0;
+  right: 53px;
+  border:1px solid #a1a1a1;
+  border-radius: 8px;
+  transition: all 0.2s ease-in 0s;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #a1a1a1;
+}
+
+.sim-switch input[type=checkbox]:checked + label:before {
+  right: 6px;
+}
+
+.sim-switch input[type=checkbox] + label:after {
+  content: "ON OFF";
+  padding: 10px 10px;
+  background-color: #a5a5a5; color: #FFFFFF;
+  text-align: right;
+
+}
+
+.sim-switch.red input[type=checkbox] + label:before{
+    background: #C67775;
+}
+
+.sim-switch.gray input[type=checkbox] + label:before{
+    background: #747474;
+}
+
+
+.sim-radio input[type=radio] {
+  display:none;
+}
+
+/* Radio boxes */
+
+.sim-radio input[type=radio] + label:before {
+  content: "";
+  display: inline-block;
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  vertical-align:middle;
+  margin-right: 8px;
+  background-color: #aaa;
+  box-shadow: inset 0px 2px 2px rgba(0, 0, 0, .3);
+  border-radius: 8px;
+  border: thin solid black;
+
+}
+
+.sim-radio input[type=radio]:checked + label:before {
+  content: "\2022"; /* Bullet */
+  color:#94c6d8;
+  background-color: #fff;
+  font-size:1.8em;
+  text-align:center;
+  line-height:16px;
+  text-shadow:0px 0px 3px #eee;
+
+
+}
+
+.sim-radio input[type=radio] + label {
+margin: 20px;
+padding: 10px;
+border: 2px solid #747474;
+border-radius: 5px;
+cursor: pointer;
+background: #fff;
+color:#000000;
+font-size: 15px;
+font-family:Helvetica, sans-serif;
+font-weight:bold;
+box-shadow: 0px 2px 0px 1px rgba(0, 0, 0, .3);
+}
+.sim-radio input[type=radio]:checked + label {
+background-color: #94c6d8;
+box-shadow: inset 0px 2px 2px rgba(0, 0, 0, .3);
+}
+.sim-radio.gray input[type=radio]:checked + label {
+background-color: #747474;
+}
+.sim-radio.red input[type=radio]:checked + label {
+  background-color: #C67775;
+}
+.sim-radio.gray input[type=radio]:checked + label:before {
+  color: #747474;
+}
+.sim-radio.red input[type=radio]:checked + label:before {
+  color: #C67775;
+}
+.sim-radio.vertical input[type=radio] + label {
+  display: block;
+  clear:both;
+}
