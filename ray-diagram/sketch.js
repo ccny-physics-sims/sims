@@ -19,8 +19,8 @@ function preload() {
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    frameRate(60);
-    
+    frameRate(30);
+
     imageMode(CENTER);
 
     // new Slider object
@@ -82,12 +82,12 @@ function draw() {
     line(0, height/2, width - 50, height/2);
     pop();
 
-    // Some tasks get their own functions     
+    // Some tasks get their own functions
     drawFocalPoints();
     updateArrows();
     drawRays();
     displayValues();
-    
+
     t++;
  }
 
@@ -123,7 +123,7 @@ function updateArrows() {
      if (keyIsDown(LEFT_ARROW)){
          objectArrow.target.x -= 2;
      }
-      if (keyIsDown(RIGHT_ARROW)){   
+      if (keyIsDown(RIGHT_ARROW)){
        objectArrow.target.x += 2;
         }
 
@@ -134,7 +134,7 @@ function updateArrows() {
         objectArrow.target.y += 2;
         }
     }
-    
+
     // Draw candles
     push();
     translate(objectArrow.target.x,(objectArrow.target.y+lensCenter.y)/2);
@@ -191,7 +191,7 @@ function displayValues() {
         // Constrain is used frequently to keep the labels on-screen.
 
         textAlign(CENTER);
-       
+
         // Boundaries
         push();
         noStroke();
@@ -254,7 +254,7 @@ function displayValues() {
             pop();
         }
         pop();
-        
+
         // Bottom display
         push();
         stroke(255);
@@ -262,7 +262,7 @@ function displayValues() {
         textAlign(CENTER);
         text('Object distance',lensCenter.x-55,height-50);
         text('Focal length',lensCenter.x+48,height-50);
-        
+
         // test object distance and focal length for equality
         if(lensCenter.x-objectArrow.target.x + 0.5 < focalLength.x && objectArrow.target.x < lensCenter.x){
             text('<',lensCenter.x,height-50);
@@ -271,7 +271,7 @@ function displayValues() {
         }else if(abs(lensCenter.x-objectArrow.target.x-focalLength.x)<0.6){
             text('=',lensCenter.x,height-50);
         }
-        
+
         // Magnification
         text('Magnification: ', lensCenter.x-20, height - 30);
         if(abs(lensCenter.x-objectArrow.target.x-focalLength.x)>0.6){
@@ -281,7 +281,7 @@ function displayValues() {
         }else{
             text('Infinite',lensCenter.x+40,height-30);
         }
-        
+
         // Real or virtual image
         if(objectArrow.target.x < lensCenter.x-focalLength.x){
             text('Real image',lensCenter.x,height-10);
@@ -342,7 +342,7 @@ function windowResized() {
     focalSlider.position(width/2+60, height/4-50);
     focalSlider.style('width', sliderWidth);
 
-    // Keep lens centered 
+    // Keep lens centered
     lensCenter.x = width/2;
     lensCenter.y = height/2;
     image(lens, lensCenter.x, lensCenter.y);
