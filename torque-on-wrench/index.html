@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
-<Title>
+<head>
+
+
+<title>
   Torque on Wrench
-</Title>
+</title>
+<!-- get the sims css file -->
+<link href="../../sim-design/sims-styles.css" rel="stylesheet" />
 <!-- load the p5 libraries we need. At first, we'll try from a CDN, but if for some reason that doesn't work, then we can load it from our local copy. For most sketches, all we'll need is the p5 and p5.dom libs -->
 
 <!-- get p5.js from cdn -->
@@ -19,10 +24,16 @@ window.p5 || document.write('<script src="../lib/p5.js"><\/script>');
 window.p5 || document.write('<script src="../lib/addons/p5.dom.js"><\/script>');
 </script>
 
+<!-- Get science Library -->
+
+<script language="javascript" src="https://ccny-physics-sims.github.io/science-library/lib/science.js"></script>
 <!-- let's get our sketch! -->
-<script language="javascript" src="../lib/science.js"></script>
 
 <script language="javascript" src="sketch.js"></script>
 <!-- this line removes any default padding and style. you might only need one of these values set. -->
 <style> body {padding: 0; margin: 0;} </style>
+</head>
+<body>
+
+</body>
 </html>
