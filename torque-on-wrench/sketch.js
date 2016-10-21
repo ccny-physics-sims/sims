@@ -7,7 +7,8 @@ function setup(){
 //Create some vectors, arrows, and a slider
   center = createVector(150,275);
   pointApplied_x = createSlider(0,350,300,10);
-  pointApplied_x.position(80,30);
+  pointApplied_x.position(100,25);
+  pointApplied_x.class("sim-slider gray");
   end = createVector(450,450);
   pointApplied = createVector(center.x+pointApplied_x.value(),center.y);
   positionVector = new Arrow(center,pointApplied);
@@ -78,6 +79,7 @@ function draw(){
 
 
   fill('black');
+  textSize(14);
   text("Applied Force (F) = "+force1mag.toFixed(0)+" N",100,100);
   text("Torque = "+torque.toFixed(1)+" N-m",100,120);
   text("Position Vector (r) = "+(pointApplied_x.value()/10).toFixed(0)+" cm",100,20);
@@ -138,7 +140,7 @@ function draw(){
   stroke('black');
 
 
-  console.log(phi)
+  // console.log(phi)
 }
 
 //taken from p5.js examples
