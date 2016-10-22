@@ -57,7 +57,7 @@ function draw(){
 
 
 //keeping integrity of force vector while enduring slider change
-  if (mouseIsPressed){
+  if (force1.origin.x != oldX){
     dx = force1.origin.x - oldX;
     force1.target.x = force1.target.x + dx;
   };
