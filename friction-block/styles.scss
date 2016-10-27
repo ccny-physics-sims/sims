@@ -1,6 +1,28 @@
+//my CSS begins here
 $spacing: 20px;
 .nums {
   float: right;
+}
+
+input[type="range"]:nth-child(1)::before {
+  content: "mass";
+  position: fixed;
+  margin-top: 1.5em;
+  color: black;
+}
+
+input[type="range"]:nth-child(2)::before {
+  content: "impulse";
+  position: fixed;
+  margin-top: 1.5em;
+  color: black;
+}
+
+input[type="range"]:nth-child(3)::before {
+  position: fixed;
+  margin-top: 1.5em;
+  color: black;
+  content: "angle";
 }
 
 #slider-holder {

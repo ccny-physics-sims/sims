@@ -1,13 +1,14 @@
 function setup() {
   createCanvas(windowWidth, windowHeight);
   m = 3; // mass of block
-  i = 40; // initial force applied
+  i = 30; // initial force applied
   w = 40; // width
   h = 40; // height
   g = 1; //gravity 
   ra = 10; // initial ramp angle
-  mus = .5;
-  muk = .4;
+  clamp = 0.5;
+  mus = .35;
+  muk = .30;
   currentMu = mus;
   moving = false;
   mahdiv = createDiv('');
@@ -35,12 +36,15 @@ function draw() {
 }
 
 function displayStats() {
+  // unit adjustment 
+  ua = 10;
   stats = ("type: <span class=\"nums\">" + frictionMode + "</span><br>" +
-    "mu: <span class=\"nums\">" + currentMu + "</span><br>" +
-    "distance: <span class=\"nums\">" + (block.distance / (9.8 * 2)).toFixed(1) + " m</span><br>" +
-    "velocity: <span class=\"nums\">" + (block.velocity.x / (9.8 * 2)).toFixed(1) + " m/s </span><br>" +
+    "mu: <span class=\"nums\">" + currentMu.toFixed(2) + "</span><br>" +
+    "distance: <span class=\"nums\">" + (block.distance / (ua*ua)).toFixed(1) + " m</span><br>" +
+    "velocity: <span class=\"nums\">" + (block.velocity.x / (ua)).toFixed(1) + " m/s </span><br>" +
     "mass: <span class=\"nums\">" + block.mass + " kg</span><br>impulse: <span class=\"nums\">" + shoveSlider.value() + " N</span><br>" +
-    "angle: <span class=\"nums\">" + rampSlider.value().toFixed(1) + " &theta;</span>");
+    "angle: <span class=\"nums\">" + rampSlider.value().toFixed(1) + " &theta;</span><br>" + 
+          "time: <span class=\"nums\">" + (t/ua).toFixed(1) + " s</span>");
   mahdiv.html(stats);
   mahdiv.parent('stats-holder');
 }
@@ -54,10 +58,10 @@ function spawnControls() {
   button2.mousePressed(init);
   button2.parent('button-holder');
   button2.class("sim-slider gray ");
-  massSlider = createSlider(1, 5, m);
+  massSlider = createSlider(1, 50, m);
   massSlider.parent('slider-holder');
   massSlider.class("sim-slider gray ");
-  shoveSlider = createSlider(0, 80, i);
+  shoveSlider = createSlider(-80, 80, i);
   shoveSlider.parent('slider-holder');
   shoveSlider.class("sim-slider gray ");
   rampSlider = createSlider(0, 30, ra);
@@ -80,11 +84,13 @@ function init() {
   accel = createVector(0, 0);
   netForce = createVector(0, 0);
   shoveMePlz = false;
+  frictSign = 1;
   block = new KineticMass(pos, vel, accel, 10, 'red');
   block.mass = massSlider.value();
   shove = shoveSlider.value();
   moving = false;
   currentMu = mus;
+  t=0;
 }
 
 function calcNetForce() {
@@ -101,24 +107,33 @@ function calcNetForce() {
     // check if block overcomes friction from being pushed
     if (Math.abs(shove) > fstaticMax) {
       moving = true;
+      t=0;
     }
     // check if block begins to slide from gravity
     else if (Math.abs(Math.tan(thetaRadians)) > mus) {
       moving = true;
+      t=0;
     }
   }
   // if the block is moving, apply kinetic friction
   if (moving === true) {
+    t+=1;
     currentMu = muk;
     frictionMode = "kinetic";
-    netForce = createVector((shove + block.mass * g * Math.sin(thetaRadians) - muk * block.mass * g * Math.cos(thetaRadians)), 0);
+    // adjust friction to oppose direction of movement
+    if (block.velocity.x > 0) {
+      frictSign = 1;
+    } else {
+      frictSign = -1;
+    }
+    netForce = createVector((shove + block.mass * g * Math.sin(thetaRadians) - frictSign * muk * block.mass * g * Math.cos(thetaRadians)), 0);
   } else {
     currentMu = mus;
     frictionMode = "static";
     netForce = createVector(0, 0);
   }
   // keep the block from sliding backwards from friction when halted
-  if (block.velocity.x <= 0) {
+  if (Math.abs(block.velocity.x) < clamp) {
     moving = false;
     currentMu = mus;
     frictionMode = "static";
@@ -133,6 +148,7 @@ var KineticMass = function(position, velocity, acceleration, mass, kmFill, scali
   this.velocity = new createVector(velocity.x, velocity.y);
   this.acceleration = new createVector(acceleration.x, acceleration.y);
   this.previousVel = new createVector(0, 0);
+  
   this.limit = 10000;
   this.mass = mass;
   this.color = kmFill;
@@ -164,6 +180,7 @@ var KineticMass = function(position, velocity, acceleration, mass, kmFill, scali
     var f = force.copy();
     f.div(this.mass);
     this.acceleration = f;
+    if (this.acceleration.x !== 0){console.log(this.acceleration.x)}
   };
   //Behaviors
   this.wrapEdges = function() {
