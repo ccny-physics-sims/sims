@@ -1,0 +1,311 @@
+.nums {
+  float: right;
+}
+
+input[type="range"]:nth-child(1)::before {
+  content: "mass";
+  position: fixed;
+  margin-top: 1.5em;
+  color: black;
+}
+
+input[type="range"]:nth-child(2)::before {
+  content: "push";
+  position: fixed;
+  margin-top: 1.5em;
+  color: black;
+}
+
+input[type="range"]:nth-child(3)::before {
+  position: fixed;
+  margin-top: 1.5em;
+  color: black;
+  content: "angle";
+}
+
+#slider-holder {
+  right: 20px;
+  top: 20px;
+}
+
+#slider-holder > * {
+  display: block;
+  margin-bottom: 3em;
+}
+
+#button-holder {
+  right: 20px;
+  bottom: 20px;
+}
+
+#button-holder > * {
+  display: block;
+  margin-top: 1.5em;
+}
+
+#stats-holder > * {
+  position: fixed;
+  min-width: 8.5em;
+  left: 20px;
+  bottom: 20px;
+}
+
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  /* This centers our sketch horizontally. */
+  justify-content: center;
+  /* This centers our sketch vertically. */
+  align-items: center;
+  font-family: Helvetica, Arial, Sans-serif;
+}
+
+button {
+  font-size: 12px;
+  min-width: 130px;
+  padding: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  outline: none;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px #999;
+  letter-spacing: 1px;
+  background-color: #747474;
+}
+
+button:hover {
+  background-color: #58585a;
+}
+
+button:active {
+  background-color: #58585a;
+}
+
+input[type=range].sim-slider {
+  -webkit-appearance: none;
+  margin: 0em 0;
+}
+
+input[type=range].sim-slider:focus {
+  outline: none;
+}
+
+input[type=range].sim-slider::-webkit-slider-runnable-track {
+  /*width: 100%;*/
+  height: 8.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+  border-radius: 1.3px;
+  border: 0.2px solid #898989;
+}
+
+input[type=range].sim-slider::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 20px;
+  border-radius: 3px;
+  background: #94c6d8;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -12px;
+}
+
+input[type=range].sim-slider::-moz-range-track {
+  /*width: 100%;*/
+  height: 7.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+  border-radius: 1.3px;
+  border: 0.2px solid #898989;
+  background: white;
+}
+
+input[type=range].sim-slider::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 20px;
+  border-radius: 3px;
+  background: #94c6d8;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -12px;
+}
+
+input[type=range].sim-slider::-ms-track {
+  /*width: 100%;*/
+  height: 8.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px;
+  color: white;
+}
+
+input[type=range].sim-slider::-ms-fill-lower {
+  background: white;
+  border: 0.2px solid #898989;
+  border-radius: 1.3px;
+  box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+}
+
+input[type=range].sim-slider::-ms-fill-upper {
+  background: white;
+  border: 0.2px solid #898989;
+  border-radius: 1.3px;
+  box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+}
+
+input[type=range].sim-slider::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 20px;
+  border-radius: 3px;
+  background: #94c6d8;
+  cursor: pointer;
+}
+
+input[type=range].sim-slider:focus::-ms-fill-lower {
+  background: white;
+}
+
+input[type=range].sim-slider:focus::-ms-fill-upper {
+  background: white;
+}
+
+input[type=range].sim-slider.gray::-webkit-slider-thumb {
+  background: #e6e6e6;
+}
+
+input[type=range].sim-slider.gray::-moz-range-thumb {
+  background: #e6e6e6;
+}
+
+input[type=range].sim-slider.gray::-ms-thumb {
+  background: #e6e6e6;
+}
+
+@media screen and (min-width: 40.5em) {
+  input[type=range].sim-slider {
+    -webkit-appearance: none;
+    /*width:400px;*/
+    /*adjust of slider here*/
+  }
+
+  input[type=range].sim-slider:focus {
+    outline: none;
+  }
+
+  input[type=range].sim-slider::-webkit-slider-runnable-track {
+    /*width: 100%;*/
+    height: 8.4px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+    border-radius: 1.3px;
+    border: 0.2px solid #898989;
+  }
+
+  input[type=range].sim-slider::-webkit-slider-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 25px;
+    width: 18px;
+    border-radius: 3px;
+    background: #94c6d8;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -10px;
+  }
+
+  input[type=range].sim-slider::-moz-range-track {
+    /*width: 100%;*/
+    height: 7.4px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+    border-radius: 1.3px;
+    border: 0.2px solid #898989;
+    background: white;
+  }
+
+  input[type=range].sim-slider::-moz-range-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 30px;
+    width: 20px;
+    border-radius: 3px;
+    background: #94c6d8;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -12px;
+  }
+
+  input[type=range].sim-slider::-ms-track {
+    /*width: 100%;*/
+    height: 8.4px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px;
+    color: white;
+  }
+
+  input[type=range].sim-slider::-ms-fill-lower {
+    background: white;
+    border: 0.2px solid #898989;
+    border-radius: 1.3px;
+    box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+  }
+
+  input[type=range].sim-slider::-ms-fill-upper {
+    background: white;
+    border: 0.2px solid #898989;
+    border-radius: 1.3px;
+    box-shadow: 1px 1px 1px #898989, 0px 0px 1px #0d0d0d;
+  }
+
+  input[type=range].sim-slider::-ms-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 30px;
+    width: 20px;
+    border-radius: 3px;
+    background: #94c6d8;
+    cursor: pointer;
+  }
+
+  input[type=range].sim-slider:focus::-ms-fill-lower {
+    background: white;
+  }
+
+  input[type=range].sim-slider:focus::-ms-fill-upper {
+    background: white;
+  }
+
+  input[type=range].sim-slider.gray::-webkit-slider-thumb {
+    background: #e6e6e6;
+  }
+
+  input[type=range].sim-slider.gray::-moz-range-thumb {
+    background: #e6e6e6;
+  }
+
+  input[type=range].sim-slider.gray::-ms-thumb {
+    background: #e6e6e6;
+  }
+}
