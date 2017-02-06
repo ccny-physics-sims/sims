@@ -1,5 +1,5 @@
 function preload() {
-  carImage = loadImage("car");
+  carImage = loadImage("car.png");
 }
 function setup() {
 
