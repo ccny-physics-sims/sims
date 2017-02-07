@@ -6,7 +6,7 @@ function setup() {
   canvas = createCanvas(500, 500);
   canvas.parent('sketch-holder');
 
-  //frameRate(25);
+  frameRate(25);
 
 
   //create slider for adjusting the accleration
