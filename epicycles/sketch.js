@@ -12,7 +12,9 @@ var Trails = [];
 
 
 function setup(){
-createCanvas(windowWidth, windowHeight);
+canvas = createCanvas(windowWidth, windowHeight);
+canvas.parent('sketch-holder');
+
 frameRate(30);
   c = 0;
   onoff = createButton("stop");
@@ -168,7 +170,7 @@ Particle.prototype.isDead = function(){
 
 function windowResized() {
     // Resize necessary elements to fit new window size
-    //resizeCanvas(windowWidth, windowHeight); // width and height system variables updated here
+    // resizeCanvas(windowWidth, windowHeight); // width and height system variables updated here
   }
 
   function turnonoff() {
