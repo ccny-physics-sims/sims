@@ -265,7 +265,7 @@ function turnonoff2() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  //resizeCanvas(windowWidth, windowHeight);
   ampSlider.position(alignX, windowHeight - alignY * 14);
   freqSlider.position(alignX, windowHeight - alignY * 8);
   toggleSineButton.position(alignX, alignY * 1);

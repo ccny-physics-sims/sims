@@ -1,5 +1,5 @@
 function setup() {
-  // set canvas dimensions 
+  // set canvas dimensions
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('sketch-holder');
   // set default min, max, average, rectWidth, etc
@@ -140,7 +140,7 @@ function labelLarge() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  //resizeCanvas(windowWidth, windowHeight);
   sliderAlignment = windowWidth / 2 + 95;
   minSlider.position(sliderAlignment, windowHeight * .65);
   maxSlider.position(sliderAlignment, windowHeight * .8);
