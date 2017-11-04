@@ -11,7 +11,9 @@ var count;
 var instructions;
 
 function setup(){
-  createCanvas(windowWidth, windowHeight);
+  canvas=createCanvas(windowWidth, windowHeight);
+  canvas.parent('sketch-holder');
+
   frameRate(30);
   planet = ellipse(width/2,height/2,40,40);
 
