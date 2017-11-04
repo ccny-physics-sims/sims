@@ -112,5 +112,5 @@ function clearWaves(){
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  // resizeCanvas(windowWidth, windowHeight);
 }

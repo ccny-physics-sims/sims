@@ -71,7 +71,7 @@ function COM(){
 
 function windowResized() {
     // Resize necessary elements to fit new window size
-    resizeCanvas(windowWidth, windowHeight); // width and height system variables updated here
+    // resizeCanvas(windowWidth, windowHeight); // width and height system variables updated here
   }
 
 function keyTyped(){
