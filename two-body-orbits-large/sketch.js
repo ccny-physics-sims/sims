@@ -1,5 +1,5 @@
 var orbiters=[];
-var gravity =5;
+var gravity = 5;
 var totalMass;
 var Trails = [];
 
@@ -7,14 +7,14 @@ var SolarSystem;
 function setup(){
   frameRate(30);
   createCanvas(windowWidth, windowHeight);
-  v1 = 1;
-  massRatio = 2;
+  v1 = 12;
+  massRatio = 70;
 
 
  SolarSystem = new GravSystem(orbiters);
 
-mass1 =  orbiters.push(new Orbiter(createVector(width/2,-200+height/2),createVector(v1,0),createVector(0,0),100, random(50,200)));
-mass2 = orbiters.push(new Orbiter(createVector(width/2,height/2),createVector(-v1/massRatio,0),createVector(0,0),100*massRatio, random(50,200)));
+mass1 =  orbiters.push(new Orbiter(createVector(width/2,-130+height/2),createVector(v1,0),createVector(0,0),100, color('DodgerBlue')));
+mass2 = orbiters.push(new Orbiter(createVector(width/2,height/2),createVector(-v1/massRatio,0),createVector(0,0),100*massRatio, color('Gold')));
 
  }
 
@@ -24,7 +24,7 @@ function draw(){
 background(255);
 
   for (var k = 0; k < 4; k++) { // increase the greater than value to increase simulation step rate
-      SolarSystem.do_physics(1.0 / 8); // increase the divisor to increase accuracy and decrease simulation speed
+      SolarSystem.do_physics(1.0 / 16); // increase the divisor to increase accuracy and decrease simulation speed
   }
 
   for (i=0;i<orbiters.length;i++){
