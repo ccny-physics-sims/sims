@@ -77,7 +77,8 @@ function draw(){
   torque = -1*sin(phi)*force1mag*pointApplied_x.value()/1000;
   //when pointApplied_x.val = 100 , take to be 10cm, divide by 1000 for N-m torque calculation
 
-
+  push()
+  noStroke();
   fill('black');
   textSize(14);
   text("Applied Force (F) = "+force1mag.toFixed(0)+" N",100,100);
@@ -106,7 +107,7 @@ function draw(){
   }  else if (torque == 0 && force1.target.x < positionVector.target.x){
   text("Angle \u03A6 = "+180+" degrees",100,80);
 };
-
+pop();
 //draw torque vector into or out of page at center of nut/bolt
   if (torque < 0){
     strokeWeight(3);
