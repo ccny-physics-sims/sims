@@ -12,7 +12,7 @@ var Trails = [];
 
 
 function setup(){
-createCanvas(windowWidth, windowHeight);
+createCanvas(800, 800);
 frameRate(30);
   c = 0;
 
