@@ -336,7 +336,7 @@ function mousePressed(){
 // Built into p5
 function windowResized() {
     // Resize necessary elements to fit new window size
-    resizeCanvas(windowWidth, windowHeight); // width and height system variables updated here
+    //resizeCanvas(windowWidth, windowHeight); // width and height system variables updated here
 
     var sliderWidth = (round(0.15*(width+height/2))+20).toString()+"px"; // Slider changes size to fit window
     focalSlider.position(width/2+60, height/4-50);
