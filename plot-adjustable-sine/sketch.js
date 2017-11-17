@@ -7,20 +7,20 @@ function setup() {
   y = new Array(windowWidth);
 
   amplitudeControl = createSlider(-200,200,50,0);
-  amplitudeControl.position(20,50)
+  amplitudeControl.position(80,50)
   amplitudeControl.parent('sketch-holder')
   amplitudeControl.class("sim-slider");
   amplitudeControlLabel = createP("Amplitude");
-  amplitudeControlLabel.position(20,20);
+  amplitudeControlLabel.position(50,20);
   amplitudeControlLabel.parent('sketch-holder')
 
 
-  omegaControl = createSlider(1,4,1,.01);
-  omegaControl.position(20,120)
+  omegaControl = createSlider(1,4,2,.01);
+  omegaControl.position(400,50)
   omegaControl.parent('sketch-holder')
   omegaControl.class("sim-slider");
   omegaControlLabel = createP("Omega");
-  omegaControlLabel.position(20,90);
+  omegaControlLabel.position(400,20);
   omegaControlLabel.parent('sketch-holder')
 }
 
@@ -95,5 +95,5 @@ function showPeriod(){
   line(5*PI/(2*.01*omega),0,5*PI/(2*.01*omega),-30)
   line(PI/(2*.01*omega),-15,5*PI/(2*.01*omega),-15)
   noStroke()
-  text('T (period)',(PI/(2*.01*omega)+5*PI/(2*.01*omega))/2,-30)
+  text('T (period)',-30+(PI/(2*.01*omega)+5*PI/(2*.01*omega))/2,-30)
 }
