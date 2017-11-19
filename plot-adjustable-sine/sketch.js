@@ -85,7 +85,7 @@ function showMaxAmplitude(){
   line(0,amplitude,10,amplitude)
   noStroke()
   text('A (max)',-70,-abs(amplitude)+5)
-  text('A (min)',-70,abs(amplitude)+5)
+  text('-A ',-70,abs(amplitude)+5)
 }
 
 function showPeriod(){
