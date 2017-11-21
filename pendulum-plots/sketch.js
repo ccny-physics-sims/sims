@@ -39,7 +39,7 @@ function setup()  {
   text1.position(430,30);
   text2=createDiv("Velocity of the Pendulum");
   text2.position(430,160);
-  text3=createDiv("Acceleration of the Pendulum");
+  text3=createDiv("Tang. Acceleration of the Pendulum");
   text3.position(430,295);
   //create the start/stop button
   onoff = createButton("start");
