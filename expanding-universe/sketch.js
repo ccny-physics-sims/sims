@@ -29,7 +29,7 @@ function setup() {
   //cursor(MOVE);
   frameRate(30);
 
-  expSlider = createSlider(0,7, 0, .1);
+  expSlider = createSlider(0,7, 2, .1);
   expSlider.position(20,50);
   expSlider.parent('sketch-holder');
   expSlider.class("sim-slider gray");
@@ -63,7 +63,7 @@ if ( mouseX > centerx-deepfieldalpha.width/2 &&
     mouseY < centery+deepfieldalpha.height/2 &&
     mouseY > centery-deepfieldalpha.height/2
   ){
-  cursor(MOVE)}
+  cursor(CROSS)}
   else (
     cursor(ARROW)
   )
