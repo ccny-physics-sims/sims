@@ -30,7 +30,7 @@ function setup() {
       addAVector()
     }
 
-    omegaSlider = createSlider(0,5,1,.1)
+    omegaSlider = createSlider(-5,5,1,.1)
     omegaSlider.class("sim-slider gray");
     omegaSlider.position(50,50);
 
@@ -67,7 +67,7 @@ function updateVectors(i){
   xVec = x
   yVec = -amplitude * Math.sin(k*x - omega*t);
   aVector[i].origin = createVector(xVec,yVec);
-  aVector[i].target = p5.Vector.add(aVector[i].origin,createVector(0,amplitude*Math.cos(k*x-omega*t)));
+  aVector[i].target = p5.Vector.add(aVector[i].origin,createVector(0,Math.sign(dt)*amplitude*Math.cos(k*x-omega*t)));
   push();
   translate(0,height/2);
   aVector[i].update();

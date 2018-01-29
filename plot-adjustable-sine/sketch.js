@@ -7,11 +7,11 @@ function setup() {
   y = new Array(windowWidth);
 
   amplitudeControl = createSlider(-200,200,50,0);
-  amplitudeControl.position(80,50)
+  amplitudeControl.position(100,50)
   amplitudeControl.parent('sketch-holder')
   amplitudeControl.class("sim-slider");
   amplitudeControlLabel = createP("Amplitude");
-  amplitudeControlLabel.position(50,20);
+  amplitudeControlLabel.position(70,20);
   amplitudeControlLabel.parent('sketch-holder')
 
 
@@ -26,7 +26,7 @@ function setup() {
 
 
 function draw() {
-  background(250)
+  background(255)
   stroke(0)
   //move things to the middle
   translate(80, height / 2)
