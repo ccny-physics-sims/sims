@@ -17,7 +17,7 @@ function setup() {
   dx = (TWO_PI / wavelength) * xspacing;
   //yvalues = new Array(floor(w/xspacing));
     y = new Array(windowWidth);
-    cursor(CROSS)
+    
 }
 
 function draw() {

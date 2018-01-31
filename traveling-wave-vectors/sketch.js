@@ -22,7 +22,6 @@ function setup() {
   dx = (TWO_PI / wavelength) * xspacing;
   //yvalues = new Array(floor(w/xspacing));
     y = new Array(windowWidth);
-    cursor(CROSS)
     for (i=0;i<10;i++){
     xpositions[i]=wavelength*(i+3)/8;
     }
