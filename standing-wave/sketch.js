@@ -6,7 +6,8 @@ var dx;               // Value for incrementing x
 var yvalues;  // Using an array to store height values for the wave
 var k = 2*Math.PI/wavelength;
 var omega = 1;
-
+var t = 0;
+var dt = .1;
 function setup() {
 
   frameRate(30);
@@ -17,12 +18,16 @@ function setup() {
   dx = (TWO_PI / wavelength) * xspacing;
   yvalues = new Array(floor(w/xspacing));
 
+  speedSlider = createSlider(-.2, .2, .05,.01);
+
+  speedSlider.position(300,50);
+  speedSlider.class("sim-slider gray");
 }
 
 function draw() {
   background(255);
 
-  t = millis()/1000;
+  //t = millis()/1000;
 
   calcWave(1);
   renderWave(color(250,0,0),1);
@@ -41,6 +46,8 @@ function draw() {
   stroke(0);
   line(0,height/2,width,height/2);
   pop();
+  dt = speedSlider.value();
+  t = t+dt;
 }
 
 function calcWave(omega) {
