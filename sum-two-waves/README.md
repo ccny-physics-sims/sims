@@ -1,1 +1,1 @@
-# Sum of Two Waves
+# A Traveling Wave
