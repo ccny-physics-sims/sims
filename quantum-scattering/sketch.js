@@ -17,7 +17,6 @@ var E_slider //Controls value of E
 var V_slider
 var ground // y coordinate of line marking V = 0
 var x_axis //y coordinate of x-axis for plot
-var img1, img2
 var optionsRadio;
 
 
@@ -27,10 +26,7 @@ function setup() {
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('sketch-holder');
 
-  frameRate(45)//60 too fast??
-
-  img1 = loadImage("Left_Equation.jpg")
-  img2 = loadImage("Right_Equation.jpg")
+  frameRate(30)//60 too fast??
 
   //Sliders and checkboxes
   E_slider = createSlider(0+4,280,150+126/2 ,1)
@@ -49,8 +45,12 @@ function setup() {
   optionsRadio.value('Re');
   optionsRadio.class("sim-radio");
   //optionsRadio.changed(switchMethodofTransportation);
-
-
+  leftEq = createP('&Psi;(x,t) = (A<sub>I</sub> e<sup>k<sub>1</sub>x</sup>  + A<sub>R</sub> e<sup>-k<sub>1</sub>x</sup> )e<sup>-i (E / &hbar;) t</sup> ');
+  leftEq.style('font-style: italic ;  font-size: 14pt;')
+  leftEq.position(.1*width,height/2+10);
+  rightEq = createP('&Psi;(x,t) = (A<sub>T</sub> e<sup>k<sub>2</sub>x</sup>  )e<sup>-i (E / &hbar;) t</sup> ');
+  rightEq.position(.7*width,height/2+10);
+  rightEq.style('font-style: italic; font-size: 14pt;');
   init()
 
   reset()
@@ -180,8 +180,7 @@ function DrawStuff() {
     text("1-D Quantum Scattering",width/2-100,20)
   pop()
 
-  image(img1,150,height/2+10)
-  image(img2,800,height/2+10)
+
 
 
 
@@ -249,20 +248,6 @@ function init(){
   E = E_slider.value()
   V_slider.position(.6*width,.33*height)
   V0 = V_slider.value()
-
-
-
-  /*Left_checkbox.position(.7*width,.9*height)
-  Right_checkbox.position(.8*width,.9*height)*/
-
-  /*arrow_A.origin = createVector(.3*width,.35*height)
-  arrow_A.target = createVector(.4*width,.35*height)
-
-  arrow_B.origin = createVector(.4*width,.4*height)
-  arrow_B.target = createVector(.3*width,.4*height)
-
-  arrow_C.origin = createVector(.6*width,.4*height)
-  arrow_C.target = createVector(.7*width,.4*height)*/
 
 }
 
