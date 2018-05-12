@@ -4,62 +4,71 @@ var Im //Store values of IMAGINARY part of wavefunction
 var p //Store values of Mag(Psi)^2
 var theta // theta = wt (intialized to zero when init() function is called)
 var wavelength1 //Wavelength depends on E-V
-var wavelength2 //Wavelength2 should be longer in region2 if E-V is smaller 
+var wavelength2 //Wavelength2 should be longer in region2 if E-V is smaller
 var dx1 //The amount by which the argument of cos(kx+-wt) increases (for a fixed time) from one point to the next in region 1
 var dx2 //Region 2
 var omega  //Needs to be changed when E changes
 var A_I = 1 //Amplitude of incident wave
 var A_R
 var A_T
-var E //Total energy of incident particle 
+var E //Total energy of incident particle
 var V0 //Height of potential barrier
 var E_slider //Controls value of E
 var V_slider
 var ground // y coordinate of line marking V = 0
 var x_axis //y coordinate of x-axis for plot
 var img1, img2
+var optionsRadio;
 
 
 
 function setup() {
-  
-  
+
+  canvas = createCanvas(windowWidth, windowHeight);
+  canvas.parent('sketch-holder');
+
   frameRate(45)//60 too fast??
-  
+
   img1 = loadImage("Left_Equation.jpg")
   img2 = loadImage("Right_Equation.jpg")
 
   //Sliders and checkboxes
   E_slider = createSlider(0+4,280,150+126/2 ,1)
+  E_slider.class("sim-slider gray ");
   V_slider = createSlider(0,300,150,1)
+  V_slider.class("sim-slider gray ");
   //E_slider = createSlider(1,100,100,1)
   //V_slider = createSlider(0,100,0,1)
-  Re_checkbox = createCheckbox('Re[Psi]', true)
-  Im_checkbox = createCheckbox('Im[Psi]', false)
-  P_checkbox = createCheckbox('Probability ( |Psi|^2 )', false)
-  Re_checkbox.changed(Re_box_changed)
-  Im_checkbox.changed(Im_box_changed)
-  P_checkbox.changed(P_box_changed)
- 
-  
+
+
+  optionsRadio = createRadio();
+  optionsRadio.position(.1*width, .9* height);
+  optionsRadio.option('Re [Psi]', 'Re');
+  optionsRadio.option('Im [Psi]', 'Im');
+  optionsRadio.option('P |Psi|^2', 'P');
+  optionsRadio.value('Re');
+  optionsRadio.class("sim-radio");
+  //optionsRadio.changed(switchMethodofTransportation);
+
+
   init()
-  
+
   reset()
-  
+
 }
 
 function draw() {
-  
+
   background(255)
-  
-  
-    
+
+
+
   if (E_slider.value()==E && V_slider.value()==V0){ //Sliders haven't changed
     calcWave()
     renderWave()
     DrawStuff()//Title,labels,frames,axis,etc.
   }
-  
+
   else { //Slider changed so init() function is called
     E = E_slider.value()
     V0 = V_slider.value()
@@ -67,60 +76,60 @@ function draw() {
     calcWave()
     renderWave()
     DrawStuff()
-    
+
   }
-  
-  
+
+
 }
 
 //Calculates the wave at all x locations for a given value of wt
 function calcWave(){
   wavelength1 = 400/sqrt(E)
-  
+
   if(E>V0){
     wavelength2 = 400/sqrt(E-V0)
   }
   else{
     wavelength2 = 400/sqrt(V0-E)
   }
-  
+
   dx1 = ( (TWO_PI) / wavelength1 ) * xspacing
   dx2 = ( (TWO_PI) / wavelength2 ) * xspacing
-  
+
   A_R = ( (wavelength2 - wavelength1) / (wavelength1 + wavelength2) ) * A_I
-  A_T = ( 2*(wavelength2) / (wavelength1 + wavelength2) ) * A_I 
-  
+  A_T = ( 2*(wavelength2) / (wavelength1 + wavelength2) ) * A_I
+
   theta += .01 * omega
-  
-  var x0 = -floor(N/2) 
-  
+
+  var x0 = -floor(N/2)
+
   for ( var i=0; i<N ; i++ ){
-    if (i<=floor(N/2)){ 
-      
+    if (i<=floor(N/2)){
+
         Re[i] = A_I*cos(-theta+(i+x0)*dx1)+A_R*cos(-theta-(i+x0)*dx1)
         Im[i] = A_I*sin(-theta+i*dx1)+A_R*sin(-theta-i*dx1)
         p[i] = (sq(A_I)+sq(A_R))+(2*A_I*A_R)*(sq(cos(i*dx1))-sq(sin(i*dx1)))
-      
+
     }
-    
+
     if (i>floor(N/2)){
-      
+
       if (E<V0){
         //Decaying exponential
         Re[i] = A_T*Math.exp(-(i+x0)*dx2)
         Im[i] = 0
         p[i] = sq(A_T*Math.exp(-(i+x0)*dx2))
       }
-      
+
       else{
         //Plane Wave
         Re[i] = A_T*cos(-theta+(i+x0)*dx2)
         Im[i] = A_T*sin(-theta+(i+x0)*dx2)
         p[i] = sq(A_T)
-        
+
       }
     }
-    
+
   }
 }
 
@@ -130,21 +139,21 @@ function renderWave() {
 push()
   noFill()
   strokeWeight(2)
-  
+  val = optionsRadio.value();
   beginShape()
-    if (Re_checkbox.checked()){
+    if (val == 'Re'){
       stroke('red')
       for (var x = 0; x < N; x+=1) {
       curveVertex(x*xspacing, x_axis-40*Re[x])
       }
     }
-    else if (Im_checkbox.checked()){
+    else if (val == 'Im'){
       stroke('blue')
       for (var x = 0; x < N; x+=1) {
       curveVertex(x*xspacing, x_axis-40*Im[x])
       }
     }
-    else{
+    else if (val == 'P'){
       for (var x = 0; x < N; x+=1) {
       curveVertex(x*xspacing, x_axis-40*p[x])
       }
@@ -154,7 +163,7 @@ pop()
 }
 
 function reset(){
-  omega=.1*E 
+  omega=.1*E
   theta = 0
 }
 
@@ -165,17 +174,17 @@ function DrawStuff() {
    fill(240)
    rect(0,0,width,ground)
   pop()
-  
+
   push()
     textSize(20)
     text("1-D Quantum Scattering",width/2-100,20)
   pop()
-  
+
   image(img1,150,height/2+10)
   image(img2,800,height/2+10)
-    
-  
-  
+
+
+
   //Axis to graph wavefunction and probability density
   push()
    stroke(10)
@@ -183,7 +192,7 @@ function DrawStuff() {
    line(0,x_axis,width,x_axis)//x-axis
    line(width/2,ground+10,width/2,height-10)//y-axis
   pop()
-  
+
   //Arrows and labels to show incident, reflected, and transmitted wavefunctions
   /*arrow_A.update()
   arrow_A.display()
@@ -192,7 +201,7 @@ function DrawStuff() {
   arrow_C.update()
   arrow_C.display()*/
 
-  
+
   //Draw potential and horizontal line to indicate energy
   push();
    stroke(51);
@@ -203,14 +212,14 @@ function DrawStuff() {
    stroke('green')
    line(0,ground-E,width,ground-E)
   pop();
-  
+
   //Label V0
   push()
    fill('black')
    textSize(16)
    text('V0',width/2-25,ground-(V0+3))
   pop()
-  
+
   //Label Energy line
   push()
    fill('green')
@@ -219,82 +228,48 @@ function DrawStuff() {
   pop()
 }
 
-function Right_box_changed(){
-  if(Left_checkbox.checked()){
-    Left_checkbox.checked(false)
-  }
-}
 
-function Left_box_changed(){
-  if(Right_checkbox.checked()){
-    Right_checkbox.checked(false)
-  }
-}
-
-function Im_box_changed(){
-  if (Im_checkbox.checked()){
-    Re_checkbox.checked(false)
-    P_checkbox.checked(false) 
-  }
- 
-}
-
-function Re_box_changed(){
-  if (Re_checkbox.checked()){
-    Im_checkbox.checked(false)
-    P_checkbox.checked(false)
-  }
-}
-
-function P_box_changed(){
-  if (P_checkbox.checked()){
-    Re_checkbox.checked(false)
-    Im_checkbox.checked(false)
-  }
-}
 
 function init(){
-  
-  var cnv = createCanvas(windowWidth,windowHeight);//Address resizing issue later
-  
+
+//var cnv = createCanvas(windowWidth,windowHeight);//Address resizing issue later
+
   //Initialize variables
   N = floor(width/xspacing) //Num points to calculate value of wavefunction
   ground = height/2 //V=0
   x_axis = .75*height
-  
+
   //Create arrays to store values of wavefunction at N poi
   Re = new Array(N) //Real part of Psi
   Im = new Array(N) //Imaginary part of Psi
   p = new Array(N) //Psi^2
-  
-  
+
+
   E_slider.position(.3*width, .33*height)
   E = E_slider.value()
   V_slider.position(.6*width,.33*height)
   V0 = V_slider.value()
-  
-  
-  Re_checkbox.position(.1*width,.9*height)
-  Im_checkbox.position(.20*width,.9*height)
-  P_checkbox.position(.3*width,.9*height)
-  
+
+
+
   /*Left_checkbox.position(.7*width,.9*height)
   Right_checkbox.position(.8*width,.9*height)*/
-  
+
   /*arrow_A.origin = createVector(.3*width,.35*height)
   arrow_A.target = createVector(.4*width,.35*height)
-  
+
   arrow_B.origin = createVector(.4*width,.4*height)
   arrow_B.target = createVector(.3*width,.4*height)
-  
+
   arrow_C.origin = createVector(.6*width,.4*height)
   arrow_C.target = createVector(.7*width,.4*height)*/
-  
+
 }
 
 function windowResized() {
   init()
   reset()
+  resizeCanvas(windowWidth, windowHeight)
+  optionsRadio.position(.1*width, .9* height);
+
 }
-
-
