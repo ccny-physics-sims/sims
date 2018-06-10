@@ -6,22 +6,13 @@ var X_AXIS = 2;
 var b1, b2, c1, c2;
 var plateWidth = 50;
 var yoffset = 100;
-var xoffset = 50;
+var xoffset = 20;
 function setup() {
   canvas = createCanvas(windowWidth,windowHeight)
   canvas.parent('sketch-holder');
+  frameRate(10);
   rectMode(CENTER);
   plateDimensions = createVector(width*.75,height*.75)
-  // fieldStrengthSlider = createSlider(0,20,10, 1);
-  // fieldStrengthSlider.position(150,10);
-  // fieldStrengthSlider.parent('sketch-holder');
-  // fieldStrengthSlider.class("sim-slider blue");
-  // fieldStrengthSliderLabel = createP();
-  // fieldStrengthSliderLabel.position(10,6);
-  // fieldStrengthSliderLabel.parent('sketch-holder');
-  // fieldStrengthSliderLabel.style("color", "#000");
-  // fieldStrengthSliderLabel.style("font-family", "Helvetica");
-  // fieldStrengthSliderLabel.html( "Potential Difference")
 
   potentialReading = createP();
   potentialReading.position(width*.8,100);
@@ -30,8 +21,8 @@ function setup() {
   potentialReading.style("font-family", "Helvetica");
   potentialReading.style("padding: 20px")
   potentialReading.style("background: #aeaeae")
-  potentialReading.style("font-size: 24pt")
-  potentialReading.style("width: 150px")
+  potentialReading.style("font-size: 22pt")
+  potentialReading.style("width: 130px")
   potentialReading.style("text-align:right")
   potentialReading.style("font-family: Monospace")
   potentialReading.html( "V: ")
@@ -44,7 +35,7 @@ function setup() {
 function draw() {
 
   background(255);
-  strength = 10;//fieldStrengthSlider.value();
+  strength = 7;//fieldStrengthSlider.value();
   fieldLineSpacing = plateDimensions.y/strength;
 
   //highPot = color('hsb(160, 100%, 50%)');
@@ -54,7 +45,7 @@ function draw() {
 
   translate(xoffset,yoffset)
 
-  setGradient(plateWidth,0, plateDimensions.x-plateWidth, plateDimensions.y, zeroPot, highPot, X_AXIS);
+  setGradient(plateWidth , 0, plateDimensions.x-2*plateWidth, plateDimensions.y+0, zeroPot, highPot, X_AXIS);
 
   drawFieldLines()
   drawPlates()
