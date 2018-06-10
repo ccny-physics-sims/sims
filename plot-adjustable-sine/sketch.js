@@ -7,20 +7,20 @@ function setup() {
   y = new Array(windowWidth);
 
   amplitudeControl = createSlider(-200,200,50,0);
-  amplitudeControl.position(100,50)
+  amplitudeControl.position(30,30)
   amplitudeControl.parent('sketch-holder')
   amplitudeControl.class("sim-slider");
   amplitudeControlLabel = createP("Amplitude");
-  amplitudeControlLabel.position(70,20);
+  amplitudeControlLabel.position(30,0);
   amplitudeControlLabel.parent('sketch-holder')
 
 
-  omegaControl = createSlider(1,4,2,.01);
-  omegaControl.position(400,50)
+  omegaControl = createSlider(2,5,3,.01);
+  omegaControl.position(300,30)
   omegaControl.parent('sketch-holder')
   omegaControl.class("sim-slider");
   omegaControlLabel = createP("Omega");
-  omegaControlLabel.position(400,20);
+  omegaControlLabel.position(300,0);
   omegaControlLabel.parent('sketch-holder')
 }
 
