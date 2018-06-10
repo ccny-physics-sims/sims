@@ -10,14 +10,14 @@ var omega = 2;
 function setup() {
 
   //frameRate(30);
-  canvas = createCanvas(710, 400);
+  canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('sketch-holder');
   w = width+12;
 
   dx = (TWO_PI / wavelength) * xspacing;
   //yvalues = new Array(floor(w/xspacing));
     y = new Array(windowWidth);
-    
+
 }
 
 function draw() {
