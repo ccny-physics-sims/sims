@@ -1,7 +1,7 @@
-var xspacing = 10;    // Distance between each horizontal location
+
 var w;                // Width of entire wave
 var amplitude = 75.0; // Height of wave
-var wavelength = 30;   // How many pixels before the wave repeats
+var wavelength = 100;   // How many pixels before the wave repeats
 var dx;               // Value for incrementing x
 var yvalues;  // Using an array to store height values for the wave
 var k = 2*Math.PI/wavelength;
@@ -15,28 +15,30 @@ function setup() {
   canvas.parent('sketch-holder');
   w = width+12;
 
-  dx = (TWO_PI / wavelength) * xspacing;
-  yvalues = new Array(floor(w/xspacing));
+  y = new Array(windowWidth);
 
   speedSlider = createSlider(-.2, .2, .05,.01);
 
   speedSlider.position(300,50);
   speedSlider.class("sim-slider gray");
+  speedSliderLabel = createP('&omega; = '+abs(speedSlider.value()));
+  speedSliderLabel.position(300,20);
 }
 
 function draw() {
   background(255);
-
+  speedSliderLabel.html('&omega; = '+abs(speedSlider.value()));
   //t = millis()/1000;
+  translate(0,height/2);
 
   calcWave(1);
-  renderWave(color(250,0,0),1);
+  renderLine(color(250,0,0),1);
 
   calcWave(-1);
-  renderWave(color(0,0,250),1);
+  renderLine(color(0,0,250),1);
 
   calcSum(1);
-  renderWave(color(0,0,0),2);
+  renderLine(color(0,0,0),2);
 
 
 
@@ -53,32 +55,34 @@ function draw() {
 function calcWave(omega) {
 
   x = 0;
-  for (var i = 0; i < yvalues.length; i++) {
-    yvalues[i] = Math.sin(k * x + omega * t)*amplitude;
-    x+=dx;
+  for (var x = 0; x < y.length; x += 1) {
+    y[x] =  Math.sin(k * x + omega * t)*amplitude;
   }
 }
 
-
-function calcSum(omega) {
+function calcSum() {
 
   x = 0;
-
-  for (var i = 0; i < yvalues.length; i++) {
-    yvalues[i] = Math.sin(k * x + omega * t)*amplitude + Math.sin(k * x - omega * t)*amplitude ;
-    x+=dx;
+  for (var x = 0; x < y.length; x += 1) {
+    y[x] =  Math.sin(k * x + omega * t)*amplitude + Math.sin(k * x - omega * t)*amplitude ;
   }
+
 }
 
-function renderWave(color_,weight_) {
 
 
+
+function renderLine(color_,weight_) {
+  //this function puts a line through all the positions defined above.
+
+  push();
   noFill();
   stroke(color_);
-  strokeWeight(weight_)
+  strokeWeight(weight_);
   beginShape();
-  for (var x = 0; x < yvalues.length; x++) {
-    curveVertex(x*xspacing, height/2+yvalues[x]);
+  for (var x = 0; x < y.length; x += 3) {
+    curveVertex(x, -y[x]);
   }
   endShape();
+  pop();
 }
