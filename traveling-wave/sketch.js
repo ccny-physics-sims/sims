@@ -39,11 +39,11 @@ function draw() {
   line(0,height/2,width,height/2);
   pop();
 
-  push();
-  fill('blue');
-  noStroke();
-  ellipse(wavelength*10,-amplitude*Math.sin(omega*t)+height/2,10)
-  pop();
+  // push();
+  // fill('blue');
+  // noStroke();
+  // ellipse(wavelength*10,-amplitude*Math.sin(omega*t)+height/2,10)
+  // pop();
 
   push()
   stroke(100)
