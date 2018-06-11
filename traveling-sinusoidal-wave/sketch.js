@@ -28,7 +28,8 @@ function setup() {
   onoff.position(650,30);
   onoff.class("sim-button")
   equation = createP("y  = sin( k x + &omega; t)");
-  equation.position(50, 60);
+  equation.position(250, 320);
+  equation.style("background: #e4e4e4; width: 220px; text-align: center; padding: 5px 10px ; border:thin solid black; border-radius: 5px;");
   ampSliderLabel = createP("Amplitude");
   ampSliderLabel.position(450,0);
   omegaSliderLabel = createP("Angular Frequency");
@@ -36,14 +37,14 @@ function setup() {
   wavelengthSliderLabel = createP("Wavelength");
   wavelengthSliderLabel.position(50,0);
   wavelengthSlider = createSlider(10, 80, 25);
-  wavelengthSlider.position(50,40);
+  wavelengthSlider.position(50,30);
   wavelengthSlider.class("sim-slider");
   omegaSlider = createSlider(-10, 10, 2);
-  omegaSlider.position(250,40);
+  omegaSlider.position(250,30);
   omegaSlider.class("sim-slider");
   amplitudeSlider = createSlider(0, 10, 7.5);
   amplitudeSlider.elt.step = 0.1;
-  amplitudeSlider.position(450,40);
+  amplitudeSlider.position(450,30);
   amplitudeSlider.class("sim-slider");
   //
 
@@ -59,6 +60,7 @@ function setup() {
 function draw() {
   background(255);
   // these lines are just to frame the plot
+  translate(0,30);
   push();
   stroke(40);
   line(0,height/2, width, height/2);
