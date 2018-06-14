@@ -84,7 +84,7 @@ function draw(){
   text(catslider.value().toString(),100,500);
   pop();
 };
-function mouseClicked(){
+function touchStarted(){
   var s = createVector(mouseX-b1.pos.x,mouseY-b1.pos.y);
   s.normalize();
   s.mult(random(2,5));

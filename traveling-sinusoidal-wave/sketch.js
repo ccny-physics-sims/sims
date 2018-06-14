@@ -29,7 +29,7 @@ function setup() {
   onoff.class("sim-button")
   equation = createP("y  = sin( k x + &omega; t)");
   equation.position(250, 320);
-  equation.style("background: #e4e4e4; width: 220px; text-align: center; padding: 5px 10px ; border:thin solid black; border-radius: 5px;");
+  equation.style("font-family: Times, serif; background: #e4e4e4; width: 220px; text-align: center; padding: 5px 10px ; border:thin solid black; border-radius: 5px;");
   ampSliderLabel = createP("Amplitude");
   ampSliderLabel.position(450,0);
   omegaSliderLabel = createP("Angular Frequency");
@@ -83,7 +83,7 @@ function draw() {
     sign = "+";
   }
   omega = Math.abs(omegaSlider.value());
-  equation.html("<p>y  = "+amplitudeSlider.value()+" sin[ (2&pi; / "+wavelengthSlider.value()+") x "+sign+" "+ omega+" t]</p>");
+  equation.html("<p><i>y</i>  = "+amplitudeSlider.value()+" sin[ (2&pi; / "+wavelengthSlider.value()+") <i>x</i> "+sign+" "+ omega+" <i>t</i> ]</p>");
 }
 
 function calcWave() {
