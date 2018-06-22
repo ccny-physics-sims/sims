@@ -11,23 +11,23 @@ createCanvas(800, 800);
 fill(255, 0, 0);
 
 LightWavelength = createElement('p', 'Wavelength');
-LightWavelength.position(20, 30);
-slider1 = createSlider(0,1000,100);
+LightWavelength.position(20, 35);
+slider1 = createSlider(200,1000,100);
 slider1.value(12);
 slider1.position(150, 30);
 slider1.class("sim-slider gray");
 
 SlitWidth = createElement('p', 'Slit Width');
-SlitWidth.position(20,55);
-slider3 = createSlider();
-slider3.position(150, 55);
+SlitWidth.position(20,75);
+slider3 = createSlider(1,1000,10);
+slider3.position(150, 70);
 slider3.value(50);
 slider3.class("sim-slider gray");
 
 CentralMaximum = createElement('p', 'Central Maximum');
-CentralMaximum.position(20, 80);
+CentralMaximum.position(20, 115);
 slider4 = createSlider(0,255,10);
-slider4.position(150, 80);
+slider4.position(150, 110);
 slider4.value(140);
 slider4.class("sim-slider gray");
 
@@ -56,36 +56,10 @@ function calcPlot(){
 function renderFunction() {
 push();
 noFill();
-strokeWeight(4);
-for (var i=0; i<255;i++){
-  if (l < 700 && l> 635){
-  stroke(i,0,0);
-  }
-  else if (l>590 && l<635){
-    stroke (204, 102, 0);
-  }
-  else if (l>560 && l<590){
-    stroke(255, 204, 0);
-  }
-  else if(l>520 && l<560){
-  stroke (0,255,0);
-  }
-  else if(l>490 && l<520){
-    colorMode(HSB, 100); // Use HSB with scale of 0-100
-  //c = color(50, 55, 100);
-  stroke(50, 55, 100);
-  }
-  else if (l>450 && l<490) {
-    stroke(0,0,255);
-  }
-  else if(l>400 && l<450){
-  stroke (175, 100, 220);
-  }
-  else{
-    stroke(0);
-  }
-}
-//stroke(0);
+strokeWeight(2);
+hue = round(map(l,200,1000,280,0));
+c = color('hsb('+hue+', 100%, 100%)');
+stroke(c)
 beginShape();
 for (var j = 0; j< y.length; j++){
   curveVertex(j,height/2-y[j])
