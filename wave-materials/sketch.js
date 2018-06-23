@@ -20,29 +20,31 @@ var onoff;
 function setup() {
 
   frameRate(30);
-  createCanvas(710, 400);
+  createCanvas(windowWidth, 400);
 
   //these are all for the labels and sliders
   onoff = createButton("start");
   onoff.mouseClicked(turnonoff);
-  onoff.position(650,30);
+  onoff.position(width-100,30);
   onoff.class("sim-button")
   equation = createP("<p>n = 1</p>");
-  equation.position(500, 70);
+  equation.position(width*3/4, 70);
   equation1 = createP("<p>n = 1</p>");
-  equation1.position(200, 70);
+  equation1.position(width*1/4, 70);
 
   omegaSliderLabel = createP("Frequency");
-  omegaSliderLabel.position(150,0);
+  omegaSliderLabel.position(50,0);
   wavelengthSliderLabel = createP("Index of Refraction");
-  wavelengthSliderLabel.position(450,0);
+  wavelengthSliderLabel.position(50,50);
   wavelengthSlider = createSlider(1, 3, 1);
   wavelengthSlider.elt.step=0.1;
-  wavelengthSlider.position(450,40);
+  wavelengthSlider.position(200,0);
   wavelengthSlider.class("sim-slider");
+  wavelengthSlider.size(width/5,30)
   omegaSlider = createSlider(-20, 20, 4);
-  omegaSlider.position(150,40);
+  omegaSlider.position(200,40);
   omegaSlider.class("sim-slider");
+  omegaSlider.size(width/5,30)
 
   w = width;
 
