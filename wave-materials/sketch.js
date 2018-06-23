@@ -34,15 +34,15 @@ function setup() {
 
   omegaSliderLabel = createP("Frequency");
   omegaSliderLabel.position(50,0);
-  wavelengthSliderLabel = createP("Index of Refraction");
-  wavelengthSliderLabel.position(50,50);
-  wavelengthSlider = createSlider(1, 3, 1);
-  wavelengthSlider.elt.step=0.1;
-  wavelengthSlider.position(200,0);
-  wavelengthSlider.class("sim-slider");
-  wavelengthSlider.size(width/5,30)
+  iorSliderLabel = createP("Index of Refraction");
+  iorSliderLabel.position(50,50);
+  iorSlider = createSlider(1, 3, 1);
+  iorSlider.elt.step=0.1;
+  iorSlider.position(200,40);
+  iorSlider.class("sim-slider");
+  iorSlider.size(width/5,30)
   omegaSlider = createSlider(-20, 20, 4);
-  omegaSlider.position(200,40);
+  omegaSlider.position(200,00);
   omegaSlider.class("sim-slider");
   omegaSlider.size(width/5,30)
 
@@ -62,7 +62,7 @@ function draw() {
   fill(240);
   noStroke();
   rect(0,100,width/2, height-200);
-  fill(240-20*(wavelengthSlider.value()-1));
+  fill(240-20*(iorSlider.value()-1));
   rect(width/2,100,width, height-200);
   pop();
 
@@ -77,7 +77,7 @@ function draw() {
   amplitude = 8;
   angularvelocity = omegaSlider.value();
 
-  dx = (TWO_PI / (10*wavelengthSlider.value())) * xspacing;
+  dx = (TWO_PI / (10*iorSlider.value())) * xspacing;
   // calculate all the points
   calcWave();
   // display the wave
@@ -90,7 +90,7 @@ function draw() {
     sign = "+";
   }
   omega = Math.abs(omegaSlider.value());
-  equation.html("<p>n = "+wavelengthSlider.value()+"</p>");
+  equation.html("<p>n = "+iorSlider.value()+"</p>");
 }
 
 function calcWave() {
@@ -109,7 +109,7 @@ function calcWave() {
     }
 
     if (i>=yvalues.length/2){
-    x+=wavelengthSlider.value()*dx;
+    x+=iorSlider.value()*dx;
     }
 
   }
