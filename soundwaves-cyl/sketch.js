@@ -8,7 +8,8 @@ var k = 0;
 
 function setup() {
   frameRate(20);
-  createCanvas(400, 400);
+
+  createCanvas(Math.min(400, windowWidth),Math.min(400, windowHeight));
   wavelength = .2*width;
   amplitude = .3*wavelength;
   angularfrequency = TWO_PI;
