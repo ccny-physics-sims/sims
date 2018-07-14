@@ -4,7 +4,7 @@
 
 
 function setup(){
-  canvas = createCanvas(windowWidth,WindowHeight);
+  canvas = createCanvas(windowWidth,windowHeight);
   canvas.parent("sketch-holder");
 
   cat_img = loadImage("mrTibbles.png");
