@@ -10,7 +10,7 @@ var rSlider;
 var massMoonSlider;
 var s;
 function setup() {
-  canvas=createCanvas(windowWidth, 500);
+  canvas=createCanvas(windowWidth*.95, 500);
   canvas.parent('sketch-holder');
   centerx = width/4;
   centery = height/2;

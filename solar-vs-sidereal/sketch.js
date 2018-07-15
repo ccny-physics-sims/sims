@@ -23,6 +23,7 @@ frameRate(30);
   SliderLabel.parent('sketch-holder');
   SliderLabel.position(50,0);
   Slider = createSlider(0, 20, 0 ,0);
+  Slider.parent('sketch-holder');
   Slider.position(50,40);
   Slider.class("sim-slider");
 

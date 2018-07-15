@@ -8,7 +8,7 @@ var x = 0.0 ;
 var slider;
 
 function setup() {
-canvas = createCanvas(800, 800);
+canvas = createCanvas(800, 600);
 canvas.parent('sketch-holder');
 noFill();
 frameRate(30);
@@ -111,7 +111,7 @@ c = color('hsb('+hue+', 100%, 100%)');
 stroke(c)
 beginShape();
 for (var j = 0; j< y.length; j++){
-  curveVertex(j,height/2-y[j])
+  curveVertex(j,height/1.5-y[j])
 }
 endShape();
 pop();
@@ -124,7 +124,7 @@ strokeWeight(2);
 stroke(100)
 beginShape();
 for (var j = 0; j< y.length; j++){
-  curveVertex(j,height/2-y[j])
+  curveVertex(j,height/1.5-y[j])
 }
 endShape();
 pop();

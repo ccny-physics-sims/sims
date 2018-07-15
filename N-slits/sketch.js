@@ -8,33 +8,42 @@ var slider;
 var N = 0;
 
 function setup() {
-createCanvas(2000, 1000);
+canvas=createCanvas(windowWidth*.95, 500);
+canvas.parent('sketch-holder');
 noFill();
 
 LightWavelength = createElement('z2', 'Wavelength');
 LightWavelength.position(20, 40);
+LightWavelength.parent('sketch-holder');
 slider1 = createSlider(400,700,10);
+slider1.parent('sketch-holder');
 slider1.value(600);
 slider1.position(200, 20);
 slider1.class("sim-slider gray");
 
 DistanceBTNSlits = createElement('z2', 'Distance between slits');
+DistanceBTNSlits.parent('sketch-holder');
 DistanceBTNSlits.position(20,80);
 slider2 = createSlider(10000,20000,100);
+slider2.parent('sketch-holder');
 slider2.position(200,60 );
 slider2.value(1500);
 slider2.class("sim-slider gray");
 
 CentralMaximum = createElement('z2', 'Central Maximum');
+CentralMaximum.parent('sketch-holder');
 CentralMaximum.position(20, 120);
 slider4 = createSlider(0,5,5);
+slider4.parent('sketch-holder');
 slider4.position(200, 100);
 slider4.value(3);
 slider4.class("sim-slider gray");
 
 NSlits = createElement('z2','N-slits');
+NSlits.parent('sketch-holder');
 NSlits.position(20,160);
 slider5 = createSlider(2,20,1);
+slider5.parent('sketch-holder');
 slider5.position(200,140);
 slider5.value(8);
 slider5.class("sim-slider gray");
@@ -73,7 +82,7 @@ stroke(c)
 
 beginShape();
 for (var j = 0; j< y.length; j++){
-  curveVertex(j/2,height/2-y[j])
+  curveVertex(j/2,height/1.2-y[j])
 }
 endShape();
 pop();

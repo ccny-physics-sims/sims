@@ -11,12 +11,12 @@ function preload() {
 }
 
 function setup() {
-  canvas=createCanvas(windowWidth , 400);
+  canvas=createCanvas(windowWidth*.95 , 400);
   canvas.parent('sketch-holder');
   isDrag = createCheckbox('drag', false);
 
   isDrag.style('width', '60px');
-  isDrag.position(20,20);
+  isDrag.position(30,35);
   isDrag.parent('sketch-holder');
   textAlign(CENTER);
 
