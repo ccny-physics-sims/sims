@@ -16,17 +16,20 @@ function preload() {
 function setup() {
 
   frameRate(10);
-  createCanvas(710, 400);
+  canvas = createCanvas(710, 400);
+  canvas.parent('sketch-holder');
   w = width+12;
 
   dx = (TWO_PI / period) * xspacing;
   yvalues = new Array(floor(w/xspacing));
 
   phaseSlider = createSlider(0, TWO_PI, HALF_PI);
+  phaseSlider.parent('sketch-holder');
   phaseSlider.elt.step = .01;
   phaseSlider.position(300,50);
   phaseSlider.class("sim-slider gray");
   phaseLabel = createP();
+  phaseLabel.parent('sketch-holder');
   phaseLabel.position(300,0);
 
 

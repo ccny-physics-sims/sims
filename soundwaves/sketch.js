@@ -8,15 +8,17 @@ var k = 0;
 function setup() {
 
   frameRate(20);
-  createCanvas(700, 200);
+  canvas=createCanvas(700, 200);
+  canvas.parent('sketch-holder');
   wavelength = .2*width;
   amplitude = .15*wavelength;
   angularfrequency = TWO_PI;
   waveconstant = TWO_PI/wavelength;
   vslider = createSlider(1, 2, 1);
-   vslider.elt.step = .01;
-  vslider.position(width/2, height-30);
   vslider.parent('sketch-holder');
+  vslider.elt.step = .01;
+  vslider.position(width/2, height-30);
+
   vslider.class("sim-slider");
   //noLoop();
   // Create objects

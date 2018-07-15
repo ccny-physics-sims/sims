@@ -39,6 +39,7 @@ function setup() {
 imageMode(CENTER);
 
 genbutton = createButton("STOP");
+genbutton.parent('sketch-holder');
 genbutton.mouseClicked(stopTheCar);
 genbutton.position(200,30);
 genbutton.class("sim-button blue");

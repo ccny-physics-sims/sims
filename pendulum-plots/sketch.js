@@ -22,7 +22,8 @@ var pendLength = 205;
 
 
 function setup()  {
-  createCanvas(800,460);
+  canvas=createCanvas(800,460);
+  canvas.parent('sketch-holder');
   // Make a new Pendulum with an origin location and armlength
   p = new Pendulum(createVector(100,20),pendLength);
   //draw position graph
@@ -36,13 +37,17 @@ function setup()  {
   y3values = new Array(floor(width/x1spacing));
   //labels for the graphs
   text1=createDiv("Position of the Pendulum");
+  text1.parent('sketch-holder');
   text1.position(430,30);
   text2=createDiv("Velocity of the Pendulum");
+  text2.parent('sketch-holder');
   text2.position(430,160);
   text3=createDiv("Tang. Acceleration of the Pendulum");
+  text3.parent('sketch-holder');
   text3.position(430,295);
   //create the start/stop button
   onoff = createButton("start");
+  onoff.parent('sketch-holder');
   onoff.mouseClicked(turnonoff);
   onoff.position(50,300);
   onoff.class("sim-button gray");

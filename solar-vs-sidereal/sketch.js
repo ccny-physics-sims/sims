@@ -4,7 +4,7 @@ var B, Brate;
 var equantD;
 var onoff;
 var running = true;
-var BSlider, EquantSlider, BRateSlider;
+var Slider;
 var xPos,yPos;
 var c;
 
@@ -12,22 +12,24 @@ var Trails = [];
 
 
 function setup(){
-createCanvas(800, 800);
+canvas = createCanvas(800, 800);
+canvas.parent('sketch-holder');
 frameRate(30);
   c = 0;
 
   textSize(18)
 
-  BSliderLabel = createP("time advance");
-  BSliderLabel.position(50,0);
-  BSlider = createSlider(0, 20, 0 ,0);
-  BSlider.position(50,40);
-  BSlider.class("sim-slider");
+  SliderLabel = createP("time advance");
+  SliderLabel.parent('sketch-holder');
+  SliderLabel.position(50,0);
+  Slider = createSlider(0, 20, 0 ,0);
+  Slider.position(50,40);
+  Slider.class("sim-slider");
 
 //noSmooth();
 //frameRate(15)
 
-B = BSlider.value()
+B = Slider.value()
 Arate = .01;
 
 }
@@ -36,7 +38,7 @@ function draw(){
 background(255)
 fill(255);
 A = width/4;
-B = BSlider.value()*.01
+B = Slider.value()*.01
 
 
 translate(width/2,height/2)
@@ -55,7 +57,7 @@ ellipse(0,0,40,40)
 pop()
 
 push()
-//rotate(-BSlider.value()*.01)
+//rotate(-Slider.value()*.01)
 //translate(width/4,0)
 
 translate(-A*cos(B), A*sin(B));

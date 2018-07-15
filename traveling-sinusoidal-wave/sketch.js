@@ -20,29 +20,38 @@ var onoff;
 function setup() {
 
   frameRate(30);
-  createCanvas(700, 400);
-
+  canvas=createCanvas(700, 400);
+  canvas.parent('sketch-holder');
   //these are all for the labels and sliders
   onoff = createButton("stop");
+  onoff.parent('sketch-holder');
   onoff.mouseClicked(turnonoff);
   onoff.position(650,30);
   onoff.class("sim-button")
   equation = createP("y  = sin( k x + &omega; t)");
+  equation.parent('sketch-holder');
   equation.position(250, 320);
   equation.style("font-family: Times, serif; background: #e4e4e4; width: 220px; text-align: center; padding: 5px 10px ; border:thin solid black; border-radius: 5px;");
   ampSliderLabel = createP("Amplitude");
+  ampSliderLabel.parent('sketch-holder');
   ampSliderLabel.position(450,0);
+
   omegaSliderLabel = createP("Angular Frequency");
+  omegaSliderLabel.parent('sketch-holder');
   omegaSliderLabel.position(250,0);
   wavelengthSliderLabel = createP("Wavelength");
+  wavelengthSliderLabel.parent('sketch-holder');
   wavelengthSliderLabel.position(50,0);
   wavelengthSlider = createSlider(10, 80, 25);
+  wavelengthSlider.parent('sketch-holder');
   wavelengthSlider.position(50,30);
   wavelengthSlider.class("sim-slider");
   omegaSlider = createSlider(-10, 10, 2);
+  omegaSlider.parent('sketch-holder');
   omegaSlider.position(250,30);
   omegaSlider.class("sim-slider");
   amplitudeSlider = createSlider(0, 10, 7.5);
+  amplitudeSlider.parent('sketch-holder');
   amplitudeSlider.elt.step = 0.1;
   amplitudeSlider.position(450,30);
   amplitudeSlider.class("sim-slider");

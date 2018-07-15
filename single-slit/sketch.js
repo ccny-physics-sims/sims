@@ -7,26 +7,33 @@ var x = 0.0 ;
 var slider;
 
 function setup() {
-createCanvas(800, 800);
+canvas = createCanvas(800, 800);
+canvas.parent('sketch-holder');
 fill(255, 0, 0);
 
 LightWavelength = createElement('p', 'Wavelength');
+LightWavelength.parent('sketch-holder');
 LightWavelength.position(20, 35);
 slider1 = createSlider(200,1000,100);
+slider1.parent('sketch-holder');
 slider1.value(12);
 slider1.position(150, 30);
 slider1.class("sim-slider gray");
 
 SlitWidth = createElement('p', 'Slit Width');
 SlitWidth.position(20,75);
+SlitWidth.parent('sketch-holder');
 slider3 = createSlider(1,1000,10);
+slider3.parent('sketch-holder');
 slider3.position(150, 70);
 slider3.value(50);
 slider3.class("sim-slider gray");
 
 CentralMaximum = createElement('p', 'Central Maximum');
+CentralMaximum.parent('sketch-holder');
 CentralMaximum.position(20, 115);
 slider4 = createSlider(0,255,10);
+slider4.parent('sketch-holder');
 slider4.position(150, 110);
 slider4.value(140);
 slider4.class("sim-slider gray");

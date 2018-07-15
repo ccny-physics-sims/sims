@@ -17,10 +17,13 @@ function setup() {
   y = new Array(windowWidth);
 
  wavelengthSlider = createSlider(50, 300, 100,1);
+ wavelengthSlider.parent('sketch-holder');
   wavelengthSlider.position(300,50);
   wavelengthSlider.class("sim-slider gray");
 anLabel = createP('antinode');
+anLabel.parent('sketch-holder');
 nLabel = createP('node');
+nLabel.parent('sketch-holder');
 
 }
 

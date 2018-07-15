@@ -8,7 +8,7 @@ function setup() {
   rectMode(CENTER);
 
   fieldStrengthSlider = createSlider(0,30,10, 1);
-  fieldStrengthSlider.position(150,10);
+  fieldStrengthSlider.position(150,0);
   fieldStrengthSlider.parent('sketch-holder');
   fieldStrengthSlider.class("sim-slider blue");
   fieldStrengthSliderLabel = createP();
