@@ -38,7 +38,7 @@ function draw() {
   pop();
 }
 
-function mouseClicked() {
+function touchEnded() {
 
   planets.push(new Planet(dist(mouseX,mouseY,width/2,height/2),random(5,12)));
 
