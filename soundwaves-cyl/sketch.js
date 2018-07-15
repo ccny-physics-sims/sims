@@ -9,7 +9,8 @@ var k = 0;
 function setup() {
   frameRate(20);
 
-  createCanvas(Math.min(400, windowWidth),Math.min(400, windowHeight));
+  canvas = createCanvas(Math.min(400, windowWidth),Math.min(400, windowHeight));
+  canvas.parent('sketch-holder');
   wavelength = .2*width;
   amplitude = .3*wavelength;
   angularfrequency = TWO_PI;

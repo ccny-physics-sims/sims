@@ -30,8 +30,16 @@ function setup() {
     }
 
     omegaSlider = createSlider(-5,5,1,.1)
+    omegaSlider.parent('sketch-holder');
     omegaSlider.class("sim-slider gray");
     omegaSlider.position(50,50);
+
+    omegaSliderLabel = createP();
+    omegaSliderLabel.parent('sketch-holder');
+    omegaSliderLabel.html('Change Wave Speed');
+    omegaSliderLabel.position(50,20);
+
+
 
 }
 

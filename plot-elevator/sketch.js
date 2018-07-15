@@ -13,18 +13,24 @@ function preload() {
 function setup() {
   running = true;
   canvas = createCanvas(600,1000);
+  canvas.parent('sketch-holder');
   frameRate(20);
   onoff = createButton("Pause");
+  onoff.parent('sketch-holder')
   onoff.position(width-100,50);
   onoff.class("sim-button blue slim");
   onoff.mousePressed(turnonoff);
+
   goUpButton = createButton("GO UP");
+  goUpButton.parent('sketch-holder');
   goUpButton.position(width-100,20);
   goUpButton.class("sim-button blue slim");
 
   goDownButton = createButton("GO DOWN");
+  goDownButton.parent('sketch-holder');
   goDownButton.position(width-100,80);
   goDownButton.class("sim-button blue slim");
+
 
   pos = createVector(width-150,ground)
   vel = createVector(0,0);

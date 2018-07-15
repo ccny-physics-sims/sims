@@ -20,13 +20,14 @@ function setup() {
   yvalues = new Array(floor(w/xspacing));
 
   phaseSlider = createSlider(0, TWO_PI, HALF_PI);
+  phaseSlider.parent('sketch-holder');
   phaseSlider.elt.step = .01;
   phaseSlider.position(300,50);
   phaseSlider.class("sim-slider gray");
 
   phaseLabel = createP();
-  phaseLabel.position(300,0);
   phaseLabel.parent('sketch-holder');
+  phaseLabel.position(300,0);
 
 }
 

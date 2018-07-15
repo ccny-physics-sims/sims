@@ -16,7 +16,7 @@ function setup() {
   //Create Canvas
   var mycanvas = createCanvas(600, 350);
   mycanvas.parent('sketch-holder');
-  mycanvas.position(0,0);
+  //mycanvas.position(0,0);
   textSize(15);
   noStroke();
 

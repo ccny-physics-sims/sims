@@ -14,28 +14,31 @@ angleMode(RADIANS)
   rvalues = new Array(floor(TWO_PI/thetaSpacing)+4);
 
   nSlider = createSlider(1, 9, 1);
+  nSlider.parent('sketch-holder');
   nSlider.elt.step =1;
   nSlider.position(400,50);
   nSlider.class("sim-slider gray");
 
   text1 = createP();
+  text1.parent('sketch-holder');
   text1.position(400,0);
-  text1.parent('sketch-holder')
+
   text1.html('Current energy level')
 
   nLabel = createP();
-  nLabel.position(550,47);
   nLabel.parent('sketch-holder');
+  nLabel.position(550,47);
   nLabel.html('&larr; integer change')
 
   halfSlider = createSlider(0, 1, 0);
+  halfSlider.parent('sketch-holder');
   halfSlider.elt.step =.1;
   halfSlider.position(400,100);
   halfSlider.class("sim-slider gray");
 
   halfLabel = createP();
-  halfLabel.position(550,97);
   halfLabel.parent('sketch-holder');
+  halfLabel.position(550,97);
   halfLabel.html('&larr; fractional change ')
 
 
@@ -44,7 +47,7 @@ angleMode(RADIANS)
 
 function draw() {
   clear();
-  background(0,0,0,0);
+  background(255);
 radius = 50*(n/2);
   //t = millis()/1000;
   t = frameCount/10;

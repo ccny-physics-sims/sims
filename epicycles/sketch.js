@@ -18,22 +18,30 @@ canvas.parent('sketch-holder');
 frameRate(30);
   c = 0;
   onoff = createButton("stop");
+  onoff.parent('sketch-holder');
   onoff.mouseClicked(turnonoff);
-  onoff.position(650,30);
+  onoff.position(width/2,30);
   onoff.class("sim-button")
+
   BSliderLabel = createP("Epicycle Radius");
+  BSliderLabel.parent('sketch-holder');
   BSliderLabel.position(50,0);
   BSlider = createSlider(0, 100, 50 ,0);
+  BSlider.parent('sketch-holder');
   BSlider.position(50,40);
   BSlider.class("sim-slider");
   EquantSliderLabel = createP("Equant");
+  EquantSliderLabel.parent('sketch-holder');
   EquantSliderLabel.position(50,80);
   EquantSlider = createSlider(0, 50, 0 ,0);
+  EquantSlider.parent('sketch-holder');
   EquantSlider.position(50,120);
   EquantSlider.class("sim-slider");
   BRateSliderLabel = createP("Speed");
+  BRateSliderLabel.parent('sketch-holder');
   BRateSliderLabel.position(50,160);
   BRateSlider = createSlider(1, 3, 2.1 ,0);
+  BRateSlider.parent('sketch-holder');
   BRateSlider.position(50,200);
   BRateSlider.class("sim-slider");
 //noSmooth();
@@ -170,7 +178,7 @@ Particle.prototype.isDead = function(){
 
 function windowResized() {
     // Resize necessary elements to fit new window size
-    // resizeCanvas(windowWidth, windowHeight); // width and height system variables updated here
+     resizeCanvas(windowWidth, windowHeight); // width and height system variables updated here
   }
 
   function turnonoff() {

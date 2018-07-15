@@ -9,33 +9,42 @@ var slider;
 
 function setup() {
 canvas = createCanvas(800, 800);
+canvas.parent('sketch-holder');
 noFill();
 frameRate(30);
 LightWavelength = createElement('p', 'Wavelength');
 LightWavelength.position(20, 15);
+LightWavelength.parent('sketch-holder');
 slider1 = createSlider(200,1000,10);
+slider1.parent('sketch-holder');
 slider1.value(400);
 slider1.position(190, 15);
 slider1.class("sim-slider gray");
 
 
 DistanceBTNSlits = createElement('p', 'Distance between slits');
+DistanceBTNSlits.parent('sketch-holder');
 DistanceBTNSlits.position(20,55);
 slider2 = createSlider(10000,50000,100);
+slider2.parent('sketch-holder');
 slider2.position(190,55 );
 slider2.value(50000);
 slider2.class("sim-slider gray");
 
 SlitWidth = createElement('p', 'Slit Width');
+SlitWidth.parent('sketch-holder');
 SlitWidth.position(20,95);
 slider3 = createSlider(1,16000,10);
+slider3.parent('sketch-holder');
 slider3.position(190, 95);
 slider3.value(8000);
 slider3.class("sim-slider gray");
 
 CentralMaximum = createElement('p', 'Central Maximum');
 CentralMaximum.position(20, 135);
+CentralMaximum.parent('sketch-holder');
 slider4 = createSlider(0,200,10);
+slider4.parent('sketch-holder');
 slider4.position(190, 135);
 slider4.value(140);
 slider4.class("sim-slider gray");
@@ -44,6 +53,7 @@ slider4.class("sim-slider gray");
 
 
  diffraction = createCheckbox('include diffraction', false);
+ diffraction.parent('sketch-holder');
  diffraction.position(400,80)
 }
 

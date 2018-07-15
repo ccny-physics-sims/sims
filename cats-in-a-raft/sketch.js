@@ -18,10 +18,12 @@ function setup(){
   //b1.throwCat(v2);
 
   catslider = createSlider(1,40,10);
+  catslider.parent('sketch-holder');
   catslider.position(20,500);
   catslider.class("sim-slider gray");
   catslider.parent
   raftslider = createSlider(5,150,10);
+  raftslider.parent('sketch-holder');
   raftslider.position(20,550);
   raftslider.class("sim-slider gray");
   raftslider.parent
@@ -84,14 +86,17 @@ function draw(){
   text(catslider.value().toString(),100,500);
   pop();
 };
-function touchStarted(){
+function touchEnded(){
   var s = createVector(mouseX-b1.pos.x,mouseY-b1.pos.y);
   s.normalize();
   s.mult(random(2,5));
+  if(mouseX>150){
   b1.throwCat(s,catslider.value());
+
   if(b1.throwCat[b1.throwCat.length-1]){
     b1.throwCat[b1.throwCat.length-1].mass = catslider.value();
   }
+}
   return false;
 
 };

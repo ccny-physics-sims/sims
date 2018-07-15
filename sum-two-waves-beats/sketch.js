@@ -20,6 +20,7 @@ function setup() {
   yvalues = new Array(floor(w/xspacing));
 
   phaseSlider = createSlider(0, .2, 0);
+  phaseSlider.parent('sketch-holder');
   phaseSlider.elt.step = .001;
   phaseSlider.position(300,30);
   phaseSlider.class("sim-slider gray");

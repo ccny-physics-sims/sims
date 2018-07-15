@@ -1,5 +1,6 @@
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(windowWidth, windowHeight);
+  canvas.parent('sketch-holder');
   m = 3; // mass of block
   i = 30; // initial force applied
   	calcBlockDimensions();
@@ -132,7 +133,7 @@ function calcNetForce() {
     // if it wasn't just shoved, include friction
     if (justShoved === false) {
       netForce = createVector((shove + block.mass * g * Math.sin(thetaRadians) - frictSign * muk * block.mass * g * Math.cos(thetaRadians)), 0);
-    } 
+    }
     // else, leave out the friction
     else {
       netForce = createVector((shove + block.mass * g * Math.sin(thetaRadians)), 0);

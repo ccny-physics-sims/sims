@@ -5,7 +5,9 @@ var howMany = 1;
 
 function setup() {
   frameRate(30);
-  createCanvas(400 , 400);
+  canvas=createCanvas(windowWidth ,windowHeight);
+  canvas.parent('sketch-holder');
+
   smooth();
   noCursor();
   // The planet objects are initialized using the counter variable

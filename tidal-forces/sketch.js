@@ -16,6 +16,7 @@ function setup() {
   centery = height/2;
 
   diff  = createCheckbox('Differential?', false);
+  diff.parent('sketch-holder');
   diff.position (20,120)
     rSlider = createSlider(REarth+70, 450, 450, 1);
     rSlider.position(20,20);

@@ -13,21 +13,26 @@ var onoff;
 function setup() {
   frameRate(25);
     onoff = createButton("start");
+    onoff.parent('sketch-holder');
     onoff.mouseClicked(turnonoff);
     onoff.position(200,290);
     onoff.class("sim-button")
 
     t1=createP('closed');
+    t1.parent('sketch-holder');
     t1.position(80,10);
     t2=createP('closed');
+    t2.parent('sketch-holder');
     t2.position(580,10);
 
   canvas = createCanvas(700, 400);
   canvas.parent('sketch-holder');
   modeslider = createSlider(1,8,1);
+  modeslider.parent('sketch-holder');
   modeslider.class("sim-slider")
   modeslider.position(400,300);
   modeSliderLabel = createP();
+  modeSliderLabel.parent('sketch-holder');
   modeSliderLabel.position(420,270);
   wavelength = (2*tubelength)/modeslider.value();
 

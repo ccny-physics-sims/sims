@@ -1,6 +1,7 @@
 
 function setup(){
-    createCanvas(500,500);
+    canvas = createCanvas(500,500);
+    canvas.parent('sketch-holder');
     w = new wheel(width/2,height/2,200);
     w.rotate = true;
     angleMode(RADIANS);

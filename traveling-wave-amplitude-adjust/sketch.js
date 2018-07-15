@@ -20,9 +20,12 @@ function setup() {
     cursor(CROSS)
 
     amplitudeAdjust = createSlider(0,200,50,1);
+    amplitudeAdjust.parent('sketch-holder');
     amplitudeAdjust.position(100,35);
     amplitudeAdjust.class("sim-slider gray");
+
     amplitudeAdjustLabel = createP();
+    amplitudeAdjustLabel.parent('sketch-holder');
     amplitudeAdjustLabel.position(100,5)
 
 }

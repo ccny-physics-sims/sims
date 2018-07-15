@@ -25,17 +25,22 @@ function setup(){
 
 
   launch = createButton("launch");
+  launch.parent('sketch-holder');
   launch.mouseClicked(launchOrbiter);
   launch.position(50,200);
   launch.class("sim-button")
   speedSliderLabel = createP("Speed");
+  speedSliderLabel.parent('sketch-holder');
   speedSliderLabel.position(50,0);
   speedSlider = createSlider(0, 400,260 ,0);
+  speedSlider.parent('sketch-holder');
   speedSlider.position(50,40);
   speedSlider.class("sim-slider");
   angleSliderLabel = createP("Direction");
+  angleSliderLabel.parent('sketch-holder');
   angleSliderLabel.position(50,80);
   angleSlider = createSlider(0, 360, 0 ,0);
+  angleSlider.parent('sketch-holder');
   angleSlider.position(50,120);
   angleSlider.class("sim-slider");
 
@@ -58,6 +63,8 @@ function draw(){
   stroke('black');
   planet = ellipse(width/2,height/2,20,20);
   pop();
+  aVector.origin.x = width/2;
+  aVector.origin.y = height/2-h;
   aVector.target.x = width/2+.5*speedSlider.value()*cos(angleSlider.value()*Math.PI/180)
   aVector.target.y = height/2 - h+.5*speedSlider.value()*sin(angleSlider.value()*Math.PI/180)
   aVector.update();
@@ -158,7 +165,7 @@ function launchOrbiter(){
 
 function windowResized() {
     // Resize necessary elements to fit new window size
-    // resizeCanvas(windowWidth, windowHeight); // width and height system variables updated here
+    resizeCanvas(windowWidth, windowHeight); // width and height system variables updated here
   }
 function keyTyped(){
  if (key === 'c'){

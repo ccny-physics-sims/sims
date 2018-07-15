@@ -11,17 +11,18 @@ var dt = .1;
 function setup() {
 
   frameRate(30);
-  canvas = createCanvas(710, 400);
+  canvas = createCanvas(windowWidth, 400);
   canvas.parent('sketch-holder');
   w = width+12;
 
   y = new Array(windowWidth);
 
   speedSlider = createSlider(-.2, .2, .05,.01);
-
+  speedSlider.parent('sketch-holder');
   speedSlider.position(300,50);
   speedSlider.class("sim-slider gray");
   speedSliderLabel = createP('&omega; = '+abs(speedSlider.value()));
+  speedSliderLabel.parent('sketch-holder');
   speedSliderLabel.position(300,20);
 }
 

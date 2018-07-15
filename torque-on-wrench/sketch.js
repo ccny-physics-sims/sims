@@ -1,13 +1,15 @@
 var pointApplied_x;
 
 function setup(){
-  createCanvas(900,900);
+  canvas=createCanvas(900,900);
+  canvas.parent('sketch-holder');
   background('white');
 
 //Create some vectors, arrows, and a slider
   center = createVector(150,275);
   pointApplied_x = createSlider(0,350,300,10);
-  pointApplied_x.position(100,25);
+  pointApplied_x.parent('sketch-holder');
+  pointApplied_x.position(300,25);
   pointApplied_x.class("sim-slider gray");
   end = createVector(450,450);
   pointApplied = createVector(center.x+pointApplied_x.value(),center.y);
@@ -81,9 +83,9 @@ function draw(){
   noStroke();
   fill('black');
   textSize(14);
-  text("Applied Force (F) = "+force1mag.toFixed(0)+" N",100,100);
-  text("Torque = "+torque.toFixed(1)+" N-m",100,120);
-  text("Position Vector (r) = "+(pointApplied_x.value()/10).toFixed(0)+" cm",100,20);
+  text("Applied Force (F) = "+force1mag.toFixed(0)+" N",100,110);
+  text("Torque = "+torque.toFixed(1)+" N-m",100,130);
+  text("Position Vector (r) = "+(pointApplied_x.value()/10).toFixed(0)+" cm",100,50);
   text("F",force1.target.x+15,force1.target.y+15);
   text("r",positionVector.target.x-75,positionVector.target.y+12);
   if (phi != 0 ){
