@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>celestial sphere</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				color: #fff;
+				font-family:Monospace;
+				font-size:13px;
+				text-align:center;
+
+				background-color: #000;
+
+				margin: 0px;
+				overflow: hidden;
+			}
+			a { color: #fff }
+
+			#info {
+				position: absolute;
+				top: 0px; width: 100%;
+				padding: 5px;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="container"></div>
+
+
+		<p><a href="../../simdocs/earth-in-orbit-simple">About</a>	</p>	</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/94/three.min.js	"></script>
+		<script src="../../threejs/js/controls/OrbitControls.js"></script>
+		<script src="../../threejs/js/Detector.js"></script>
+
+		<script>
+
+			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+			var params = { opacity: .8, rotationSpeed: .0005 };
+
+			var container, stats;
+			var camera, scene, renderer, controls;
+			var initAnim = true;
+			var runAnim = false;
+			var isPlay = false;
+			var theta = 0;
+
+
+			init();
+			animate();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 2000 );
+				camera.position.set( 200, 100, 50 );
+
+				scene = new THREE.Scene();
+				scene.background = new THREE.Color( 0x000000 );
+
+
+				parent = new THREE.Object3D();
+				scene.add( parent );
+
+				var earthGEO = new THREE.SphereGeometry( 4, 30, 30 );
+
+
+				var earthMAT = new THREE.MeshStandardMaterial( {
+					roughness: 1
+				} );
+
+				var textureLoader = new THREE.TextureLoader();
+				textureLoader.load( "earth-color.jpg", function ( map ) {
+					map.anisotropy = 8;
+					earthMAT.map = map;
+					earthMAT.needsUpdate = true;
+          earthMAT.opacity = 1;
+
+				} );
+
+				var earthMESH = new THREE.Mesh( earthGEO, earthMAT );
+				earthMESH.position.x = 50.0;
+				earthMESH.rotation.y = 0
+				earthMESH.name = "theEarth";
+				earthMESH.rotation.x = -0.4101524;
+
+
+				var sunMAT = new THREE.MeshBasicMaterial( {
+					color: 0xe5bc29
+				});
+				var textureLoader = new THREE.TextureLoader();
+				textureLoader.load( "sun-texture-512.jpg", function ( map ) {
+					map.anisotropy = 8;
+					sunMAT.map = map;
+					sunMAT.needsUpdate = true;
+					sunMAT.opacity = 1;
+
+				} );
+				var sunGEO = new THREE.SphereGeometry( 5, 30,30 );
+				var sunMESH = new THREE.Mesh(sunGEO, sunMAT);
+				sunMESH.position.x=00;
+				sunMESH.position.y=00;
+				sunMESH.position.z=0;
+				sunMESH.name = "theSun";
+				scene.add( sunMESH );
+				scene.add( earthMESH );
+
+				var material = new THREE.LineBasicMaterial({
+					color: 0xffffff
+				});
+
+				var geometry = new THREE.Geometry();
+				geometry.vertices.push(
+					new THREE.Vector3(0 , 100, 0 ),
+					new THREE.Vector3( 0, -100, 0 )
+				);
+
+				var line = new THREE.Line( geometry, material );
+
+				earthMESH.add( line );
+
+
+				var stars = createStars(200, 64);
+				stars.rotation.x = -62.6 * Math.PI / 180;
+				stars.rotation.z = 0 * Math.PI / 180;
+				stars.rotation.y = 0 * Math.PI / 180;
+				//stars.material.map.matrix.setUvTransform(1, 1, 1, 1, -Math.PI, 0, 0);
+
+				//stars.rotation.y = -Math.PI/2;
+				scene.add(stars);
+
+				// Lights
+
+				var light = new THREE.AmbientLight( 0x404040,2 ); // soft white light
+
+				scene.add( light );
+
+          var pointLight = new THREE.PointLight( 0xF8FF91, 2 );
+          pointLight.position.set(00,0,0);
+        //  directionalLight.name = "sunLight";
+
+        // scene.add( directionalLight );
+				//
+				//  var light = new THREE.PointLight( 0xF8FF91, 1, 0 );
+				//  light.position.set( 200, 00, 0 );
+				scene.add( pointLight );
+
+
+				renderer = new THREE.WebGLRenderer();
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.shadowMap.enabled = true;
+				container.appendChild( renderer.domElement );
+
+				renderer.gammaInput = true;
+				renderer.gammaOutput = true;
+
+
+				controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls.target.set( 0, 0, 0 );
+				controls.enableZoom = false;
+				controls.update();
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+
+			}
+			axes = buildAxes( 1000 );
+			scene.add( axes );
+
+
+			function createStars(radius, segments) {
+
+				var loader = new THREE.TextureLoader();
+				var texture = loader.load('milky-way-and-stars-2048.jpg', render);
+				//texture.mapping = THREE.SphericalReflectionMapping;
+				texture.matrixAutoUpdate = false;
+
+		return new THREE.Mesh(
+			new THREE.SphereGeometry(radius, segments, segments),
+			new THREE.MeshBasicMaterial({
+				map: texture,
+				emissive: new THREE.Color(0xffffff),
+				emissiveMap: texture,
+				transparent: false,
+				metalness: 0,
+				roughness: 1,
+				opacity: 1,
+				side: THREE.BackSide
+			})
+		);
+	}
+			function buildAxes( length ) {
+					var axes = new THREE.Object3D();
+
+					axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( length, 0, 0 ), 0x990000, false ) ); // +X
+					axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( -length, 0, 0 ), 0x960000, true) ); // -X
+					axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, length, 0 ), 0x009900, false ) ); // +Y
+					axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, -length, 0 ), 0x009900, true ) ); // -Y
+					axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, length ), 0x000099, false ) ); // +Z
+					axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -length ), 0x000099, true ) ); // -Z
+//0x969696
+					return axes;
+
+				}
+
+				function buildAxis( src, dst, colorHex, dashed ) {
+
+					var geom = new THREE.Geometry();
+					geom.vertices.push(src.clone(), dst.clone());
+
+					if(dashed) {
+						mat = new THREE.LineDashedMaterial({ linewidth: 1, color: colorHex, dashSize: 3, gapSize: 3 });
+					} else {
+						mat = new THREE.LineBasicMaterial({ linewidth: 1, color: colorHex });
+					}
+
+					var axis = new THREE.Line( geom, mat );
+					axis.computeLineDistances();
+
+					return axis;
+
+				}
+
+			function onWindowResize() {
+
+				var width = window.innerWidth;
+				var height = window.innerHeight;
+
+				camera.aspect = width / height;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( width, height );
+
+			}
+
+			//
+
+			function animate() {
+				requestAnimationFrame( animate );
+				render();
+			}
+
+			function render() {
+
+				// for ( var i = 0, l = scene.children.length; i < l; i ++ ) {
+				//
+				// 	var object = scene.children[ 1 ];
+				//
+				// 	if ( object.geometry instanceof THREE.SphereGeometry ) {
+				// 		object.rotation.y = - performance.now() * params.rotationSpeed;
+				// 	}
+				//
+				// }
+				 var theEarth = scene.getObjectByName( "theEarth" );
+				 theEarth.position.x = 50*Math.sin(performance.now() * params.rotationSpeed);
+				 theEarth.position.z = 50*Math.cos(performance.now() * params.rotationSpeed);
+
+				theEarth.rotation.y = performance.now() * .005;
+
+				//parent.children[0].rotation.y = performance.now()*.005;
+
+				//console.log(parent.children);
+				//sunMESH.position.y = 1;
+				//sunMESH.position.y = 20*Sin(performance.now()*.2);
+				//parent.rotation.y = -Math.sin(performance.now() * params.rotationSpeed);
+				// var theSun = scene.getObjectByName( "theSun" );
+				// theSun.position.x = 36*Math.cos(performance.now() * params.rotationSpeed);
+				// theSun.position.z = 36*Math.sin(performance.now() * params.rotationSpeed);
+				// //theSun.position.y = 10*Math.sin(performance.now() * params.rotationSpeed);
+				// theSun.rotation.y = - performance.now() * params.rotationSpeed;
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+	</body>
+</html>
