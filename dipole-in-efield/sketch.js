@@ -3,16 +3,16 @@ var strength=20;
 var dipoles = [];
 
 function setup() {
-  canvas = createCanvas(windowWidth,windowHeight)
+  canvas = createCanvas(windowWidth*.95,windowHeight*.95)
   canvas.parent('sketch-holder');
   rectMode(CENTER);
 
   fieldStrengthSlider = createSlider(0,30,10, 1);
-  fieldStrengthSlider.position(150,0);
+  fieldStrengthSlider.position(160,15);
   fieldStrengthSlider.parent('sketch-holder');
   fieldStrengthSlider.class("sim-slider blue");
   fieldStrengthSliderLabel = createP();
-  fieldStrengthSliderLabel.position(10,6);
+  fieldStrengthSliderLabel.position(30,20);
   fieldStrengthSliderLabel.parent('sketch-holder');
   fieldStrengthSliderLabel.style("color", "#ffffff");
   fieldStrengthSliderLabel.style("font-family", "Helvetica");
