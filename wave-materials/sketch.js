@@ -20,28 +20,35 @@ var onoff;
 function setup() {
 
   frameRate(30);
-  createCanvas(windowWidth, 400);
-
+  canvas = createCanvas(windowWidth*.95, 400);
+  canvas.parent('sketch-holder');
   //these are all for the labels and sliders
   onoff = createButton("start");
+  onoff.parent('sketch-holder')
   onoff.mouseClicked(turnonoff);
   onoff.position(width-100,30);
   onoff.class("sim-button")
   equation = createP("<p>n = 1</p>");
+  equation.parent('sketch-holder')
   equation.position(width*3/4, 70);
   equation1 = createP("<p>n = 1</p>");
+  equation1.parent('sketch-holder')
   equation1.position(width*1/4, 70);
 
   omegaSliderLabel = createP("Frequency");
   omegaSliderLabel.position(50,0);
+  omegaSliderLabel.parent('sketch-holder')
   iorSliderLabel = createP("Index of Refraction");
+  iorSliderLabel.parent('sketch-holder')
   iorSliderLabel.position(50,50);
   iorSlider = createSlider(1, 3, 1);
+  iorSlider.parent('sketch-holder');
   iorSlider.elt.step=0.1;
   iorSlider.position(200,40);
   iorSlider.class("sim-slider");
   iorSlider.size(width/5,30)
   omegaSlider = createSlider(-20, 20, 4);
+  omegaSlider.parent('sketch-holder');
   omegaSlider.position(200,00);
   omegaSlider.class("sim-slider");
   omegaSlider.size(width/5,30)

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>celestial sphere</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+
+	<style>
+		body {
+
+			font-family: sans-serif;
+			font-size: 13px;
+			text-align: center;
+			background-color: #fff;
+			margin: 0px;
+			overflow: hidden;
+		}
+
+		a {
+			color: #eee
+		}
+
+		#info {
+			color: #000;
+			position: absolute;
+			top: 0px;
+			width: 100%;
+			padding: 5px;
+		}
+
+		.controlButton {
+			background-color: rgb(201, 217, 233);
+			border: none;
+			border-radius: 5px;
+			color: black;
+			padding: 10px 25px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			width: 10em;
+			position: absolute;
+			left: 10px;
+			top: 10px;
+		}
+	</style>
+
+</head>
+
+<body>
+	<button type="button" class="controlButton" id="startButtonId">Pause</button>
+	<!-- <div class="controlButton" id="startButtonId">Play</div> -->
+
+	<div id="info">The Celestial Sphere of Ancient Times</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/94/three.min.js	"></script>
+	<script src="../../threejs/js/controls/OrbitControls.js"></script>
+	<script src="../../threejs/js/Detector.js"></script>
+
+
+	<script>
+		if (!Detector.webgl) Detector.addGetWebGLMessage();
+
+		var params = {
+			opacity: 1,
+			rotationSpeed: .2
+		};
+
+		var container, stats;
+		var camera, scene, renderer, controls;
+		var initAnim = true;
+		var runAnim = false;
+		var isPlay = true;
+		var t = 0;
+		var deltaTime = 0.01;
+		var axis = new THREE.Vector3(0, 1, 0)
+		init();
+		animate();
+
+		function init() {
+
+			container = document.createElement('div');
+			document.body.appendChild(container);
+
+			var startButton = document.getElementById('startButtonId');
+			//startButton.innerHTML = 'Pause';
+			startButton.onclick = function StartAnimation() {
+
+				// if (initAnim) {
+				// 	initAnim = false;
+				// 	runAnim = true;
+				//
+				// }
+				// Start and Pause
+				if (deltaTime > 0) {
+
+					//runAnim = false;
+					//isPlay = true;
+					deltaTime = 0;
+					startButton.innerHTML = 'Restart &#9658';
+					//animate();
+				} else {
+					startButton.innerHTML = 'Pause';
+					//runAnim = true;
+					//isPlay = false;
+					deltaTime = 0.01;
+				}
+			}
+
+			camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 2000);
+			camera.position.set(0.0, 00, 100 * 2);
+			//camera.position.set(0,200,0)
+			scene = new THREE.Scene();
+			scene.background = new THREE.Color(0xffffff);
+
+			//
+
+			var geometry = new THREE.SphereGeometry(18, 30, 30);
+
+			var material1 = new THREE.MeshStandardMaterial({
+				roughness: 1
+			});
+
+			var material2 = new THREE.MeshStandardMaterial({
+				opacity: params.opacity,
+				premultipliedAlpha: true,
+				transparent: true,
+				roughness: 1
+
+			});
+
+			var sunMaterial = new THREE.MeshStandardMaterial({
+				roughness: 1,
+				emissive: 0xffff00,
+				emissiveIntensity: 1
+			});
+
+			var textureLoader = new THREE.TextureLoader();
+			textureLoader.load("earth-clouds-2048.jpg", function(map) {
+
+				map.anisotropy = 8;
+
+				material1.map = map;
+				material1.needsUpdate = true;
+				material1.opacity = 1;
+
+			});
+
+			var loader = new THREE.TextureLoader();
+			var texture = loader.load('milky-way-and-constellations-2048.jpg', render);
+			texture.mapping = THREE.SphericalReflectionMapping;
+			texture.matrixAutoUpdate = false;
+
+			var celestSphereMat = new THREE.MeshStandardMaterial({
+				map: texture,
+				emissive: new THREE.Color(0xffffff),
+				emissiveMap: texture,
+				transparent: false,
+				metalness: 0,
+				roughness: 1,
+				opacity: 1,
+				side: THREE.BackSide
+			});
+
+
+
+			var mesh = new THREE.Mesh(geometry, material1);
+			mesh.position.x = 0.0;
+			mesh.name = "theEarth";
+
+			scene.add(mesh);
+
+			var geometry = new THREE.SphereGeometry(50, 64, 64);
+
+			var mesh = new THREE.Mesh(geometry, celestSphereMat);
+			mesh.position.x = 0.0;
+			mesh.rotation.x = 2 * 58 * Math.PI / 180;
+			mesh.rotation.y = -33 * Math.PI / 180;
+			mesh.name = "theCelestialSphere";
+
+			scene.add(mesh);
+			mesh.material.map.matrix.setUvTransform(1, 1, 1, 1, -Math.PI, 0, 0);
+
+			//rotation = -Math.Pi/2;
+
+
+
+			var sunSphere = new THREE.CylinderGeometry(3, 3, .1, 32);
+			var mesh = new THREE.Mesh(sunSphere, sunMaterial);
+			mesh.position.x = 0;
+			mesh.position.y = 0;
+			mesh.position.z = 36;
+			mesh.name = "theSun";
+			mesh.rotation.z = Math.PI / 2;
+			scene.add(mesh)
+
+
+			// Lights
+
+			var directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+			directionalLight.position.set(500, 0, 0);
+			directionalLight.name = "sunLight";
+			scene.add(directionalLight);
+			//
+
+			renderer = new THREE.WebGLRenderer();
+			renderer.setPixelRatio(window.devicePixelRatio);
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			renderer.shadowMap.enabled = true;
+			container.appendChild(renderer.domElement);
+
+			renderer.gammaInput = true;
+			renderer.gammaOutput = true;
+
+
+			controls = new THREE.OrbitControls(camera, renderer.domElement);
+			controls.target.set(0, 0, 0);
+			controls.enableZoom = false;
+			controls.update();
+
+			window.addEventListener('resize', onWindowResize, false);
+
+
+
+		}
+
+		function onWindowResize() {
+
+			var width = window.innerWidth;
+			var height = window.innerHeight;
+
+			camera.aspect = width / height;
+			camera.updateProjectionMatrix();
+
+			renderer.setSize(width, height);
+
+		}
+
+		//
+
+		function animate(delta) {
+			if (!isPlay) return;
+			requestAnimationFrame(animate);
+			t += deltaTime;
+			render();
+			//console.log(deltaTime);
+		}
+
+		function render() {
+
+			// for ( var i = 0, l = scene.children.length; i < l; i ++ ) {
+			//
+			// 	var object = scene.children[ 1 ];
+			//
+			// 	if ( object.geometry instanceof THREE.SphereGeometry ) {
+			// 		object.rotation.y = - t * params.rotationSpeed;
+			// 	}
+			//
+			// }
+			var theCelestialSphere = scene.getObjectByName("theCelestialSphere");
+			//	theCelestialSphere.rotation.x = Math.PI/3;
+			//	theCelestialSphere.rotation.y = -t*params.rotationSpeed;
+
+			theCelestialSphere.rotateOnWorldAxis(axis, -params.rotationSpeed * deltaTime);
+
+			var sunLight = scene.getObjectByName("sunLight");
+			sunLight.position.x = 200 * Math.cos(t * params.rotationSpeed);
+			sunLight.position.z = 200 * Math.sin(t * params.rotationSpeed);
+
+			var theSun = scene.getObjectByName("theSun");
+			theSun.position.x = 36 * Math.cos(t * params.rotationSpeed);
+			theSun.position.z = 36 * Math.sin(t * params.rotationSpeed);
+			theSun.rotation.y = -t * params.rotationSpeed;
+			renderer.render(scene, camera);
+
+		}
+	</script>
+</body>
+
+</html>
