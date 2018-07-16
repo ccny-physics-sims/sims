@@ -1,7 +1,7 @@
  var thetaSpacing = .1;
  var n=1;
  var omega = 1;
-
+var nicename = 'bohr-model';
 
 function setup() {
 angleMode(RADIANS)
@@ -43,6 +43,8 @@ angleMode(RADIANS)
 
 
   dtheta = thetaSpacing;
+  addQmark('bottom-left')
+
 }
 
 function draw() {
@@ -99,4 +101,22 @@ function renderWave(color_,weight_) {
   endShape();
   pop()
 
+}
+
+function addQmark(corner){
+  push();
+  fill(0);
+  noStroke();
+  link = createA('https://ccny-physics-sims.github.io/simdocs/'+nicename,'?');
+  link.parent('sketch-holder');
+  link.style('text-decoration:none;');
+  link.style('font-size:18pt;');
+  link.style('color: #aaa;');
+  
+  if (corner = 'top-left'){
+  link.position(20,20)
+  }
+  if (corner = 'bottom-left'){
+  link.position(20,height-0);
+  }
 }
