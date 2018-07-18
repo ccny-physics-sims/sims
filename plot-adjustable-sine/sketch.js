@@ -1,5 +1,5 @@
 function setup() {
-  canvas = createCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(windowWidth*.95, windowHeight*.95);
   canvas.parent('sketch-holder');
   background(250);
   frameRate(30);
