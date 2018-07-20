@@ -1,14 +1,17 @@
-var i=0;
-var A;
+//Mercury Orbit Simulation
+
+var nicename = 'mercury-orbit';
+
 var B;
 
 var onoff;
-var running = true;
-var Slider;
 
+var Slider;
 
 var deltatime = 0;
 var autoadvance = false;
+
+//parameters of the orbit from: https://nssdc.gsfc.nasa.gov/planetary/factsheet/mercuryfact.html
 
 var semimajor = 57.91*3;
 var eccentricity = .2056;
@@ -17,7 +20,10 @@ var c = Math.sqrt(Math.pow(semimajor,2)-Math.pow(semiminor,2));
 
 var skyLight = 0;
 var daystatus = 'sunrise';
+
 function preload() {
+  //image based on from https://photojournal.jpl.nasa.gov/catalog/PIA16950
+  //credit: NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie Institution of Washington
   mercuryImage = loadImage('mercury-polar.png');
 }
 
@@ -29,12 +35,14 @@ imageMode(CENTER);
 
   textSize(18)
 
+  //start stop button
   onoff = createButton("PLAY");
   onoff.parent('sketch-holder')
   onoff.mouseClicked(timeadvancertoggle);
   onoff.position(30,30);
   onoff.class("sim-button blue");
 
+  //orbit control slider
   SliderLabel = createP("manual orbit control");
   SliderLabel.parent('sketch-holder');
   SliderLabel.position(30,80);
@@ -44,6 +52,8 @@ imageMode(CENTER);
   Slider.parent('sketch-holder');
   Slider.position(30,110);
   Slider.class("sim-slider");
+
+  //text boxes
 
   orbitCount = createP('Mercury Orbits: 0');
   orbitCount.parent('sketch-holder');
@@ -67,25 +77,21 @@ imageMode(CENTER);
   daynightstatus.attribute('align', 'center');
   daynightstatus.style('text-align: center');
   daynightstatus.style('color: #42b3f4;')
-  // angleOfSun = createP('Angle: 0');
-  // angleOfSun.parent('sketch-holder');
-  // angleOfSun.position(30,250);
-  //noSmooth();
-  //frameRate(15)
 
   B = Slider.value()
+  addQmark('bottom-left')
 
 
 }
 
 function draw(){
 
-
+//reset the anomoly
   if (B > 7*PI){B = 3*PI}
 
 background(255)
 fill(255);
-A = width/4;
+
 if (autoadvance == true){
   B += deltatime;
   Slider.value(B)
@@ -98,60 +104,59 @@ orbitCount.html('Mercury Orbits: '+map(B,3*PI,7*PI,0,2).toFixed(2))
 rotationCount.html('Mercury Rotations: '+map(B,3*PI,7*PI,0,3).toFixed(2))
 earthDayCount.html('Earth Days: ' +(175.97*(B-3*PI)/(4*PI)).toFixed(0))
 push()
-
+//move it all to the center
 translate(width/2,height/2)
 
+//make the orbit path
 push()
 fill(0,0,0,0)
 stroke(220);
 ellipse(+c,0,2*semimajor,2*semiminor)
 pop()
 
+//make the sun
+push()
+noStroke()
+fill(240,200,40)
+translate(0,0)
+ellipse(0,0,40,40)
+pop()
+
+//lable the sun
 push()
 fill(0)
 translate(0,0)
 text("Sun",-15,-30);
 pop()
 
-push()
-noStroke()
-fill(240,200,40)
-translate(0,0)
-ellipse(0,0,40,40)
+//find the eccentric anomoly, by solving Kepler's equation, thanks to: http://www.jgiesen.de/kepler/kepler.html
 
 E = B + (eccentricity-(1/8)*Math.pow(eccentricity,3))*Math.sin(B)+(1/2)*Math.pow(eccentricity,2)*Math.sin(2*B)
 C = Math.cos(E)
 S = Math.sin(E)
-pop()
 
-//xpos = -semimajor*cos(2*Math.PI*B);
-//ypos = semiminor*sin(2*Math.PI*B);
+// x-y position of the orbiter
 
 xpos = -semimajor*(C - eccentricity)
 ypos = semimajor*Math.sqrt(1-Math.pow(eccentricity,2))*S
 push()
-//rotate(-Slider.value()*.01)
-//translate(width/4,0)
 noStroke();
 translate(xpos,ypos);
 fill(0)
-//text("Mercury",-80,5);
-//line(0,0,300,0)
 
-//fill(230)
+
 push();
-//omega = B*2*PI*3/2-PI/2;
+//rotation about the planet's axis
 omega = 2*PI*(B*3/(4*PI))-PI/2;
-//omega = 2*PI*B*
 rotate(-omega);
 image(mercuryImage,0,0);
 translate(0,-15)
 stickFigure(15);
 pop();
 
+// shade the dark side
 push();
 fill(200);
-//ellipse(0,0,30,30)
 rotate(-E)
 fill(0,0,0,200)
 arc(0,0,30,30,PI/2,3*PI/2,CHORD)
@@ -159,32 +164,20 @@ pop();
 
 pop();
 
+//this part is used to figure out where the sun will be:
 
-// push()
-// daylight = map(B,0,2,255,0)
-// fill(daylight)
-// rect(0,0,50,50)
-// pop()
 Omega = Math.atan2(ypos,(-xpos));
-//omega = omega+HALF_PI
-//omega = omega-4*PI;
+
 if (Omega < 0){Omega = Omega+2*PI}
-//console.log('Omega: '+Omega);
-//Omega = Math.atan(ypos/(xpos-c))
-//if (abs(omega)>TWO_PI){omega = omega+TWO_PI}
-//console.log('omega: '+omega);
+
 anglefromhorizon = -1*((Omega-(omega))+3*PI);
 anglefromhorizonReduced = anglefromhorizon % TWO_PI;
 degreesfromhorizonReduced = (degrees(anglefromhorizon) % 360);
 degreesfromnoon = anglefromhorizonReduced-90
 
-//if (anglefromhorizon>HALF_PI) {anglefromhorizon = anglefromhorizon-TWO_PI}
-//angleOfSun.html(degrees(anglefromnoon).toFixed(2))
-// angleOfSun.html(degrees(anglefromhorizon).toFixed(2)+' <br>  Omega (reduced): '+(degrees(anglefromhorizon) % 360).toFixed(2) +' <br>  Omega: '+Omega.toFixed(2)+' <br>  omega: '+(omega-4*PI).toFixed(2))
-
-
 pop();
 
+//Make the sky simulator
 push()
 sunx = 50*Math.cos(anglefromhorizonReduced)
 suny = 50*Math.sin(anglefromhorizonReduced)
@@ -216,7 +209,7 @@ push()
 fill(240,200,40)
 noStroke()
 line(0,0,100,0)
-//rotate(anglefromhorizonReduced)
+
 
 translate(-sunx,-suny)
 
@@ -246,6 +239,7 @@ function timeadvancertoggle(){
     autoadvance = false;
   }
 }
+
 function stickFigure(figureHeight){
   push()
   noFill()
@@ -259,7 +253,3 @@ larm = line(0,-figureHeight/1.2,-figureHeight/4,-figureHeight/1.4)
 rarm = line(0,-figureHeight/1.2,figureHeight/4,-figureHeight/1.4)
 pop()
 }
-function windowResized() {
-    // Resize necessary elements to fit new window size
-    //resizeCanvas(windowWidth, windowHeight); // width and height system variables updated here
-  }
