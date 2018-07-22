@@ -13,10 +13,9 @@ var autoadvance = false;
 
 //parameters of the orbit from: https://nssdc.gsfc.nasa.gov/planetary/factsheet/mercuryfact.html
 
-var semimajor = 57.91*3;
+var semimajor = 57.91;
 var eccentricity = .2056;
-var semiminor = semimajor*Math.sqrt(1-Math.pow(eccentricity,2))
-var c = Math.sqrt(Math.pow(semimajor,2)-Math.pow(semiminor,2));
+
 
 var skyLight = 0;
 var daystatus = 'sunrise';
@@ -28,13 +27,14 @@ function preload() {
 }
 
 function setup(){
-canvas = createCanvas(800, 600);
+canvas = createCanvas(windowWidth*.9, windowHeight*.9);
 canvas.parent('sketch-holder');
 //frameRate(15);
 imageMode(CENTER);
-
   textSize(18)
-
+  semimajor = semimajor * windowWidth/300
+  semiminor = semimajor * Math.sqrt(1-Math.pow(eccentricity,2))
+  c = Math.sqrt(Math.pow(semimajor,2)-Math.pow(semiminor,2));
   //start stop button
   onoff = createButton("PLAY");
   onoff.parent('sketch-holder')
@@ -201,7 +201,7 @@ else if (suny > -20 && suny < 20){
 }
 daynight.html('Day/Night?')
 daynightstatus.html(daystatus)
-
+stroke(0)
 fill(skyLight)
 translate(70,400)
 rect(-60,-80,120,80)
@@ -252,4 +252,11 @@ rleg = line(0,-figureHeight/2,+figureHeight/4,0)
 larm = line(0,-figureHeight/1.2,-figureHeight/4,-figureHeight/1.4)
 rarm = line(0,-figureHeight/1.2,figureHeight/4,-figureHeight/1.4)
 pop()
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth*.9, windowHeight*.9);
+  semimajor = 57.91 * windowWidth/300;
+  semiminor = semimajor * Math.sqrt(1-Math.pow(eccentricity,2))
+  c = Math.sqrt(Math.pow(semimajor,2)-Math.pow(semiminor,2));
 }
