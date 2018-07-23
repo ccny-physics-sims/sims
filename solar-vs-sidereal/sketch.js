@@ -1,37 +1,50 @@
-var i=0;
-var A, Arate;
-var B, Brate;
-var equantD;
-var onoff;
-var running = true;
+
+var A;
+var B;
+
 var Slider;
 var xPos,yPos;
-var c;
 
-var Trails = [];
+var nicename = 'solar-vs-sidereal';
 
 
+function preload() {
+  //image based on from https://photojournal.jpl.nasa.gov/catalog/PIA16950
+  //credit: NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie Institution of Washington
+  earthImage = loadImage('earth-polar-view.png');
+}
 function setup(){
-canvas = createCanvas(800, 800);
+canvas = createCanvas(windowWidth*.9,windowHeight*.9);
 canvas.parent('sketch-holder');
 frameRate(30);
-  c = 0;
+
+  imageMode(CENTER)
 
   textSize(18)
 
   SliderLabel = createP("time advance");
   SliderLabel.parent('sketch-holder');
-  SliderLabel.position(50,0);
-  Slider = createSlider(0, 20, 0 ,0);
+  SliderLabel.position(30,0);
+
+  Slider = createSlider(0, 20, 0 ,.05);
   Slider.parent('sketch-holder');
-  Slider.position(50,40);
+  Slider.position(30,40);
   Slider.class("sim-slider");
 
 //noSmooth();
 //frameRate(15)
 
 B = Slider.value()
-Arate = .01;
+
+
+solarDays = createP('Solar Days: 0');
+solarDays.parent('sketch-holder');
+solarDays.position(30,120)
+
+siderealDays = createP('Sidereal Days: 0');
+siderealDays.parent('sketch-holder');
+siderealDays.position(30,150);
+  addQmark('bottom-left')
 
 }
 
@@ -53,7 +66,8 @@ fill(0)
 text("Sun",-15,-30);
 pop()
 push()
-fill(250,250,40)
+noStroke()
+fill(240,200,40)
 ellipse(0,0,40,40)
 pop()
 
@@ -64,75 +78,23 @@ push()
 translate(-A*cos(B), A*sin(B));
 fill(0)
 text("Earth",-80,5);
-line(0,0,300,0)
-fill(20,200,20);
-ellipse(0,0,30,30)
+line(0,0,400,0)
+
 rotate(-B*32.42)
+
+image(earthImage,0,0,30,30)
 line(0,0,400,0)
 pop();
 
-
-
-
-
-c++
-if(c % 5 == 0){
-//Trails.push(new Particle(createVector(width/2+xPos/2, height/2-yPos/2+equantD)));
-}
-for (var j = Trails.length-1; j >= 0; j--) {
-  var p = Trails[j];
-  p.run();
-  if (p.isDead()) {
-    //remove the particle
-    Trails.splice(j, 1);
-  }
-}
-
-
-i++
+solarDays.html('Sidereal Days: '+ (B*5*1.032).toFixed(2));
+siderealDays.html('Solar Days: '+ (B*5).toFixed(2));
 
 }
 
 
-//particles class
-
-var Particle = function(position) {
-  this.acceleration = createVector(0, 0.0);
-  //this.velocity = createVector(random(-1, 1), random(-1, 0));
-  this.velocity = createVector(0,0);
-  this.position = position.copy();
-  this.lifespan = 1000.0;
-};
-
-Particle.prototype.run = function() {
-  this.update();
-  this.display();
-};
-
-// Method to update position
-Particle.prototype.update = function(){
-  this.velocity.add(this.acceleration);
-  this.position.add(this.velocity);
-  this.lifespan -= 2;
-};
-
-// Method to display
-Particle.prototype.display = function() {
-  fill(80, this.lifespan);
-  ellipse(this.position.x, this.position.y, 2,2);
-};
-
-// Is the particle still useful?
-Particle.prototype.isDead = function(){
-  if (this.lifespan < 0.0) {
-      return true;
-  } else {
-    return false;
-  }
-};
 
 
 function windowResized() {
     // Resize necessary elements to fit new window size
-    //resizeCanvas(windowWidth, windowHeight); // width and height system variables updated here
+    resizeCanvas(windowWidth, windowHeight); // width and height system variables updated here
   }
