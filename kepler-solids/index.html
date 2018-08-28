@@ -231,7 +231,8 @@
 					if ( ! this.renderer.autoClear ) this.renderer.clear();
 
 					this.controls.update();
-
+					this.camera.fov *= .999;
+					this.camera.updateProjectionMatrix();
 
 
 					this.renderer.render( this.scene, this.camera );
@@ -331,6 +332,7 @@
 
 			var render = function () {
 				pivotB.rotation.y = performance.now() * .0005;
+
 				requestAnimationFrame( render );
 				app.render();
 			};
