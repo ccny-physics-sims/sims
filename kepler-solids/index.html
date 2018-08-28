@@ -72,20 +72,21 @@
 			<div id="feedback"></div>
 		</div>
 
-		<script src="../../3js/js/Detector.js"></script>
+		<script src="../../threejs/js/Detector.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/95/three.min.js	"></script>
-		<script src="../../3js/js/controls/TrackballControls.js"></script>
-		<script src="../../3js/js/loaders/MTLLoader.js"></script>
-		<script src="../../3js/js/libs/dat.gui.min.js"></script>
+		<script src="../../threejs/js/controls/TrackballControls.js"></script>
+		<script src="../../threejs/js/loaders/MTLLoader.js"></script>
+		<script src="../../threejs/js/libs/dat.gui.min.js"></script>
+		<script src="../../threejs/js/loaders/LoaderSupport.js"></script>
 
-		<script src="../../3js/js/loaders/OBJLoader2.js"></script>
+		<script src="../../threejs/js/loaders/OBJLoader2.js"></script>
 		<script>
 
 			'use strict';
 
 			var OBJLoader2Example = (function () {
 
-				var Validator = THREE.OBJLoader2.prototype._getValidator();
+				var Validator = THREE.LoaderSupport.Validator;
 
 				function OBJLoader2Example( elementToBindTo ) {
 					this.renderer = null;
@@ -164,10 +165,10 @@
 
 						scope.pivot.add( objDef.pivot );
 						var objLoader = new THREE.OBJLoader2();
-						objLoader.setSceneGraphBaseNode( objDef.pivot );
+						objLoader.setStreamMeshesTo( objDef.pivot );
 						objLoader.setMaterials( materials.materials );
 						objLoader.setPath( objDef.path );
-						objLoader.setDebug( false, false );
+						//objLoader.setDebug( false, false );
 
 						var onSuccess = function ( object3d ) {
 							console.log( 'Loading complete. Meshes were attached to: ' + object3d.name );
