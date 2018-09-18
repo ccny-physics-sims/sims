@@ -47,7 +47,7 @@ function draw() {
 }
 
   drawSum(n);
-
+  addQmark('bottom-left')
 }
 
 function drawSine(counter_,strokeColor_) {
