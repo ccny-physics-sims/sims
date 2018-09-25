@@ -6,7 +6,7 @@ var nicename = 'bohr-model';
 function setup() {
 angleMode(RADIANS)
   frameRate(20);
-  canvas = createCanvas(600, 600);
+  canvas = createCanvas(windowHeight*.9, windowHeight*.9);
   canvas.parent('sketch-holder');
 
 
@@ -112,7 +112,7 @@ function addQmark(corner){
   link.style('text-decoration:none;');
   link.style('font-size:18pt;');
   link.style('color: #aaa;');
-  
+
   if (corner = 'top-left'){
   link.position(20,20)
   }
