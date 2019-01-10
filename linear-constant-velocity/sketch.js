@@ -3,12 +3,13 @@ function preload() {
 }
 
 function setup(){
-  running = true;
+  running = false;
+  noLoop();
   canvas = createCanvas(.9*windowWidth,200);
   canvas.parent('sketch-holder');
   //frameRate(20);
 
-  onoff = createButton("Pause");
+  onoff = createButton("Start");
   onoff.parent('sketch-holder')
   onoff.position(width-100,10);
   onoff.class("sim-button blue slim");
@@ -27,6 +28,7 @@ function draw(){
   car.wrapEdges();
   //car.display();
   image(carImage, car.position.x-50, car.position.y);
+  line(0,height/2+47,width,height/2+47);
 }
 
 function turnonoff() {
