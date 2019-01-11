@@ -15,17 +15,17 @@ function setup(){
   onoff.class("sim-button blue slim");
   onoff.mousePressed(turnonoff);
   pos = createVector(0,height/2)
-  vel = createVector(3,0);
-  accel = createVector(0,0);
-  car = new KineticMass(pos,vel,accel,0,'gray');
-  car.tail = true;
+  vel = createVector(0,0);
+  accel = createVector(.05,0);
+  car = new KineticMass(pos,vel,accel,00,'gray');
+  car.tail=true;
 
 }
 
 function draw(){
   background(255);
   if (car.position.x == 0){
-    //car.velocity = createVector(0,0);
+    car.velocity = createVector(0,0);
     car.tailA = [];
   }
   car.update();
@@ -34,6 +34,9 @@ function draw(){
   image(carImage, car.position.x-50, car.position.y);
   stroke(0)
   line(0,height/2+47,width,height/2+47);
+
+
+
 }
 
 function turnonoff() {
