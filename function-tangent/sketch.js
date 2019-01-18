@@ -1,23 +1,28 @@
-var coA,coB,coC;
+var coA,coB,coC,slope;
 function setup() {
-  canvas = createCanvas(500,.8*windowHeight);
+  canvas = createCanvas(.9*windowWidth,.8*windowHeight);
   canvas.parent('sketch-holder')
   background(250);
   frameRate(30);
   //lets make an array to fill
-  y = new Array(800);
-  coA = pow(width,1.75)
-  console.log(coA);
-  coB = pow(width,1.02)
-  console.log(coB)
-  coC = pow(width,.005)
-console.log(coC)
+  y = new Array(floor(.9*windowWidth));
+  //coA = pow(width,1.75)
+  coA = 80000
+  //console.log(coA);
+  //coB = pow(width,1.02)
+  coB = 6 * coA / width
+  //console.log(coB)
+  //coC = pow(width,.005)
+  coC = -(4*(coA - coB*width))/(3*pow(width,2))
+
+  //console.log(coC)
 }
 
 
 function draw() {
   background(250)
   stroke(0)
+  
   //move things to the middle
   translate(0, height / 2)
   //x axis
@@ -37,7 +42,6 @@ function draw() {
 function calcFunction() {
   //this function fills the aray with values
   for (var x = 0; x < y.length; x += 1) {
-
     y[x] = (coA*x-coB*pow(x,2)+coC*pow(x,3))*.00001;
   }
 
@@ -77,7 +81,15 @@ function renderTangent() {
   yy = (mouseX+coA*mouseX-coB*pow(mouseX,2)+coC*pow(mouseX,3))*.00001;
 
   push()
+  if (slope<-.01){
   stroke('red')
+  }
+  else if(slope>0.01){
+    stroke('blue')
+  }
+  else if (Math.abs(slope)<=.01){
+    stroke(0)
+  }
   strokeWeight(3)
   translate(mouseX,-yy)
   toRot = atan2(mouseX*slope,mouseX)
