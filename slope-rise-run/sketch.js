@@ -6,7 +6,7 @@ function setup() {
   frameRate(30);
   //lets make an array to fill
   y = new Array(width);
-  
+
   coB = width*2;
   textSize(18);
 }
@@ -110,4 +110,9 @@ function renderTangent() {
   noStroke()
   text('slope: '+(rise/run).toFixed(1),width/2,-height/2.3)
   pop()
+}
+
+function touchStarted() {
+  // prevent default
+  return false;
 }

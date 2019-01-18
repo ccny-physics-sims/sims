@@ -22,7 +22,7 @@ function setup() {
 function draw() {
   background(250)
   stroke(0)
-  
+
   //move things to the middle
   translate(0, height / 2)
   //x axis
@@ -100,4 +100,9 @@ function renderTangent() {
   stroke('gray')
   line(mouseX,-height/2,mouseX,height/2)
   pop()
+}
+
+function touchStarted() {
+  // prevent default
+  return false;
 }
