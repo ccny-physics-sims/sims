@@ -46,7 +46,7 @@ canvas.parent('sketch-holder');
   ballRoller.tailSpacing = 10;
   ballRoller.tailLength = 20;
 
-  ballRoller.size =0;
+
   //This will be the position vector
 
   //And this will be the velocity vector
