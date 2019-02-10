@@ -72,7 +72,11 @@ function draw() {
   fill('black');
   ellipse(width / 2, height / 2, 5, 5);
   pop()
-
+  push()
+  fill('black')
+  noStroke()
+  ellipse((width / 2)+2*radiusCircle*cos(theta),(height / 2)+2*radiusCircle*sin(theta),20)
+  pop()
   theta+=speedRot/100;
   }
 
