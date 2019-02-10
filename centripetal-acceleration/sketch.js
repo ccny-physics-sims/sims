@@ -25,12 +25,14 @@ function setup() {
   aVector.grab = false;
   aVector.draggable = false;
   aVector.showComponents = false;
+  aVector.width = 15;
 
   velVector = new Arrow(startPoint, endPoint);
   velVector.color = color('green');
   velVector.grab = false;
   velVector.draggable = false;
   velVector.showComponents = false;
+  velVector.width = 15;
   theta = 0;
   noLoop()
 }
@@ -40,7 +42,7 @@ function setup() {
 function draw() {
 
   background(250);
-  speedRot = speedSlider.value();
+  speedRot = .5*speedSlider.value();
   lengthV = speedRot;
   radiusCircle = 100;
   //makes an x-y coordinate axis
@@ -49,20 +51,6 @@ function draw() {
   line(0,height/2,width,height/2);
 
   // sets a rotation in the CCW direction
-
-
-  //both the origin and the endpoint are moving now, but the length stays the same.
-  aVector.origin = p5.Vector.add(startPoint,createVector(2*radiusCircle*cos(theta),2*radiusCircle*sin(theta)));
-  aVector.target = p5.Vector.add(startPoint,createVector((1.8*radiusCircle-pow(lengthV,2))*cos(theta),(1.8*radiusCircle-pow(lengthV,2))*sin(theta)));
-  aVector.update();
-  aVector.display();
-
-
-  velVector.origin = p5.Vector.add(startPoint,createVector(2*radiusCircle*cos(theta),2*radiusCircle*sin(theta)));
-  velVector.target = p5.Vector.add(velVector.origin,createVector(-20*lengthV*sin(theta),20*lengthV*cos(theta)));
-  velVector.update();
-  velVector.display();
-  //just draw some other things
   push();
   noFill();
   stroke('black')
@@ -72,10 +60,24 @@ function draw() {
   fill('black');
   ellipse(width / 2, height / 2, 5, 5);
   pop()
+
+  //both the origin and the endpoint are moving now, but the length stays the same.
+  aVector.origin = p5.Vector.add(startPoint,createVector(2*radiusCircle*cos(theta),2*radiusCircle*sin(theta)));
+  aVector.target = p5.Vector.add(startPoint,createVector((2*radiusCircle-6*pow(lengthV,2))*cos(theta),(2*radiusCircle-6*pow(lengthV,2))*sin(theta)));
+  aVector.update();
+  aVector.display();
+
+
+  velVector.origin = p5.Vector.add(startPoint,createVector(2*radiusCircle*cos(theta),2*radiusCircle*sin(theta)));
+  velVector.target = p5.Vector.add(velVector.origin,createVector(-8*lengthV*sin(theta),8*lengthV*cos(theta)));
+  velVector.update();
+  velVector.display();
+  //just draw some other things
+
   push()
   fill('black')
   noStroke()
-  ellipse((width / 2)+2*radiusCircle*cos(theta),(height / 2)+2*radiusCircle*sin(theta),20)
+  ellipse((width / 2)+2*radiusCircle*cos(theta),(height / 2)+2*radiusCircle*sin(theta),10)
   pop()
   theta+=speedRot/100;
   }
