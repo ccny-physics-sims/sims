@@ -25,14 +25,14 @@ function setup() {
   aVector.grab = false;
   aVector.draggable = false;
   aVector.showComponents = false;
-  aVector.width = 15;
+  aVector.width = 16;
 
   velVector = new Arrow(startPoint, endPoint);
   velVector.color = color('green');
   velVector.grab = false;
   velVector.draggable = false;
   velVector.showComponents = false;
-  velVector.width = 15;
+  velVector.width = 16;
   theta = 0;
   noLoop()
 }
