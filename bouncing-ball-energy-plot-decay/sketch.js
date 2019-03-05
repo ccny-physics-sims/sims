@@ -10,7 +10,7 @@ function setup()  {
   startPoint = createVector(3*width / 4, height / 2-10);
   vdisp = createVector(random(50, 100), random(-80, -20));
   frameRate(30);
-  pos = createVector(width/2,200);
+  pos = createVector(2*width/3,200);
   vel = createVector(0,0);
   accel = createVector(0,0);
   //make the ball! It is an instance of the Mass object
@@ -61,7 +61,7 @@ ball.display();
 //console.log(ball.velocity.y)
  push()
  noStroke();
- translate(width/9.2,450)
+ translate(width/10,450)
  push()
  fill('blue')
  PE = map(ball.position.y,200,500,0,100)

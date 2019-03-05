@@ -55,7 +55,7 @@ ball.display();
 //console.log(ball.velocity.y)
  push()
  noStroke();
- translate(width/9.2,450)
+ translate(width/10,450)
  push()
  fill('blue')
  PE = map(ball.position.y,200,500,0,100)
