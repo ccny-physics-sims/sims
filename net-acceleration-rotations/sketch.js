@@ -4,7 +4,7 @@ function setup() {
   canvas = createCanvas(.8*windowWidth, 500);
   canvas.parent('sketch-holder');
   // the length of the vector is 100!
-  lengthV = width/8;
+  lengthV = min(width/8,100);
   //its startPoint (i.e. origin) is in the center of the canvas
   startPoint = createVector(width / 2, height / 2);
   //it will initially start
