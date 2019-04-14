@@ -16,7 +16,7 @@ function setup() {
   playButton.position(20,25);
   playButton.mousePressed(togglePlayButton);
   playButton.value = true;
-  playButton.class("sim-button gray slim");
+  playButton.class("sim-button gray");
   playButton.parent('sketch-holder');
 
 

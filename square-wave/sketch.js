@@ -9,7 +9,7 @@ var sinePoints = [];
 function setup() {
 
   frameRate(30);
-  canvas = createCanvas(windowWidth, 400);
+  canvas = createCanvas(windowWidth*.9, 400);
   canvas.parent('sketch-holder');
 
   radio = createRadio();
