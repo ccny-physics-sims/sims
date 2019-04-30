@@ -33,6 +33,6 @@ function Pendulum(origin_, r_, start_) {
     fill(127);
     // Draw the ball
     ellipse(this.position.x, this.position.y, this.ballr, this.ballr);
-    rect(this.origin.x-60,this.origin.y-5,120,10)
+    rect(this.origin.x-30,this.origin.y-5,60,10)
   }
 }

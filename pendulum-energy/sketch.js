@@ -12,15 +12,14 @@ var dx;               // Value for incrementing x
          //...to store height values for the acceleration wave
 var text;             //to be used as labels for the graphs
 var color;            //simply to make the text colorful
-
+var pendLength = 205;
 
 
 function setup()  {
   canvas=createCanvas(windowWidth*.9,windowHeight*.9);
   canvas.parent('sketch-holder');
-  pendLength = height/4;
   // Make a new Pendulum with an origin location and armlength
-  p = new Pendulum(createVector(width/2,height/4),pendLength, PI/6);
+  p = new Pendulum(createVector(width/1.8,height/4),pendLength, PI/6);
 
   //labels for the graphs
 
@@ -42,23 +41,12 @@ function setup()  {
   velVector.draggable = false;
   velVector.grab = false;
 
-  accel = createVector(0,0);
-  accelVector = new Arrow(pos,vel);
-  accelVector.color = color('purple');
-  accelVector.width = 10;
-  accelVector.showComponents = false;
-  accelVector.draggable = false;
-  accelVector.grab = false;
 
 }
 
 function draw() {
   background(255);
-  push();
-  noFill();
-  stroke(170)
-  arc(width/2,height/4, 2*pendLength, 2*pendLength,PI/2-PI/6, PI/2+PI/6)
-  pop()
+
 
   p.go();
   pendVel = createVector(-cos(p.angle),sin(p.angle))
@@ -67,15 +55,22 @@ function draw() {
  velVector.update();
  velVector.display();
 
- pendAccel = p5.Vector.mult(createVector(-cos(p.angle),sin(p.angle)),-200000*p.aAcceleration);
- tensionDir = p5.Vector.mult(createVector(-sin(p.angle),-cos(p.angle)),200000*sq(p.aVelocity));
- totalAccel = p5.Vector.add(pendAccel,tensionDir);
- accelVector.origin = p.position;
+ push()
+ noStroke();
+ translate(200,400)
+ push()
+ fill('blue')
+ rect(0,0,50,-1000*(1-cos(p.angle)))
 
-accelVector.target = p5.Vector.add(totalAccel,p.position);
-accelVector.update();
-accelVector.display();
-
+ text('Potential',0,20)
+ pop()
+ push()
+ fill('red')
+ translate(100,0)
+ rect(0,00,50,-Math.pow(1000*p.aVelocity,2))
+ text('Kinetic',0,20)
+ pop()
+ pop()
 }
 
 
