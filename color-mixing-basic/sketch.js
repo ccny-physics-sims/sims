@@ -37,7 +37,7 @@ function draw() {
   aswatchYellow.over();
   aswatchYellow.show();
 
-  
+
 
 }
 
@@ -91,7 +91,7 @@ class Draggable {
     noStroke();
     // Different fill based on state
     if (this.dragging) {
-      fill(color(this.hue,80,100,1));
+      fill(color(this.hue,80,100,.7));
     } else if (this.rollover) {
       fill(color(this.hue,100,100,.5));
     } else {
