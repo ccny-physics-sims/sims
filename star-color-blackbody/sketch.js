@@ -37,7 +37,7 @@ button.position(aTextBox.x + aTextBox.width+30, aTextBox.y);
 button.class('sim-button ')
 button.mousePressed(updateValue);
 
-y = new Array(1000);
+y = new Array(500);
 }
 
 
@@ -98,14 +98,14 @@ function draw() {
     //renderLine();
 
     peakLambda = .002897771955/temp*1E9;
-    peakLambdaScaled = peakLambda*width/y.length
+    peakLambdaScaled = peakLambda*width/1000
     stroke(180)
     fill(0)
     //ellipse(peakLambdaScaled,0,30,30)
     line(peakLambdaScaled,0,peakLambdaScaled,-height/2)
     noStroke()
     textSize(24);
-    text('Max λ = '+peakLambda.toFixed(0)+' nm',peakLambdaScaled,35 )
+    text('Max = '+peakLambda.toFixed(0)+' nm',peakLambdaScaled,35 )
 
 
 }
@@ -113,7 +113,8 @@ function draw() {
 function calcFunction() {
   //this function fills the aray with values
   for (var x = 0; x < y.length; x += 1) {
-    let lambda = (1+x)*1E-9
+    xscaled = map(x,0,y.length,0,1000)
+    let lambda = (1+xscaled)*1E-9
     y[x] = 1.5E-12*(2*h*pow(c,2)/pow(lambda,5))*(1/(exp((h*c)/(lambda*kb*temp))-1))
   }
 
@@ -123,26 +124,27 @@ function renderPoints() {
   //this function puts ellipses at all the positions defined above.
   noStroke()
 
-  for (var x = 0; x < y.length; x += 4) {
-
+  for (var x = 0; x < y.length; x += 3) {
+    xscaled = map(x,0,y.length,0,1000)
     yscaled = map(y[x],0,max(y),0,height/2)
-    xscaled = map(x,0,y.length,0,width)
+    xwindowScaled = map(xscaled,0,1000,0,width)
+    //xscaled = map(x,0,1000,0,width)
 
-    specColor = getRGB(x)
-    if (x >= 370 && x <= 750){
+    specColor = getRGB(xscaled)
+    if (xscaled >= 370 && xscaled <= 750){
       fill(specColor);
       stroke(specColor)
 
     }
-    else if (x < 370){
+    else if (xscaled < 370){
       fill(255)
       stroke('violet')
     }
-    else if (x > 750){
+    else if (xscaled > 750){
       fill(255)
       stroke('red')
     }
-    ellipse(xscaled, -yscaled, 8, 8);
+    ellipse(xwindowScaled, -yscaled, 8, 8);
 
   }
 
@@ -158,8 +160,9 @@ function renderLine() {
   beginShape();
   for (var x = 0; x < y.length; x += 2) {
     yscaled = map(y[x],0,max(y),0,height/2)
-    xscaled = map(x,0,y.length,0,width)
-    curveVertex(xscaled, -yscaled);
+    xscaled = map(x,0,y.length,0,1000)
+    xwindowScaled = map(xscaled,0,1000,0,width)
+    curveVertex(xwindowScaled, -yscaled);
   }
   endShape();
   pop();
