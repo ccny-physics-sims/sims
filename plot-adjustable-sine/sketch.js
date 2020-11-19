@@ -1,14 +1,14 @@
 function setup() {
-  canvas = createCanvas(windowWidth*.95, windowHeight*.95);
+  canvas = createCanvas(windowWidth*.8, windowHeight*.7);
   canvas.parent('sketch-holder');
   background(250);
   frameRate(30);
   textSize(18)
   //lets make an array to fill
-  y = new Array(windowWidth);
+  y = new Array(200);
 
   amplitudeControl = createSlider(-200,200,50,0);
-  amplitudeControl.position(30,30)
+  amplitudeControl.position(30,height*.05)
   amplitudeControl.parent('sketch-holder')
   amplitudeControl.class("sim-slider");
   amplitudeControlLabel = createP("Amplitude");
@@ -16,12 +16,12 @@ function setup() {
   amplitudeControlLabel.parent('sketch-holder')
 
 
-  omegaControl = createSlider(2,5,3,.01);
-  omegaControl.position(300,30)
+  omegaControl = createSlider(5,30,15,.1);
+  omegaControl.position(30,height*.15)
   omegaControl.parent('sketch-holder')
   omegaControl.class("sim-slider");
   omegaControlLabel = createP("Omega");
-  omegaControlLabel.position(300,0);
+  omegaControlLabel.position(30,height*.1);
   omegaControlLabel.parent('sketch-holder')
 }
 
@@ -34,7 +34,7 @@ function draw() {
   //x axis
   line(0, 0, width, 0)
   line(0,-200,0,200)
-
+  widthScale = y.length/width;
   amplitude = amplitudeControl.value();
   omega = omegaControl.value();
   //calculate this points
@@ -60,9 +60,9 @@ function renderPoints() {
   //this function puts ellipses at all the positions defined above.
   noStroke()
       fill(0);
-  for (var x = 0; x < y.length; x += 10) {
-
-    ellipse(x, -y[x], 5, 5);
+  for (var x = 0; x < y.length; x += 2) {
+    xscaled = map(x,0,y.length,0,width)
+    ellipse(xscaled, -y[x], 5, 5);
   }
 }
 
@@ -75,7 +75,8 @@ function renderLine() {
 
   beginShape();
   for (var x = 0; x < y.length; x += 2) {
-    curveVertex(x, -y[x]);
+    xscaled = map(x,0,y.length,0,width)
+    curveVertex(xscaled, -y[x]);
   }
   endShape();
   pop();
@@ -92,9 +93,9 @@ function showMaxAmplitude(){
 function showPeriod(){
   stroke(0)
   translate(0,-80)
-  line(PI/(2*.01*omega),0,PI/(2*.01*omega),-30)
-  line(5*PI/(2*.01*omega),0,5*PI/(2*.01*omega),-30)
-  line(PI/(2*.01*omega),-15,5*PI/(2*.01*omega),-15)
+  line(PI/(2*.01*omega*widthScale),0,PI/(2*.01*omega*widthScale),-30)
+  line(5*PI/(2*.01*omega*widthScale),0,5*PI/(2*.01*omega*widthScale),-30)
+  line(PI/(2*.01*omega*widthScale),-15,5*PI/(2*.01*omega*widthScale),-15)
   noStroke()
-  text('T (period)',-30+(PI/(2*.01*omega)+5*PI/(2*.01*omega))/2,-30)
+  text('T (period)',(PI/(2*.01*omega*widthScale)+5*PI/(2*.01*omega*widthScale))/2,-30)
 }
