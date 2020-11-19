@@ -8,28 +8,27 @@ var k = 0;
 function setup() {
 
   frameRate(20);
-  canvas=createCanvas(700, 200);
+  canvas=createCanvas(.7*windowWidth, .4*windowHeight);
   canvas.parent('sketch-holder');
   wavelength = .2*width;
   amplitude = .15*wavelength;
   angularfrequency = TWO_PI;
   waveconstant = TWO_PI/wavelength;
-  vslider = createSlider(1, 2, 1);
+  vslider = createSlider(1, 2, 1,.01);
   vslider.parent('sketch-holder');
-  vslider.elt.step = .01;
-  vslider.position(width/2, height-30);
+  vslider.position(width/2-100, height-30);
 
   vslider.class("sim-slider");
   //noLoop();
   // Create objects
   loop();
   running = false;
-  for (var i=0; i<700; i++) {
+  for (var i=0; i<900; i++) {
     molecules.push(new Waver(180));
   }
   // Create a few dark ones for visibility
   for (var i=0; i<10; i++) {
-    molecules.push(new Waver(color(20,20,20)));
+    molecules.push(new Waver(color(240,20,20)));
   }
   fill(100);
 
@@ -93,19 +92,3 @@ function Waver(fill_) {
     pop();
   };
 }
-
-// function mousePressed(){
-//   if (!running){
-//     running = true;
-//     loop();
-//     return
-//   }
-//
-//   if (running){
-//     running = false;
-//     noLoop()
-//     return
-//   }
-//
-
-//}
