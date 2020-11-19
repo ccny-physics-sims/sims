@@ -3,34 +3,29 @@
 
 
 <head>
-  <title>Plot A Decaying Sine Function</title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-16872952-16"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-16872952-16');
+</script>
+
+  <title>Plot Decaying Sine Wave</title>
   <style>
   body {
     font-family:Helvetica, Arial, Sans-serif;
   }
   canvas {
-
-
-
   }
   </style>
 
-  <link href="../../sim-design/sims-styles.css" rel="stylesheet" />
-
-  <!-- load the p5 libraries we need. At first, we'll try from a CDN, but if for some reason that doesn't work, then we can load it from our local copy. For most sketches, all we'll need is the p5 and p5.dom libs -->
+  <link href="../../sim-design/sims-styles-2020.css" rel="stylesheet" />
 
   <!-- get p5.js from cdn -->
-  <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
-  <!-- uh oh. Can't find CDN?, then load from local. -->
-  <script>
-  window.p5 || document.write('<script src="../../../js/p5.js"><\/script><script src="../../../js/addons/p5.dom.min.js"><\/script>');
-  </script>
-
-  <!-- get p5.dom.js from cdn -->
-  <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
-
-  <!-- let's get our sketch! -->
-  <script language="javascript" src="../../science-library/lib/science.js"></script>
+  <script language="javascript" src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
 
   <script language="javascript" src="sketch.js"></script>
 
@@ -41,6 +36,9 @@
 </head>
 
 <body>
+  <a href="https://sciencesims.com"><img class="logo" src="../../img/scisims-profile-clipped-to-circle.png" alt="sciencesims" ></a>
+  <h3 class="simTitle">Plot Decaying Sine Wave</h3>
+  <a href="../../simdocs/plot-decaying-sine"><img class="helpButton" src="../../img/q-mark.png" alt="help" >  </a>
 <div id="sketch-holder" style="position: relative;">
   <!-- Our sketch will go here! -->
 </div>
