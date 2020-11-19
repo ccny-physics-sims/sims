@@ -1,5 +1,5 @@
 var xspacing;
-var howmanypoints = 40;    // how far between each point
+var howmanypoints = 50;    // how far between each point
 
 var dx;
 var x = 0;            // Value for incrementing x
@@ -22,8 +22,8 @@ var c=1;
 
 function setup() {
 
-  frameRate(10);
-  canvas = createCanvas(700, 500);
+  frameRate(20);
+  canvas = createCanvas(.9*windowWidth, .7*windowHeight);
   canvas.parent('sketch-holder');
 
   //these are all for the labels and sliders
@@ -32,31 +32,32 @@ function setup() {
   // onoff.position(650,30);
   // onoff.class("pure-button")
   equation = createP("y  = ");
-  equation.position(50, 20);
+  equation.position(50, height*.04);
   equation.parent('sketch-holder')
 
-  cSlider = createSlider(-40, 40, 0);
-  cSlider.position(50,80);
+  cSlider = createSlider(-40, 40, 0,1);
+  cSlider.position(50,height*.15);
   cSlider.parent('sketch-holder')
   cSlider.class("sim-slider gray");
-  bSlider = createSlider(-20, 20, 1);
-  bSlider.position(50,120);
+
+  bSlider = createSlider(-20, 20, 1,1);
+  bSlider.position(50,height*.25);
   bSlider.parent('sketch-holder')
   bSlider.class("sim-slider gray");
-  aSlider = createSlider(-2, 2, 1);
-  aSlider.elt.step = 0.1;
-  aSlider.position(50,160);
+
+  aSlider = createSlider(-4, 4, 1,.1);
+  aSlider.position(50,height*.35);
   aSlider.parent('sketch-holder')
   aSlider.class("sim-slider gray");
 
   cSliderLabel = createP("c");
-  cSliderLabel.position(30,74);
+  cSliderLabel.position(30,height*.15-20);
   cSliderLabel.parent('sketch-holder')
   bSliderLabel = createP("b");
-  bSliderLabel.position(30,114);
+  bSliderLabel.position(30,height*.25-20);
   bSliderLabel.parent('sketch-holder')
   aSliderLabel = createP("a");
-  aSliderLabel.position(30,154);
+  aSliderLabel.position(30,height*.35-20);
   aSliderLabel.parent('sketch-holder')
 
 
@@ -65,7 +66,7 @@ function setup() {
 
   w = width;
   xspacing = width/howmanypoints;
-  dx = xspacing/20;
+  dx = xspacing/50;
 
   // a small segment of the 'rope'
 
@@ -100,8 +101,8 @@ function draw() {
   omega = Math.abs(bSlider.value());
   equation.html("<p>y = "+
   getsign(cSlider.value()) +" " + abs(cSlider.value()) +
-  " " + getsign(bSlider.value()) + " " + abs(bSlider.value()) + "t" +
-  " " + getsign(aSlider.value()) + " "+ abs(aSlider.value()) + "t<sup>2</sup></p>");
+  " " + getsign(bSlider.value()) + " " + abs(bSlider.value()) + "x" +
+  " " + getsign(aSlider.value()) + " "+ abs(aSlider.value()) + "x<sup>2</sup></p>");
 
 
 }
@@ -140,7 +141,9 @@ function renderFunction() {
   push();
   noFill();
   stroke(80);
+  strokeWeight(2)
   if (a == 0){stroke(240,20,20)}
+  if (a == 0 && b ==0 ){stroke(20,20,240)}
     beginShape();
     for (var x = 0; x < yvalues.length; x+=2) {
       curveVertex(x*xspacing, height/2+yvalues[x]);
