@@ -3,46 +3,56 @@
 
 
 <head>
-  <title>Plot Sine Function</title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-16872952-16"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-16872952-16');
+</script>
+
+  <title>Plot N-Slit Intensity and Diffraction Pattern</title>
   <style>
   body {
     font-family:Helvetica, Arial, Sans-serif;
   }
   canvas {
-
-
-
   }
   </style>
 
-    <link href="../../sim-design/sims-styles.css" rel="stylesheet" />
+  <link href="../../sim-design/sims-styles-2020.css" rel="stylesheet" />
 
-    <!-- load the p5 libraries we need. At first, we'll try from a CDN, but if for some reason that doesn't work, then we can load it from our local copy. For most sketches, all we'll need is the p5 and p5.dom libs -->
+  <!-- load the p5 libraries we need. At first, we'll try from a CDN, but if for some reason that doesn't work, then we can load it from our local copy. For most sketches, all we'll need is the p5 and p5.dom libs -->
 
-    <!-- get p5.js from cdn -->
-    <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
-    <!-- uh oh. Can't find CDN?, then load from local. -->
-    <script>
-    window.p5 || document.write('<script src="../../../js/p5.js"><\/script><script src="../../../js/addons/p5.dom.min.js"><\/script>');
-    </script>
+  <!-- get p5.js from cdn -->
+  <script language="javascript" src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+  <!-- uh oh. Can't find CDN?, then load from local. -->
+  <script>
+  window.p5 || document.write('<script src="../../../js/p5.js"><\/script><script src="../../../js/addons/p5.dom.min.js"><\/script>');
+  </script>
 
-    <!-- get p5.dom.js from cdn -->
-    <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
-
-    <!-- let's get our sketch! -->
-    <script language="javascript" src="https://ccny-physics-sims.github.io/science-library/lib/science.js"></script>
-
-    <script language="javascript" src="sketch.js"></script>
-
-    <!-- this line removes any default padding and style. you might only need one of these values set. -->
-    <style> body {padding: 0; margin: 0;} </style>
+  <!-- get p5.dom.js from cdn -->
 
 
-  </head>
+  <!-- let's get our sketch! -->
+  <script language="javascript" src="https://ccny-physics-sims.github.io/science-library/lib/science.js"></script>
 
-  <body>
-  <div id="sketch-holder" style="position: relative;">
-    <!-- Our sketch will go here! -->
-  </div>
-  </body>
-  </html>
+  <script language="javascript" src="sketch.js"></script>
+
+  <!-- this line removes any default padding and style. you might only need one of these values set. -->
+  <style> body {padding: 0; margin: 0;} </style>
+
+
+</head>
+
+<body>
+  <a href="https://sciencesims.com"><img class="logo" src="../../img/scisims-profile-clipped-to-circle.png" alt="" ></a>
+  <h3 class="simTitle">N-Slit Intensity and Diffraction Pattern</h3>
+  <a href="../../simdocs/N-slits"><img class="helpButton" src="../../img/q-mark.png" alt="" >  </a>
+<div id="sketch-holder" style="position: relative;">
+  <!-- Our sketch will go here! -->
+</div>
+</body>
+</html>
