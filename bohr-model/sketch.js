@@ -6,44 +6,42 @@ var nicename = 'bohr-model';
 function setup() {
 angleMode(RADIANS)
   frameRate(20);
-  canvas = createCanvas(windowHeight*.9, windowHeight*.9);
+  canvas = createCanvas(windowWidth*.8, windowHeight*.8);
   canvas.parent('sketch-holder');
 
 
 
   rvalues = new Array(floor(TWO_PI/thetaSpacing)+4);
 
-  nSlider = createSlider(1, 9, 1);
+  nSlider = createSlider(1, 9, 1,1);
   nSlider.parent('sketch-holder');
-  nSlider.elt.step =1;
-  nSlider.position(400,50);
+
+  nSlider.position(width*.55,height*.05);
   nSlider.class("sim-slider gray");
 
   text1 = createP();
   text1.parent('sketch-holder');
-  text1.position(400,0);
+  text1.position(width*.05,0);
 
   text1.html('Current energy level')
 
   nLabel = createP();
   nLabel.parent('sketch-holder');
-  nLabel.position(550,47);
-  nLabel.html('&larr; integer change')
+  nLabel.position(width*.7,height*.07);
+  nLabel.html('integer change')
 
-  halfSlider = createSlider(0, 1, 0);
+  halfSlider = createSlider(0, 1, 0,.1);
   halfSlider.parent('sketch-holder');
-  halfSlider.elt.step =.1;
-  halfSlider.position(400,100);
+  halfSlider.position(width*.55,height*.15);
   halfSlider.class("sim-slider gray");
 
   halfLabel = createP();
   halfLabel.parent('sketch-holder');
-  halfLabel.position(550,97);
-  halfLabel.html('&larr; fractional change ')
+  halfLabel.position(width*.7,height*.17);
+  halfLabel.html('fractional change ')
 
 
   dtheta = thetaSpacing;
-  addQmark('bottom-left')
 
 }
 
@@ -60,7 +58,7 @@ radius = 50*(n/2);
   //dtheta = .1;
 
   calcWave(0);
-  renderWave(color(250,0,0),2);
+  renderWave(color(250,0,0),3);
 
   for (i = 0;i<10;i++){
   push();
@@ -101,22 +99,4 @@ function renderWave(color_,weight_) {
   endShape();
   pop()
 
-}
-
-function addQmark(corner){
-  push();
-  fill(0);
-  noStroke();
-  link = createA('https://ccny-physics-sims.github.io/simdocs/'+nicename,'?');
-  link.parent('sketch-holder');
-  link.style('text-decoration:none;');
-  link.style('font-size:18pt;');
-  link.style('color: #aaa;');
-
-  if (corner = 'top-left'){
-  link.position(20,20)
-  }
-  if (corner = 'bottom-left'){
-  link.position(20,height-0);
-  }
 }
