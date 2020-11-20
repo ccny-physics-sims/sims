@@ -1,6 +1,6 @@
 var coA,coB,coC,slope;
 function setup() {
-  canvas = createCanvas(.9*windowWidth,.8*windowHeight);
+  canvas = createCanvas(.8*windowWidth,.7*windowHeight);
   canvas.parent('sketch-holder')
   background(250);
   frameRate(30);
@@ -62,8 +62,8 @@ function renderLine() {
 
   push();
   noFill();
-  stroke(color('hsl(0,100%,80%)'));
-
+  stroke(color('hsl(160,0%,0%)'));
+  strokeWeight(2)
   beginShape();
   for (var x = 0; x < y.length; x += 2) {
     curveVertex(x, -y[x]);
@@ -82,15 +82,15 @@ function renderTangent() {
 
   push()
   if (slope<-.01){
-  stroke('red')
+  stroke('blue')
   }
   else if(slope>0.01){
-    stroke('blue')
+    stroke('red')
   }
   else if (Math.abs(slope)<=.01){
     stroke(0)
   }
-  strokeWeight(3)
+  strokeWeight(4)
   translate(mouseX,-yy)
   toRot = atan2(mouseX*slope,mouseX)
   rotate(-toRot)
