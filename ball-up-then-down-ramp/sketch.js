@@ -4,20 +4,20 @@ var running = false;
 
 
 function setup(){
-canvas = createCanvas(windowWidth*.9, windowHeight*.9);
+canvas = createCanvas(windowWidth*.8, windowHeight*.7);
 canvas.parent('sketch-holder');
 
   c = 0;
   onoff = createButton("Release");
   onoff.parent('sketch-holder');
   onoff.mouseClicked(turnonoff);
-  onoff.position(50,30);
+  onoff.position(width*.02,30);
   onoff.class("sim-button")
 
   reseter = createButton("Reset");
   reseter.parent('sketch-holder');
   reseter.mouseClicked(resetTheBalls);
-  reseter.position(150,30);
+  reseter.position(width*.02,100);
   reseter.class("sim-button")
   //speedRoller = 10;
   rampTheta = .1;
@@ -115,11 +115,12 @@ function draw(){
   line(0,posRoller.y, width, posRoller.y)
   //line(posRoller.x,posRoller.y,width,posRoller.y-(width*tan(rampTheta)));
   pop();
-  if (ballRoller.position.x < 0) {
+  if (ballRoller.position.x < -20) {
     //resetTheBalls();
     //ballRoller.velocity = createVector(0,0)
     //ballRoller.a = createVector(0,0)
     noLoop()
+    onoff.html("done")
   }
 };
 
@@ -134,8 +135,14 @@ function resetTheBalls(){
   ballRoller.position = posRoller.copy();
   ballRoller.velocity = velRoller.copy();
   ballRoller.tailA = [];
-  loop();
+  draw();
 
+  // ballRoller.update();
+  // ballRoller.display();
+
+  noLoop();
+  running = false;
+  onoff.html("Release")
   //noLoop();
 }
   function turnonoff() {
