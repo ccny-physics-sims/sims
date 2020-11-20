@@ -4,15 +4,21 @@ function setup() {
   canvas = createCanvas(800, 500);
   canvas.parent('sketch-holder');
 
-  speedSlider = createSlider(-10, 10, 1, .1);
-  speedSlider.position(50,70);
+  speedSlider = createSlider(-10, 10, 5, .1);
+  speedSlider.position(width*.05,height*.1);
   speedSlider.parent('sketch-holder');
   speedSlider.class("sim-slider red");
+
+  speedSliderLabel = createP();
+  speedSliderLabel.parent('sketch-holder');
+  speedSliderLabel.position(width*.05,height*.15);
+  speedSliderLabel.html('Change the Speed of Rotation')
+
   // the length of the vector is 100!
   onoff = createButton("start");
   onoff.parent('sketch-holder');
   onoff.mouseClicked(turnonoff);
-  onoff.position(50,30);
+  onoff.position(width*.85,height*.06);
   onoff.class("sim-button")
   //its startPoint (i.e. origin) is in the center of the canvas
   startPoint = createVector(width / 2, height / 2);
@@ -41,7 +47,7 @@ function setup() {
 
 function draw() {
 
-  background(250);
+  background(255);
   speedRot = .5*speedSlider.value();
   lengthV = speedRot;
   radiusCircle = 100;
