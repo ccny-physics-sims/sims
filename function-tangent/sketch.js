@@ -102,7 +102,7 @@ function renderTangent() {
   pop()
 }
 
-function touchStarted() {
+function touchMoved() {
   // prevent default
   return false;
 }
