@@ -12,20 +12,19 @@ var phaseLabel;
 function setup() {
 
   frameRate(10);
-  canvas = createCanvas(710, 450);
+  canvas = createCanvas(windowWidth*.8, windowHeight*.7);
   canvas.parent('sketch-holder');
   w = width+xspacing;
 
   dx = (TWO_PI / period) * xspacing;
   yvalues = new Array(floor(w/xspacing));
 
-  phaseSlider = createSlider(0, .2, 0);
+  phaseSlider = createSlider(0, .2, 0, .001);
   phaseSlider.parent('sketch-holder');
-  phaseSlider.elt.step = .001;
-  phaseSlider.position(300,30);
+  phaseSlider.position(width/2-100,height*.1);
   phaseSlider.class("sim-slider gray");
   phaseLabel = createP();
-  phaseLabel.position(300,0);
+  phaseLabel.position(width/2-100,0);
   phaseLabel.parent('sketch-holder');
 
 }
@@ -39,27 +38,33 @@ function draw() {
   //calc the points for the un-changed wave
   calcWave(0);
   //show the plot!
-  renderWave(color(250,0,0),1,100);
-
+  push()
+  translate(0,height*.3)
+  renderWave(color(250,0,0),1,0);
+  pop(0)
   //calc the points for the modified wave
   calcWave(delfreq);
   //show the plot
-  renderWave(color(0,0,250),1,200);
-
+  push()
+  translate(0,height*.5)
+  renderWave(color(0,0,250),1,0);
+  pop()
   //calc the sum
   calcSum();
   //show the sum
-  renderWave(color(250,0,250),2,350);
-
+  push()
+  translate(0,height*.7)
+  renderWave(color(250,0,250),2,0);
+  pop()
 
   //make some labels and lines
   phaseLabel.html('frequency difference: '+ delfreq);
   push();
   strokeWeight(1);
   stroke(50);
-  line(0,200/2,width,200/2);
-  line(0,400/2,width,400/2);
-  line(0,700/2,width,700/2);
+  line(0,height*.3,width,height*.3);
+  line(0,height*.5,width,height*.5);
+  line(0,height*.7,width,height*.7);
   pop();
 }
 

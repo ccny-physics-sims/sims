@@ -17,7 +17,7 @@ function setup() {
   w = width+12;
 
   dx = (TWO_PI / period) * xspacing;
-  yvalues = new Array(floor(w/xspacing));
+  yvalues = new Array(500);
 
   phaseSlider = createSlider(0, TWO_PI, HALF_PI);
   phaseSlider.parent('sketch-holder');
