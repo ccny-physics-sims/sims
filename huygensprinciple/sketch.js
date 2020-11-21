@@ -7,17 +7,20 @@ function preload() {
   img = loadImage("candle.png");
 }
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(.8*windowWidth, .7*windowHeight);
+  canvas.parent('sketch-holder')
   systems = [];
   frameRate(20);
   button = createButton('clear');
+  button.parent('sketch-holder')
   button.position(5, 5);
   button.mousePressed(clearWaves);
   button.addClass('sim-button');
+
 }
 
 function draw() {
-  background(250);
+  background(255);
 
   image(img, width/2, height/4);
 
@@ -37,9 +40,9 @@ function mousePressed() {
   systems[i].addWavelet();
 }
 }
-function touchStarted() {
-  if (touchX >= 50){
-  this.p = new WaveletSystem(createVector(touchX,touchY));
+function touchEnded() {
+  if (mouseX >= 80){
+  this.p = new WaveletSystem(createVector(mouseX,mouseY));
   systems.push(p);
   systems[i].addWavelet();
 }

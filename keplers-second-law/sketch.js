@@ -11,7 +11,7 @@ var count;
 var instructions;
 
 function setup(){
-  canvas=createCanvas(windowWidth*.7, windowHeight*.9);
+  canvas=createCanvas(windowWidth*.8, windowHeight*.7);
   canvas.parent('sketch-holder');
 
   frameRate(30);
@@ -28,7 +28,7 @@ function setup(){
   launch.parent('sketch-holder');
   launch.mouseClicked(launchOrbiter);
   launch.position(50,200);
-  launch.class("sim-button")
+  launch.class("sim-button");
   speedSliderLabel = createP("Speed");
   speedSliderLabel.parent('sketch-holder');
   speedSliderLabel.position(50,0);
@@ -38,7 +38,7 @@ function setup(){
   speedSlider.class("sim-slider");
   angleSliderLabel = createP("Direction");
   angleSliderLabel.parent('sketch-holder');
-  angleSliderLabel.position(50,80);
+  angleSliderLabel.position(50,70);
   angleSlider = createSlider(0, 360, 0 ,0);
   angleSlider.parent('sketch-holder');
   angleSlider.position(50,120);

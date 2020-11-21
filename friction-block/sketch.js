@@ -1,5 +1,5 @@
 function setup() {
-  canvas = createCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(.8*windowWidth, .7*windowHeight);
   canvas.parent('sketch-holder');
   m = 3; // mass of block
   i = 30; // initial force applied
@@ -33,38 +33,61 @@ function draw() {
   line(-width, 0, width, 0);
   pop();
   displayStats();
+  console.log(block.velocity.x)
 }
 
 function displayStats() {
+  massLabel.html('Mass: '+block.mass+' kg')
+  shoveLabel.html('Push: '+shoveSlider.value()+' N')
+  rampLabel.html('Angle: '+rampSlider.value().toFixed(1)+' N')
+
   // unit adjustment
   ua = 10;
   stats = ("type: <span class=\"nums\">" + frictionMode + "</span><br>" +
-    "mu: <span class=\"nums\">" + currentMu.toFixed(2) + "</span><br>" +
-    // "distance: <span class=\"nums\">" + (block.distance / (ua)).toFixed(1) + " m</span><br>" +   "velocity: <span class=\"nums\">" + (block.velocity.x).toFixed(1) + " m/s </span><br>" +
-    "mass: <span class=\"nums\">" + block.mass + " kg</span><br>push: <span class=\"nums\">" + shoveSlider.value() + " N</span><br>" +
-    "angle: <span class=\"nums\">" + rampSlider.value().toFixed(1) + " &theta;</span><br>");
+    "mu: <span class=\"nums\">" + currentMu.toFixed(2) + "</span><br>" )
   mahdiv.html(stats);
-  mahdiv.parent('stats-holder');
+  mahdiv.parent('sketch-holder');
 }
 
 function spawnControls() {
   button1 = createButton('shove block');
   button1.mousePressed(shoveButton);
-  button1.parent('button-holder');
-  button1.class("sim-slider gray ");
+  button1.parent('sketch-holder');
+  button1.position(width*.8,height*.05);
+  button1.class("sim-button");
+
   button2 = createButton('reset');
   button2.mousePressed(init);
-  button2.parent('button-holder');
-  button2.class("sim-slider gray ");
+  button2.parent('sketch-holder');
+  button2.position(width*.8,height*.15)
+  button2.class("sim-button")
+
   massSlider = createSlider(1, 50, m);
-  massSlider.parent('slider-holder');
+  massSlider.parent('sketch-holder');
+  massSlider.position(width*.14,height*.08)
   massSlider.class("sim-slider gray ");
+
+  massLabel = createP()
+  massLabel.parent('sketch-holder');
+  massLabel.position(width*.01,height*.05)
+
   shoveSlider = createSlider(-80, 80, i);
-  shoveSlider.parent('slider-holder');
+  shoveSlider.parent('sketch-holder');
+  shoveSlider.position(width*.14,height*.18)
   shoveSlider.class("sim-slider gray ");
+
+  shoveLabel = createP()
+  shoveLabel.parent('sketch-holder');
+  shoveLabel.position(width*.01,height*.15)
+
   rampSlider = createSlider(0, 30, ra);
-  rampSlider.parent('slider-holder');
+  rampSlider.parent('sketch-holder');
+  rampSlider.position(width*.14,height*.28)
   rampSlider.class("sim-slider gray ");
+
+  rampLabel = createP()
+  rampLabel.parent('sketch-holder');
+  rampLabel.position(width*.01,height*.25)
 }
 
 function windowResized() {

@@ -1,10 +1,13 @@
 var whitish = 200;
+let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+
 
 function setup() {
 frameRate(30);
 
 
 canvas = createCanvas(windowWidth-60, windowHeight-60);
+canvas.parent('sketch-holder')
 //canvas = createCanvas(600,600);
 pos = createVector(random(0,width),random(0,height))
 vel = createVector(2,0);
@@ -46,9 +49,14 @@ translate(random(-1,1),random(-1,1))
   if (keyIsDown(DOWN_ARROW)){
     accel.y+=.002;
   }
+  if (isMobile) {
+      //Conditional script here
+      accel.y =rotationX*.01;
+      accel.x =rotationY*.01;
+  }
   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    accel.y =rotationX*.01;
-    accel.x =rotationY*.01;  }
+
+  }
 
 
 

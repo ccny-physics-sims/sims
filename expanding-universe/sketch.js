@@ -15,7 +15,7 @@ function preload() {
 
 
 function setup() {
-  canvas = createCanvas(.9*windowHeight,.9*windowHeight)
+  canvas = createCanvas(.8*windowHeight,.8*windowHeight)
   //canvas = createCanvas(500, 500);
   canvas.parent('sketch-holder');
 
@@ -30,9 +30,9 @@ function setup() {
   frameRate(30);
 
   expSlider = createSlider(0,7, 2, .1);
-  expSlider.position(220,5);
+  expSlider.position(width/2,.05*height);
   expSlider.parent('sketch-holder');
-  expSlider.class("sim-slider gray");
+  expSlider.class("sim-slider");
   expSlider.changed(moveUniverse);
   expSliderLabel = createP();
   expSliderLabel.position(30,10);
@@ -87,8 +87,8 @@ function touchEnded() {
   // prevent default
   moveUniverse()
   return false;
-
 }
+
 function moveUniverse() {
   if ( mouseX > centerx-deepfieldalpha.width/2 &&
       mouseX < centerx+deepfieldalpha.width/2  &&

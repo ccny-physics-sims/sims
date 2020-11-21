@@ -5,29 +5,29 @@ var Trails = [];
 var com;
 var SolarSystem;
 var centerx,centery;
-
+var running = false;
 
 function setup(){
   frameRate(30);
-  canvas = createCanvas(800, 600);
+  canvas = createCanvas(windowWidth*.8, windowHeight*.7);
   canvas.parent('sketch-holder');
   running = false;
 
   onoff = createButton("Start");
   onoff.parent('sketch-holder');
-  onoff.position(width-200,50);
-  onoff.class("sim-button blue slim");
+  onoff.position(width-200,20);
+  onoff.class("sim-button");
   onoff.mousePressed(turnonoff);
 
   reset = createButton("Reset");
   reset.parent('sketch-holder');
-  reset.position(width-200,100);
-  reset.class("sim-button blue slim");
+  reset.position(width-200,90);
+  reset.class("sim-button");
   reset.mousePressed(resetMasses);
 
   comCoord  = createCheckbox('Center Of Mass?', false);
   comCoord.parent('sketch-holder');
-  comCoord.position (width-200,150)
+  comCoord.position (width-200,160)
   comCoord.changed(resetMasses);
 
 
@@ -41,13 +41,14 @@ mass1Pos = createVector(centerx,centery);
 mass1Vel = createVector(vSat*1,0)
 
 
-mass2Pos = createVector(centerx*.74,height);
+mass2Pos = createVector(centerx-50,600);
 mass2Vel = createVector(+vSat,-vSat);
 mass1 =  orbiters.push(new Orbiter(mass1Pos,mass1Vel,createVector(0,0),100000, 'red',10));
 
-mass2 = orbiters.push(new Orbiter(mass2Pos,mass2Vel,createVector(0,0),.0000001, 'blue',3));
+mass2 = orbiters.push(new Orbiter(mass2Pos,mass2Vel,createVector(0,0),.000001, 'blue',3));
   COM();
   noLoop()
+
  }
 
 
@@ -55,7 +56,7 @@ mass2 = orbiters.push(new Orbiter(mass2Pos,mass2Vel,createVector(0,0),.0000001, 
 function draw(){
 background(255);
 textSize(18)
-text("Sat velocity: "+(orbiters[1].velocity.mag().toFixed(1)),50,50)
+
 
 
   for (var k = 0; k < 2; k++) { // increase the greater than value to increase simulation step rate
@@ -65,6 +66,8 @@ text("Sat velocity: "+(orbiters[1].velocity.mag().toFixed(1)),50,50)
   for (i=0;i<orbiters.length;i++){
     orbiters[i].display();
   }
+  text("Speed: "+(orbiters[1].velocity.mag().toFixed(1)),orbiters[1].position.x,orbiters[1].position.y-30)
+  text("Speed: "+(orbiters[0].velocity.mag().toFixed(10)),orbiters[0].position.x,orbiters[0].position.y-30)
   COM();
 COMDisplay();
 
@@ -113,16 +116,7 @@ function windowResized() {
     resizeCanvas(windowWidth, windowHeight); // width and height system variables updated here
   }
 
-function keyTyped(){
- if (key === 'c'){
-    for ( i = orbiters.length-1; i >= 0; i--){
-      orbiters.splice(i,1);
-    }
-    // for ( i = Trails.length-1; i >= 0; i--){
-    //   Trails.splice(i,1);
-    // }
-  }
-}
+
 
 function turnonoff() {
   // and of course it's nice to be able to stop it if things get crazy
@@ -149,9 +143,13 @@ function resetMasses(){
   SolarSystem = new GravSystem(orbiters);
   mass1Pos = createVector(centerx,centery);
   mass1Vel = createVector(vSat*1,0)
-  mass2Pos = createVector(centerx*.74,height);
+  mass2Pos = createVector(centerx-50,600);
   mass2Vel = createVector(+vSat,-vSat);
   mass1 =  orbiters.push(new Orbiter(mass1Pos,mass1Vel,createVector(0,0),100000, 'red',10));
-  mass2 = orbiters.push(new Orbiter(mass2Pos,mass2Vel,createVector(0,0),.0000001, 'blue',3));
+  mass2 = orbiters.push(new Orbiter(mass2Pos,mass2Vel,createVector(0,0),.000001, 'blue',3));
 
 }
+
+// function touchEnded() {
+//   return false;
+// }
