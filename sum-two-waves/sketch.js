@@ -12,7 +12,7 @@ var phaseLabel;
 function setup() {
 
   frameRate(10);
-  canvas = createCanvas(710, 400);
+  canvas = createCanvas(windowWidth*.8, windowHeight*.7);
   canvas.parent('sketch-holder');
   w = width+12;
 
@@ -47,7 +47,7 @@ function draw() {
 
   dx = (TWO_PI / period) * xspacing;
 
-  phaseLabel.html('phase difference: '+ phase);
+  phaseLabel.html('phase difference (rad): '+ phase);
   push();
   strokeWeight(1);
   stroke(0);
