@@ -155,7 +155,7 @@ function touchStarted() {
   aswatchBlue.pressed();
   aswatchYellow.pressed();
   // prevent default
-  return false;
+  //return false;
 }
 
 function touchEnded() {
