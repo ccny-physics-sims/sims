@@ -10,7 +10,7 @@ let hue;
 
 function setup() {
 
-  canvas = createCanvas(.8*windowWidth,.7*windowHeight)
+  canvas = createCanvas(.8*windowWidth,.8*windowHeight)
   canvas.parent('sketch-holder');
   colorMode(HSB)
 mousePos = createVector(0,0)
