@@ -17,7 +17,6 @@ mousePos = createVector(0,0)
 aswatchRed = new Draggable(width/2,.3*height,0,0);
 aswatchBlue = new Draggable(.4*width,height/2,205,240);
 aswatchYellow = new Draggable(.6*width,height/2,60,120);
-addQmark('bottom-left')
 }
 
 function draw() {
