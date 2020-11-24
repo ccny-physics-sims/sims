@@ -3,13 +3,18 @@ var forceSlider;
 var triangleHeight, triangleBase;
 
 function setup() {
-  canvas=createCanvas(400 , 600);
+  canvas=createCanvas(.8*windowWidth,.7*windowHeight,);
   canvas.parent('sketch-holder');
 
-  angleSlider = createSlider(0, 90, 0, 1);
+  angleSlider = createSlider(0, 90, 30, 1);
   angleSlider.position(20,50);
   angleSlider.parent('sketch-holder');
   angleSlider.class("sim-slider red");
+
+  angleSliderLabel = createP()
+  angleSliderLabel.parent('sketch-holder');
+  angleSliderLabel.position(20,80)
+  angleSliderLabel.html('&theta; = '+angleSlider.value()+'º')
 
   box_fbd = new FBD(createVector(width/2,height/2+80),2,true);
 
@@ -18,6 +23,11 @@ function setup() {
   triangleBase = 300;
   triangleHeight = 100;
 
+  thetaLabel = createP()
+  thetaLabel.parent('sketch-holder');
+
+  thetaLabel.html('&theta;')
+  thetaLabel.position(20,100)
 
 }
 
@@ -35,11 +45,11 @@ function draw() {
   drawTriangle()
   drawCoordinates();
 
-  push();
-  noStroke();
-  fill('black');
-  text('Ramp Angle: ' + round(angleSlider.value()) +  ' deg',20,30,150,90);
-  pop();
+  // push();
+  // noStroke();
+  // fill('black');
+  // text('Ramp Angle: ' + round(angleSlider.value()) +  ' deg',20,30,150,90);
+  // pop();
 
   translate(0,-triangleHeight/2);
   box_fbd.mag = [100,100*Math.cos(theta)];
@@ -52,7 +62,8 @@ function draw() {
   box_fbd.update();
   box_fbd.display();
 
-
+  angleSliderLabel.html('&theta; = '+angleSlider.value() +'º')
+  thetaLabel.position(width/2-triangleBase/2+50,height/2+60)
 }
 
 function drawCoordinates() {
