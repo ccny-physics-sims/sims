@@ -165,3 +165,9 @@ function touchEnded() {
   // prevent default
   //return false;
 }
+
+function touchMoved() {
+  //ellipse(mouseX, mouseY, 5, 5);
+  // prevent default
+  return false;
+}
