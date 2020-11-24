@@ -1,7 +1,7 @@
 var theta, lengthV, running;
 
 function setup() {
-  canvas = createCanvas(800, 500);
+  canvas = createCanvas(.8*windowWidth, .7*windowHeight);
   canvas.parent('sketch-holder');
 
   speedSlider = createSlider(-10, 10, 5, .1);
