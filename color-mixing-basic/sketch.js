@@ -14,9 +14,9 @@ function setup() {
   canvas.parent('sketch-holder');
   colorMode(HSB)
 mousePos = createVector(0,0)
-aswatchRed = new Draggable(width/2,.3*height,0,0);
-aswatchBlue = new Draggable(.4*width,height/2,205,240);
-aswatchYellow = new Draggable(.6*width,height/2,60,120);
+aswatchRed = new Draggable(width/2,.4*height,0,0);
+aswatchBlue = new Draggable(.4*width,.66*height,205,240);
+aswatchYellow = new Draggable(.6*width,.66*height,60,120);
 }
 
 function draw() {
