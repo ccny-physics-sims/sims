@@ -6,19 +6,16 @@ var running = false;  //the simulation **shouldn't** run until "start" is presse
 var onoff;
 var theta1 = 0;//Math.sqrt(.1/205);      // Start angle at PI radians
 
-var amplitude = -40.0; // Height of wave
-var period = 198.0;   // How many pixels before the wave repeats
-var dx;               // Value for incrementing x
-         //...to store height values for the acceleration wave
+
 var text;             //to be used as labels for the graphs
 var color;            //simply to make the text colorful
 
 
 
 function setup()  {
-  canvas=createCanvas(windowWidth*.9,windowHeight*.9);
+  canvas=createCanvas(windowWidth*.8,windowHeight*.7);
   canvas.parent('sketch-holder');
-  pendLength = height/4;
+  pendLength = height/2.5;
   // Make a new Pendulum with an origin location and armlength
   p = new Pendulum(createVector(width/2,height/4),pendLength, PI/6);
 
