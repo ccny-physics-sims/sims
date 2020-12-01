@@ -1,6 +1,6 @@
 function setup() {
   // set canvas dimensions
-  canvas = createCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(windowWidth*.8, windowHeight*.7);
   canvas.parent('sketch-holder');
   // set default min, max, average, rectWidth, etc
   theMin = 100;
@@ -11,7 +11,7 @@ function setup() {
   textOffsetX = rectWidths / 2;
   textOffsetY = 10;
   // horizontal alignment of sliders
-  sliderAlignment = windowWidth / 2 + 95;
+  sliderAlignment = width / 2 + 95;
   // vertical distance between sliders
   interdistanceY = -50;
   // create sliders and set default fontsize
@@ -22,7 +22,7 @@ function setup() {
 function draw() {
   clear();
   //scoot the origin to the bottom of the canvas
-  translate(windowWidth / 2 - rectWidths * 2.5, windowHeight * .95);
+  translate(width / 2 - rectWidths * 2.5, height * .95);
   // update values
   updateBars();
   //flip the bars so they grow bottom to top
@@ -67,8 +67,8 @@ function spawnSliders() {
   //maxSlider.class("sim-slider gray");
   minSlider.parent('sketch-holder');
   maxSlider.parent('sketch-holder');
-  minSlider.position(sliderAlignment, windowHeight * .65);
-  maxSlider.position(sliderAlignment, windowHeight * .8);
+  minSlider.position(sliderAlignment, height * .65);
+  maxSlider.position(sliderAlignment, height * .8);
   pop();
 }
 

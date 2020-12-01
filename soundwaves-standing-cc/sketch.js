@@ -4,46 +4,58 @@ var amplitude;
 var angularfrequency;
 var waveconstant;
 var k = 0;
-var tubelength = 500;
+let tubelength;
 var canvas;
 var modeslider;
 var modeSliderLabel;
 var onoff;
 
 function setup() {
-  frameRate(25);
-    onoff = createButton("start");
-    onoff.parent('sketch-holder');
-    onoff.mouseClicked(turnonoff);
-    onoff.position(200,290);
-    onoff.class("sim-button")
+  //frameRate(25);
 
-    t1=createP('closed');
-    t1.parent('sketch-holder');
-    t1.position(80,10);
-    t2=createP('closed');
-    t2.parent('sketch-holder');
-    t2.position(580,10);
 
-  canvas = createCanvas(700, 400);
+  canvas = createCanvas(windowWidth*.8, windowHeight*.7);
   canvas.parent('sketch-holder');
+
+tubelength = width*.8
+
   modeslider = createSlider(1,8,1);
   modeslider.parent('sketch-holder');
   modeslider.class("sim-slider")
-  modeslider.position(400,300);
+  modeslider.position(width/2,.75*height);
   modeSliderLabel = createP();
   modeSliderLabel.parent('sketch-holder');
-  modeSliderLabel.position(420,270);
+  modeSliderLabel.position(width/2,.65*height);
+
+  onoff = createButton("start");
+  onoff.parent('sketch-holder');
+  onoff.mouseClicked(turnonoff);
+  onoff.position(width/3,.72*height);
+  onoff.class("sim-button")
+
+  t1=createP('closed');
+  t1.parent('sketch-holder');
+  t1.position(50,height/4);
+  t1.style('color','black')
+  t1.style('font-size','2em')
+
+  t2=createP('closed');
+  t2.parent('sketch-holder');
+  t2.position(width-100,height/4);
+  t2.style('color','black')
+  t2.style('font-size','2em')
+
+
   wavelength = (2*tubelength)/modeslider.value();
 
   amplitude = .15*wavelength;
-  angularfrequency = 2*PI;
+  angularfrequency = .1*PI;
   waveconstant = TWO_PI/wavelength;
   //noLoop();
   // Create objects
   noLoop();
   running = false;
-  for (var i=0; i<700; i++) {
+  for (var i=0; i<500; i++) {
     molecules.push(new Waver(20));
   }
   // Create a few red ones for visilibity
@@ -65,11 +77,11 @@ modeSliderLabel.html('mode: '+modeslider.value())
   angularfrequency = 2*PI*modeslider.value();
   waveconstant = TWO_PI/wavelength;
   background(255);
-
+  translate(0,height/4)
   fill(120)
   rect(0,0,width,200)
   fill(240)
-  rect(100,0,tubelength,200);
+  rect(width*.1,0,tubelength,200);
 
   for (var i=0; i<molecules.length; i++) {
     //molecules[i].jitter();
@@ -82,11 +94,11 @@ modeSliderLabel.html('mode: '+modeslider.value())
 // Jitter class
 function Waver(fill_) {
   var j = 0;
-  this.originalx = random(00,tubelength+00);
+  this.originalx = random(00,tubelength);
   //this.originalx = this.x
   this.y = random(200);
   this.diameter = random(4, 8);
-  this.speed = .4;
+  this.speed = .1;
 
   this.jitter = function() {
 
@@ -101,7 +113,7 @@ function Waver(fill_) {
 
     //this.x = this.originalx + amplitude*sin(waveconstant*this.originalx)*cos(angularfrequency*j*.01);
 
-    this.x = this.originalx + amplitude*sin(waveconstant*this.originalx+0*wavelength/4)*cos(angularfrequency*j*.01);
+    this.x = this.originalx + amplitude*sin(waveconstant*this.originalx+0*wavelength/4)*cos(angularfrequency*j*.003);
 
 
 
@@ -113,7 +125,7 @@ function Waver(fill_) {
     push();
     fill(fill_);
     noStroke();
-    translate(this.x+100, this.y);
+    translate(this.x+width*.1, this.y);
     ellipse(0, 0, this.diameter, this.diameter);
     pop();
     }

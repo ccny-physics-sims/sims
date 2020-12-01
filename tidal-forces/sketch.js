@@ -9,30 +9,41 @@ var theta = [];
 var rSlider;
 var massMoonSlider;
 var s;
+
+let img;
+
 function setup() {
-  canvas=createCanvas(windowWidth*.95, 500);
+  canvas=createCanvas(windowWidth*.8, windowHeight*.6);
   canvas.parent('sketch-holder');
-  centerx = width/4;
+
+  imageMode(CENTER);
+  centerx = width/3;
   centery = height/2;
 
-  diff  = createCheckbox('Differential?', false);
-  diff.parent('sketch-holder');
-  diff.position (20,120)
+
+
     rSlider = createSlider(REarth+70, 450, 450, 1);
-    rSlider.position(20,20);
+    rSlider.position(30,height*.1);
     rSlider.parent('sketch-holder');
-    rSlider.class("sim-slider red");
+    rSlider.class("sim-slider");
 
     massMoonSlider = createSlider(10, 100, 100, 1);
-    massMoonSlider.position(20,70);
+    massMoonSlider.position(30,rSlider.y+80);
     massMoonSlider.parent('sketch-holder');
-    massMoonSlider.class("sim-slider blue");
+    massMoonSlider.class("sim-slider");
+
+    diff  = createCheckbox('Differential Forces?', true);
+    diff.parent('sketch-holder');
+    diff.style('color','black')
+    diff.position (30,massMoonSlider.y+100)
+
+
   startPoint = createVector(0, 0);
   for (var i = 0; i < howMany; i++) {
   aVector[i] = new Arrow(startPoint, startPoint);
   aVector[i].grab = false;
   aVector[i].draggable = false;
-  aVector[i].color = color(0,0,0);
+  aVector[i].color = color(250,10,10);
   aVector[i].width = 6
 
 }
@@ -44,20 +55,26 @@ function draw() {
   push();
   noStroke();
   fill('black');
-  text('Moon Position',20,10,150,90);
-  text('Moon Mass',20,60,150,90);
+  textSize(18)
+
+  text('Moon Position',20,rSlider.y+10,150,90);
+  text('Moon Mass',20,massMoonSlider.y+10,150,90);
   pop();
   MassMoon = massMoonSlider.value();
   r = rSlider.value();
   noStroke();
     if (diff.checked()){
   fill(100,150,250)
+
   ellipse(centerx,centery,REarth*2+(MassMoon/100)*(200000000/Math.pow(r,3)),REarth*2-(MassMoon/100)*(7000000/Math.pow(r,3)))
 }
   fill(200)
   ellipse(centerx,centery,REarth*2,REarth*2-(MassMoon/100)*(7000000/Math.pow(r,3)))
 
   ellipse(centerx+r,centery,REarth*2*(MassMoon/100)*.27,REarth*2*(MassMoon/100)*.27)
+  fill(0)
+  text('Earth',centerx-15,height*.7)
+  text('Moon',centerx+r-15,height*.7)
 
 
   translate(centerx,centery)
