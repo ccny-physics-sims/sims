@@ -1,10 +1,11 @@
 
 var Trails = [];
 var running = false;
-
+let theta;
+let v_0;
 
 function setup(){
-canvas = createCanvas(windowWidth*.9, windowHeight*.9);
+canvas = createCanvas(windowWidth*.8, windowHeight*.8);
 canvas.parent('sketch-holder');
 
 frameRate(30);
@@ -14,14 +15,15 @@ frameRate(30);
   onoff.mouseClicked(turnonoff);
   onoff.position(.75*width,30);
   onoff.class("sim-button")
-
-
+  gravity = createVector(0,1);
+  theta = -60*PI/180
+  v_0 = sqrt(width*.04*gravity.y/sin(2*abs(theta)));
   posThrow = createVector(.05*width,.95*height)
-  velThrow = createVector(2,-4);
+  velThrow = createVector(v_0*cos(theta),v_0*sin(theta));
   accel = createVector(0,0);
 
   //what is gravity?
-  gravity = createVector(0,1);
+
 
   //make the ball! It is an instance of the mover object
 
@@ -84,8 +86,11 @@ function draw(){
   accelVectorThrow.update();
   accelVectorThrow.display();
 
-  if (ballThrow.position.y > .95*height) {
+  if (ballThrow.position.y > height) {
+    running = false;
+    onoff.html('launch')
     resetTheBalls();
+    //ballThrow.velocity = createVector(0,0)
   }
   line(.05*width,0,.05*width,height)
   line(0,.95*height,width,.95*height)
@@ -101,6 +106,7 @@ function resetTheBalls(){
   ballThrow.position = posThrow.copy();
   ballThrow.velocity = velThrow.copy();
   ballThrow.tailA = [];
+  noLoop();
 }
   function turnonoff() {
     // and of course it's nice to be able to stop it if things get crazy
@@ -110,8 +116,12 @@ function resetTheBalls(){
         onoff.html("stop");
         return
       }
+      if (running && ballThrow.position.y > height){
+          resetTheBalls()
 
-      if (running){
+      }
+
+      else if (running){
         running = false;
         noLoop()
         onoff.html("start");

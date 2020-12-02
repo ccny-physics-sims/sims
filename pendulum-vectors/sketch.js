@@ -1,7 +1,5 @@
 var p;
 
-
-
 var running = false;  //the simulation **shouldn't** run until "start" is pressed
 var onoff;
 var theta1 = 0;//Math.sqrt(.1/205);      // Start angle at PI radians

@@ -1,10 +1,10 @@
 
 var Trails = [];
 var running = false;
-
+let onoff;
 
 function setup(){
-canvas = createCanvas(windowWidth*.9, windowHeight*.9);
+canvas = createCanvas(windowWidth*.8, windowHeight*.7);
 canvas.parent('sketch-holder');
 
 frameRate(30);
@@ -18,7 +18,7 @@ frameRate(30);
   posDrop = createVector(.1*width,.2*height)
   posThrow = createVector(.15*width,.2*height)
   velDrop = createVector(random(0,0),random(0,0));
-  velThrow = createVector(3,random(0,0));
+  velThrow = createVector(2,random(0,0));
   accel = createVector(0,0);
 
   //what is gravity?
@@ -117,7 +117,11 @@ function draw(){
   line(0,ballDrop.position.y,width,ballDrop.position.y);
   pop();
   if (ballDrop.position.y > height+40) {
-    resetTheBalls();
+    //resetTheBalls();
+    onoff.html('Reset')
+    ballDrop.velocity = createVector(0,0)
+    ballDrop.acceleration = createVector(0,0)
+    line(0,mouseY,width,mouseY)
   }
 };
 
@@ -127,7 +131,7 @@ function windowResized() {
      resizeCanvas(windowWidth, windowHeight); // width and height system variables updated here
   }
 function resetTheBalls(){
-  console.log('resetting');
+  //console.log('resetting');
   ballDrop.position = posDrop.copy();
   ballThrow.position = posThrow.copy();
   ballDrop.velocity = velDrop.copy();
@@ -143,6 +147,10 @@ function resetTheBalls(){
         onoff.html("stop");
         return
       }
+      if (running && ballDrop.position.y > height+20){
+          resetTheBalls()
+
+      }
 
       if (running){
         running = false;
@@ -150,4 +158,6 @@ function resetTheBalls(){
         onoff.html("start");
         return
       }
+
+
     }
