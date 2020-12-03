@@ -79,8 +79,7 @@ imageMode(CENTER);
   daynightstatus.style('color: #42b3f4;')
 
   B = Slider.value()
-  addQmark('bottom-left')
-
+  
 
 }
 
