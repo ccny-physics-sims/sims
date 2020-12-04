@@ -90,8 +90,8 @@ if (!hasSensorPermission){
    return;
  }
 
-background(random(16,23));
-
+//background(random(16,23));
+background('blue')
 whitish = random(170,215);
 translate(random(-1,1),random(-1,1))
 //should we change acceleration?
@@ -110,8 +110,8 @@ translate(random(-1,1),random(-1,1))
   }
   if (hasSensorPermission) {
       //Conditional script here
-      accel.y = accelerationX;
-      accel.x = accelerationY;
+      accel.y = rotationX;
+      accel.x = rotationY;
   }
 
 
