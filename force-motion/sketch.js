@@ -110,8 +110,8 @@ translate(random(-1,1),random(-1,1))
   }
   if (hasSensorPermission) {
       //Conditional script here
-      accel.y = rotationX;
-      accel.x = rotationY;
+      accel.y = rotationX*.05;
+      accel.x = rotationY*.05;
   }
 
 
