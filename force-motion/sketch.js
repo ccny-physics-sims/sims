@@ -1,7 +1,7 @@
 var whitish = 200;
 let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
 let hasSensorPermission = !(DeviceOrientationEvent.requestPermission || DeviceMotionEvent.requestPermission);
-
+const touch = matchMedia('(hover: none)').matches;
 function begPermission(){
   if (DeviceOrientationEvent.requestPermission){
     DeviceOrientationEvent.requestPermission()
@@ -90,8 +90,8 @@ if (!hasSensorPermission){
    return;
  }
 
-//background(random(16,23));
-background('blue')
+background(random(16,23));
+//background('blue')
 whitish = random(170,215);
 translate(random(-1,1),random(-1,1))
 //should we change acceleration?
@@ -108,10 +108,10 @@ translate(random(-1,1),random(-1,1))
   if (keyIsDown(DOWN_ARROW)){
     accel.y+=.002;
   }
-  if (hasSensorPermission) {
+  if (touch) {
       //Conditional script here
-      accel.y = rotationX*.05;
-      accel.x = rotationY*.05;
+      accel.y = rotationX*.01;
+      accel.x = rotationY*.01;
   }
 
 
