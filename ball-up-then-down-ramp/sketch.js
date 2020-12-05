@@ -17,7 +17,7 @@ canvas.parent('sketch-holder');
   reseter = createButton("Reset");
   reseter.parent('sketch-holder');
   reseter.mouseClicked(resetTheBalls);
-  reseter.position(width*.02,100);
+  reseter.position(width*.02,80);
   reseter.class("sim-button")
   //speedRoller = 10;
   rampTheta = .1;

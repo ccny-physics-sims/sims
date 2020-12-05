@@ -16,9 +16,9 @@ frameRate(30);
   onoff.class("sim-button")
 
   posDrop = createVector(.1*width,.2*height)
-  posThrow = createVector(.15*width,.2*height)
+  posThrow = createVector(.2*width,.2*height)
   velDrop = createVector(random(0,0),random(0,0));
-  velThrow = createVector(2,random(0,0));
+  velThrow = createVector(width*.003,random(0,0));
   accel = createVector(0,0);
 
   //what is gravity?
