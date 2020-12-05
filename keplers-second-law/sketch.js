@@ -8,7 +8,7 @@ var mass;
 var h;
 var c;
 var count;
-var instructions;
+let orbitCenter;
 
 function setup(){
   canvas=createCanvas(windowWidth*.8, windowHeight*.7);
@@ -27,30 +27,35 @@ function setup(){
   launch = createButton("launch");
   launch.parent('sketch-holder');
   launch.mouseClicked(launchOrbiter);
-  launch.position(50,200);
+  launch.position(width*.7,height*.05);
   launch.class("sim-button");
   speedSliderLabel = createP("Speed");
   speedSliderLabel.parent('sketch-holder');
-  speedSliderLabel.position(50,0);
+  speedSliderLabel.position(30,0);
   speedSlider = createSlider(0, 400,260 ,0);
   speedSlider.parent('sketch-holder');
-  speedSlider.position(50,40);
+  speedSlider.position(30,20);
   speedSlider.class("sim-slider");
+  speedSlider.size(150,50)
   angleSliderLabel = createP("Direction");
   angleSliderLabel.parent('sketch-holder');
-  angleSliderLabel.position(50,70);
+  angleSliderLabel.position(30,60);
   angleSlider = createSlider(0, 360, 0 ,0);
   angleSlider.parent('sketch-holder');
-  angleSlider.position(50,120);
+  angleSlider.position(30,90);
   angleSlider.class("sim-slider");
+  angleSlider.size(150,50)
 
-  aVector = new Arrow(createVector(width/2,height/2-h),createVector(0,0));
+
+
+  orbitCenter = createVector(width/2,height*.6)
+
+  aVector = new Arrow(createVector(orbitCenter.x,orbitCenter.y-h),createVector(0,0));
   aVector.color = color('red');
   aVector.grab = false;
   aVector.draggable = false;
   aVector.showComponents = false;
   aVector.width=10;
-
 }
 
 
@@ -61,12 +66,12 @@ function draw(){
   push();
   fill('yellow');
   stroke('black');
-  planet = ellipse(width/2,height/2,20,20);
+  planet = ellipse(orbitCenter.x,orbitCenter.y,20,20);
   pop();
-  aVector.origin.x = width/2;
-  aVector.origin.y = height/2-h;
-  aVector.target.x = width/2+.5*speedSlider.value()*cos(angleSlider.value()*Math.PI/180)
-  aVector.target.y = height/2 - h+.5*speedSlider.value()*sin(angleSlider.value()*Math.PI/180)
+  aVector.origin.x = orbitCenter.x;
+  aVector.origin.y = orbitCenter.y-h;
+  aVector.target.x = orbitCenter.x+.5*speedSlider.value()*cos(angleSlider.value()*Math.PI/180)
+  aVector.target.y = orbitCenter.y - h+.5*speedSlider.value()*sin(angleSlider.value()*Math.PI/180)
   aVector.update();
   aVector.display();
 
@@ -78,8 +83,8 @@ function draw(){
     a.drawOrbiter();
     a.drawAreas();
 
-    dis = distance(a.position, createVector(width/2, height/2));
-    if ( dis < 20 || dis > 2000){
+    dis = distance(a.position, orbitCenter);
+    if ( dis < 10 || dis > 2000){
       Orbiters.splice(i,1);
     }
   }
@@ -98,9 +103,9 @@ function distance(pos, pos2){
 }
 
  grav = function(pos){
-   direction = createVector(width/2 - pos.x, height/2 - pos.y);
+   direction = createVector(orbitCenter.x - pos.x, orbitCenter.y - pos.y);
    direction.normalize();
-   d = distance(pos, createVector(width/2, height/2));
+   d = distance(pos, orbitCenter);
    direction.mult(mass/(d*d));
    return direction;
  }
@@ -139,7 +144,7 @@ Orbiter.prototype.drawOrbiter = function(){
       if(this.VertzOfAreas.length>20){
       fill('blue');
       beginShape();
-      vertex(width/2,height/2)
+      vertex(orbitCenter.x,orbitCenter.y)
 
       for (i=0; i<this.VertzOfAreas.length; i++){
         vertex(this.VertzOfAreas[i].x,this.VertzOfAreas[i].y)
@@ -159,7 +164,7 @@ function launchOrbiter(){
        Trails.splice(i,1);
      }
 
-  Orbiters.push(new Orbiter(width/2, height/2 - h, speedSlider.value()*cos(angleSlider.value()*Math.PI/180), speedSlider.value()*sin(angleSlider.value()*Math.PI/180)));
+  Orbiters.push(new Orbiter(orbitCenter.x, orbitCenter.y - h, speedSlider.value()*cos(angleSlider.value()*Math.PI/180), speedSlider.value()*sin(angleSlider.value()*Math.PI/180)));
 
 }
 
