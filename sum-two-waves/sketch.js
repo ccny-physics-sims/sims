@@ -12,22 +12,22 @@ var phaseLabel;
 function setup() {
 
   frameRate(10);
-  canvas = createCanvas(windowWidth*.8, windowHeight*.7);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
   w = width+12;
 
   dx = (TWO_PI / period) * xspacing;
   yvalues = new Array(500);
 
-  phaseSlider = createSlider(0, TWO_PI, HALF_PI);
+  phaseSlider = createSlider(0, TWO_PI, HALF_PI,.01);
   phaseSlider.parent('sketch-holder');
-  phaseSlider.elt.step = .01;
-  phaseSlider.position(300,50);
-  phaseSlider.class("sim-slider gray");
+
+  phaseSlider.position(20,20);
+  phaseSlider.class("sim-slider ");
 
   phaseLabel = createP();
   phaseLabel.parent('sketch-holder');
-  phaseLabel.position(300,0);
+  phaseLabel.position(20,phaseSlider.y+20);
 
 }
 

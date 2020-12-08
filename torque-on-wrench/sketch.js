@@ -1,7 +1,7 @@
 var pointApplied_x;
 
 function setup(){
-  canvas=createCanvas(windowWidth*.8,windowHeight*.8);
+  canvas=createCanvas(windowWidth,0.9*windowHeight);
   canvas.parent('sketch-holder');
   background('white');
 

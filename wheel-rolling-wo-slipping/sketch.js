@@ -1,6 +1,6 @@
 var Trails=[];
 function setup(){
-    canvas = createCanvas(windowWidth*.85,400);
+    canvas = createCanvas(windowWidth,0.9*windowHeight);
     canvas.parent('sketch-holder')
     w = new wheel(100,height/2,100);
     w.rotate = true;
@@ -34,18 +34,20 @@ function setup(){
 
     //create controls for sketch
     translate_speed = createSlider(-5,5,0,.2);
-    translate_speed.position(20,40)
+    translate_speed.position(20,20)
     translate_speed.parent('sketch-holder')
     translate_speed.class("sim-slider");
+    translate_speed.size(min(300,width/3))
+
     speedIndicator = createP();
     speedIndicator.parent('sketch-holder')
-    speedIndicator.position(20,10);
+    speedIndicator.position(20,translate_speed.y+30);
 
     btn_pause = createButton('Pause');
     btn_pause.position(20,100);
     btn_pause.mouseClicked(ptoggle);
     btn_pause.parent('sketch-holder');
-    btn_pause.class("sim-button slim");
+    btn_pause.class("sim-button");
 
 
 

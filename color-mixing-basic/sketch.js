@@ -2,15 +2,13 @@
 //By. J. Hedberg
 
 
-var nicename = 'color-mixing-basic';
-
 let aswatch;
 let mousePos;
 let hue;
 
 function setup() {
 
-  canvas = createCanvas(.8*windowWidth,.8*windowHeight)
+  canvas = createCanvas(windowWidth,.9*windowHeight)
   canvas.parent('sketch-holder');
   colorMode(HSB)
 mousePos = createVector(0,0)
@@ -48,7 +46,7 @@ class Draggable {
     this.tabRotRad = tabRot*PI/180;
 
     this.position = createVector(xPos,yPos);
-    this.r = 400;
+    this.r = min(400,.7*width/2);
     this.offset = createVector(0,0)
     this.hue = hue;
     this.tabposition = createVector(this.position.x+this.r/2*sin(this.tabRotRad),this.position.y-this.r/2*cos(this.tabRotRad))
@@ -104,7 +102,7 @@ class Draggable {
       translate(this.position.x,this.position.y)
       rotate(this.tabRotRad)
       translate(0,-this.r/2)
-      arc(0, 0,50, 50, PI-.1,0+.1,PIE);
+      arc(0, 0, this.r/6, this.r/6, PI-.1,0+.1,PIE);
       pop()
   }
 

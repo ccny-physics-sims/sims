@@ -10,16 +10,16 @@ var dt = .05;
 function setup() {
 
   frameRate(30);
-  canvas = createCanvas(710, 400);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
   w = width+12;
 
-  y = new Array(windowWidth);
+  y = new Array(200);
 
- wavelengthSlider = createSlider(50, 300, 100,1);
+ wavelengthSlider = createSlider(20, 200, 100,1);
  wavelengthSlider.parent('sketch-holder');
-  wavelengthSlider.position(300,50);
-  wavelengthSlider.class("sim-slider gray");
+  wavelengthSlider.position(20,20);
+  wavelengthSlider.class("sim-slider");
 anLabel = createP('antinode');
 anLabel.parent('sketch-holder');
 nLabel = createP('node');
@@ -32,8 +32,8 @@ function draw() {
   wavelength = wavelengthSlider.value()
   k = 2*Math.PI/wavelength;
   //t = millis()/1000;
-  line((1*wavelength),height/2,1*wavelength,height-20)
-  line((1.75*wavelength),height/2,1.75*wavelength,height-20)
+  line((1*wavelength*(width/y.length)),height/2,1*wavelength*(width/y.length),height-50)
+  line((1.75*wavelength*(width/y.length)),height/2,1.75*wavelength*(width/y.length),height-50)
 
   // calcWave(1);
   // renderWave(color(250,200,200),1);
@@ -47,8 +47,8 @@ function draw() {
   renderLine();
   pop();
 
-  anLabel.position( 1.75*wavelength+10 ,height-50)
-  nLabel.position(1*wavelength-40  ,height-50)
+  anLabel.position( 1.75*wavelength*(width/y.length)-20 ,height-50)
+  nLabel.position(1*wavelength*(width/y.length)-20  ,height-50)
 
 
   push();
@@ -82,8 +82,8 @@ function renderLine() {
   stroke(color('rgba(200,0,200,1)'));
   strokeWeight(2);
   beginShape();
-  for (var x = 0; x < y.length; x += 3) {
-    curveVertex(x, -y[x]);
+  for (var x = 0; x < y.length; x += 1) {
+    curveVertex(map(x,0,y.length,0,width), -y[x]);
   }
   endShape();
   pop();

@@ -1,8 +1,8 @@
 rotate_speed = 0;
 function setup(){
-    canvas = createCanvas(500,500);
+    canvas = createCanvas(windowWidth,0.9*windowHeight);
     canvas.parent('sketch-holder');
-    w = new wheel(width/2,2*height/3,200);
+    w = new wheel(width/2,height/2,200);
     w.rotate = true;
     angleMode(RADIANS);
     w.cdecorate = false;
@@ -13,12 +13,12 @@ function setup(){
     w.spokeColor = color('rgba(0,0,0,1)');
     w.wheelColor = color('rgba(0,0,0,.1)');
     rotationSign = createP();
-    rotationSign.style('font-size', '28px')
-    rotationSign.position(width/4, 40);
+    rotationSign.style('font-size', '1.5em')
+    rotationSign.position(width/3-20, 10);
     rotationSign.parent('sketch-holder')
     accelSign = createP();
-    accelSign.style('font-size', '28px')
-    accelSign.position(width/4, 80);
+    accelSign.style('font-size', '1.5em')
+    accelSign.position(width/3-20, 50);
     accelSign.parent('sketch-holder')
     // w.arrowDecorations[0] = {type: 'velocity', location_radial: 1, rimPos: 0 };
     // w.arrowDecorations[1] = {type: 'velocity', location_radial: .5, rimPos: 0 };
@@ -42,10 +42,10 @@ function setup(){
     // rotate_speed.class("sim-slider");
 
     btn_pause = createButton('Start');
-    btn_pause.position(20,60);
+    btn_pause.position(20,20);
     btn_pause.mouseClicked(ptoggle);
     btn_pause.parent('sketch-holder');
-    btn_pause.class("sim-button slim");
+    btn_pause.class("sim-button");
 
 
 
@@ -70,7 +70,7 @@ function draw(){
     else {
       signAlpha = '+';
     }
-    accelSign.html('Angular Acceleration (&alpha;): '+signAlpha);
+    accelSign.html('Angular Accel. (&alpha;): '+signAlpha);
     w.draw();
     //get speed from slider
     w.ang_speed = rotate_speed/20;

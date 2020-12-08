@@ -1,7 +1,7 @@
 aForceVector = [];
 
 function setup() {
-  canvas = createCanvas(500, 500);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent("sketch-holder");
 
   startPoint = createVector(width / 2, height / 2);
@@ -26,8 +26,6 @@ function draw() {
 
     aForceVector[0].display();
     aForceVector[0].update();
-
-
 
 
 }

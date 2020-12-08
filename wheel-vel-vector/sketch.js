@@ -1,6 +1,6 @@
 
 function setup(){
-    canvas = createCanvas(500,500);
+    canvas = createCanvas(windowWidth,0.9*windowHeight);
     canvas.parent('sketch-holder');
     w = new wheel(width/2,height/2,200);
     w.rotate = true;
@@ -30,15 +30,15 @@ function setup(){
 
     //create controls for sketch
     rotate_speed = createSlider(-2,2,1,.1);
-    rotate_speed.position(width/3,50)
+    rotate_speed.position(20,20)
     rotate_speed.parent('sketch-holder')
     rotate_speed.class("sim-slider");
 
     btn_pause = createButton('Pause');
-    btn_pause.position(20,60);
+    btn_pause.position(20,rotate_speed.y+60);
     btn_pause.mouseClicked(ptoggle);
     btn_pause.parent('sketch-holder');
-    btn_pause.class("sim-button slim");
+    btn_pause.class("sim-button");
 
 
 
@@ -48,7 +48,7 @@ function draw(){
     //drawAxes();
 
     //draw text for controls
-    text('Rotation Speed',width/3,40);
+    text('Rotation Speed',20,rotate_speed.y+40);
 
 
     w.draw();

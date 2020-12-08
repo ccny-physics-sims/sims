@@ -3,7 +3,7 @@ var forceSlider;
 var triangleHeight, triangleBase;
 
 function setup() {
-  canvas=createCanvas(400 , 600);
+  canvas=createCanvas(windowWidth , .9*windowHeight);
   canvas.parent('sketch-holder');
 
   angleSlider = createSlider(0, 90, 0, 1);

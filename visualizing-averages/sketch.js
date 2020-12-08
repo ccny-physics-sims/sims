@@ -1,6 +1,10 @@
+let bigColor = 'red';
+let littleColor = 'blue';
+let avgColor = 'purple';
+
 function setup() {
   // set canvas dimensions
-  canvas = createCanvas(windowWidth*.8, windowHeight*.7);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
   // set default min, max, average, rectWidth, etc
   theMin = 100;
@@ -17,12 +21,15 @@ function setup() {
   // create sliders and set default fontsize
   spawnSliders();
   textSize(fontSize);
+
 }
 
 function draw() {
+
   clear();
+    labelSliders();
   //scoot the origin to the bottom of the canvas
-  translate(width / 2 - rectWidths * 2.5, height * .95);
+  translate(width / 2 - rectWidths * 1.5, height * .95);
   // update values
   updateBars();
   //flip the bars so they grow bottom to top
@@ -50,7 +57,7 @@ function draw() {
   labelLarge();
   pop();
   //label the sliders
-  labelSliders();
+
 }
 
 function Bar(x, y, color) {
@@ -66,22 +73,24 @@ function spawnSliders() {
   //minSlider.class("sim-slider gray");
   //maxSlider.class("sim-slider gray");
   minSlider.parent('sketch-holder');
+  minSlider.position(width/3, height*.1);
+  minSlider.size(min(300,width/3),0)
   maxSlider.parent('sketch-holder');
-  minSlider.position(sliderAlignment, height * .65);
-  maxSlider.position(sliderAlignment, height * .8);
+  maxSlider.position(width/3, height * .2);
+  maxSlider.size(min(300,width/3),0)
   pop();
 }
 
 function labelSliders() {
   push();
   //de flip so the text isn't upside down
-  scale(1, -1);
-  fill(rectSmall.color);
-  text("a: " + theMin, 345, -windowHeight * .30);
-  fill(rectLarge.color);
-  text("b: " + theMax, 345, -windowHeight * .15);
-  fill(rectAverage.color);
-  text("average: (" + theMin + "+" + theMax + ")/2 = " + theAverage, 345, -windowHeight * .01);
+  // scale(1, -1);
+  fill(littleColor);
+  text("a: " + theMin, width/3-50, height*.08);
+  fill(bigColor);
+  text("b: " + theMax, width/3-50, height*.18);
+  fill(avgColor);
+  text("average: (" + theMin + "+" + theMax + ")/2 = " + theAverage, width/3, height*.28);
   pop();
 }
 
@@ -90,9 +99,9 @@ function updateBars() {
   theMin = minSlider.value();
   theMax = maxSlider.value();
   theAverage = (theMax + theMin) / 2;
-  rectSmall = new Bar(rectWidths, theMin, 'blue');
-  rectLarge = new Bar(rectWidths, theMax, 'red');
-  rectAverage = new Bar(rectWidths, theAverage, 'purple');
+  rectSmall = new Bar(rectWidths, theMin, littleColor);
+  rectLarge = new Bar(rectWidths, theMax, bigColor);
+  rectAverage = new Bar(rectWidths, theAverage, avgColor);
 }
 
 function drawSmall() {

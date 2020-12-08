@@ -11,7 +11,7 @@ var color;            //simply to make the text colorful
 
 
 function setup()  {
-  canvas=createCanvas(windowWidth*.8,windowHeight*.7);
+  canvas=createCanvas(windowWidth,windowHeight*.9);
   canvas.parent('sketch-holder');
   pendLength = height/2.5;
   // Make a new Pendulum with an origin location and armlength
@@ -23,8 +23,8 @@ function setup()  {
   onoff = createButton("start");
   onoff.parent('sketch-holder');
   onoff.mouseClicked(turnonoff);
-  onoff.position(50,50);
-  onoff.class("sim-button gray");
+  onoff.position(20,20);
+  onoff.class("sim-button");
 
 
   noLoop();

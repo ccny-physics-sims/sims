@@ -3,30 +3,40 @@
 
 
 <head>
-  <title>Standing Wave in Closed-Open Tube</title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-16872952-16"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  gtag('config', 'UA-16872952-16');
+</script>
+
+  <title>Standing Wave in Closed-Open Tube</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
   <style>
   body {
     font-family:Helvetica, Arial, Sans-serif;
   }
   canvas {
   }
-
   </style>
-  <!-- get the sims css file -->
-  <link href="../../sim-design/sims-styles.css" rel="stylesheet" />
+
+  <link href="../../sim-design/sims-styles-2020.css" rel="stylesheet" />
+
   <!-- load the p5 libraries we need. At first, we'll try from a CDN, but if for some reason that doesn't work, then we can load it from our local copy. For most sketches, all we'll need is the p5 and p5.dom libs -->
 
   <!-- get p5.js from cdn -->
-  <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
+  <script language="javascript" src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
   <!-- uh oh. Can't find CDN?, then load from local. -->
   <script>
   window.p5 || document.write('<script src="../../../js/p5.js"><\/script><script src="../../../js/addons/p5.dom.min.js"><\/script>');
   </script>
 
   <!-- get p5.dom.js from cdn -->
-  <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
+
 
   <!-- let's get our sketch! -->
   <script language="javascript" src="../../science-library/lib/science.js"></script>
@@ -40,7 +50,10 @@
 </head>
 
 <body>
-<div id="sketch-holder" style="position: relative;">
+  <a href="https://sciencesims.com"><img class="logo" src="../../img/scisims-profile-clipped-to-circle.png" alt="" ></a>
+  <h3 class="simTitle">Standing Wave in Closed-Open Tube</h3>
+  <a href="../../simdocs/soundwaves-standing-co"><img class="helpButton" src="../../img/q-mark.png" alt="" >  </a>
+<div id="sketch-holder">
   <!-- Our sketch will go here! -->
 </div>
 </body>

@@ -12,7 +12,7 @@ var phaseLabel;
 function setup() {
 
   frameRate(10);
-  canvas = createCanvas(windowWidth*.8, windowHeight*.7);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
   w = width+xspacing;
 
@@ -21,10 +21,10 @@ function setup() {
 
   phaseSlider = createSlider(0, .2, 0, .001);
   phaseSlider.parent('sketch-holder');
-  phaseSlider.position(width/2-100,height*.1);
+  phaseSlider.position(20,20);
   phaseSlider.class("sim-slider gray");
   phaseLabel = createP();
-  phaseLabel.position(width/2-100,0);
+  phaseLabel.position(20,phaseSlider+20);
   phaseLabel.parent('sketch-holder');
 
 }

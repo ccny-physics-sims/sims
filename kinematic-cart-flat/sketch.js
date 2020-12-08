@@ -11,12 +11,12 @@ function preload() {
 }
 
 function setup() {
-  canvas=createCanvas(windowWidth*.95 , 400);
+  canvas=createCanvas(windowWidth, windowHeight*.9);
   canvas.parent('sketch-holder');
   isDrag = createCheckbox('drag', false);
 
   isDrag.style('width', '60px');
-  isDrag.position(30,35);
+  isDrag.position(20,20);
   isDrag.parent('sketch-holder');
   textAlign(CENTER);
 
@@ -106,7 +106,7 @@ function touchStarted(){
 }
 
 function launchABall() {
-  projectile.velocity.y = -8*(height-mouseY)/height;
+  projectile.velocity.y = -15*(height-mouseY)/height;
   if (isDrag.checked()){
     projectile.acceleration = createVector(-projectile.velocity.x*.01,.1);
   }

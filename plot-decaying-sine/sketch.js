@@ -1,17 +1,18 @@
 var b = .2;
 var m = 200;
 var k = 8;
-var amplitude = 200;
+let amplitude;
 var phi=0;
 var omega;
 
 function setup() {
-  canvas = createCanvas(.8*windowWidth, .7*windowHeight);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
   background(250);
   frameRate(30);
   textSize(18)
   //lets make an array to fill
+  amplitude = min(200,height/4)
   y = new Array(300);
   expFunct = new Array(300);
 
@@ -76,7 +77,7 @@ function renderLine() {
   strokeWeight(2)
   beginShape();
   for (var x = 0; x < y.length; x += 1) {
-    xscaled = map(x,0,y.length,0,width)
+    xscaled = map(x,0,y.length,0,width-100)
     curveVertex(xscaled, -y[x]);
   }
   endShape();
@@ -92,12 +93,12 @@ function renderLine() {
   curveVertex(0,-amplitude)
   //curveVertex(0,amplitude-50)
   for (var x = 0; x < y.length; x += 2) {
-    xscaled = map(x,0,y.length,0,width)
+    xscaled = map(x,0,y.length,0,width-100)
     curveVertex(xscaled, -expFunct[x]);
   }
   curveVertex(xscaled,expFunct[y.length-1])
   for (var x = y.length-1; x > 0; x -= 2) {
-    xscaled = map(x,0,y.length,0,width)
+    xscaled = map(x,0,y.length,0,width-100)
     curveVertex(xscaled, expFunct[x]);
   }
   curveVertex(0,amplitude)
@@ -119,11 +120,11 @@ function showMaxAmplitude(){
 function showTau(){
   push();
   stroke(100)
-  tau = (2*m/b)*width/y.length
+  tau = (2*m/b)*(width-100)/y.length
   line(tau,-.37*amplitude-30,tau,0)
   line(0,-.37*amplitude,tau+30,-.37*amplitude)
   pop();
 
-  tauLabel.position(tau+200,height/2)
+  tauLabel.position(tau+100,height/2)
 
 }

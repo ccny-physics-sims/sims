@@ -14,7 +14,7 @@ function setup() {
   //frameRate(25);
 
 
-  canvas = createCanvas(windowWidth*.8, windowHeight*.7);
+  canvas = createCanvas(windowWidth*.8, 0.9*windowHeight);
   canvas.parent('sketch-holder');
 
 tubelength = width*.8
@@ -22,15 +22,16 @@ tubelength = width*.8
   modeslider = createSlider(1,8,1);
   modeslider.parent('sketch-holder');
   modeslider.class("sim-slider")
-  modeslider.position(width/2,.75*height);
+  modeslider.position(width/3,.8*height);
+  modeslider.size(min(300,width/3),0)
   modeSliderLabel = createP();
   modeSliderLabel.parent('sketch-holder');
-  modeSliderLabel.position(width/2,.65*height);
+  modeSliderLabel.position(width/2,modeslider.y);
 
   onoff = createButton("start");
   onoff.parent('sketch-holder');
   onoff.mouseClicked(turnonoff);
-  onoff.position(width/3,.72*height);
+  onoff.position(20,20);
   onoff.class("sim-button")
 
   t1=createP('closed');

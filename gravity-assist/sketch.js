@@ -9,25 +9,25 @@ var running = false;
 
 function setup(){
   frameRate(30);
-  canvas = createCanvas(windowWidth*.8, windowHeight*.7);
+  canvas = createCanvas(windowWidth, windowHeight*.9);
   canvas.parent('sketch-holder');
   running = false;
 
   onoff = createButton("Start");
   onoff.parent('sketch-holder');
-  onoff.position(width-200,20);
+  onoff.position(20,20);
   onoff.class("sim-button");
   onoff.mousePressed(turnonoff);
 
   reset = createButton("Reset");
   reset.parent('sketch-holder');
-  reset.position(width-200,90);
+  reset.position(20,onoff.y+50);
   reset.class("sim-button");
   reset.mousePressed(resetMasses);
 
   comCoord  = createCheckbox('Center Of Mass?', false);
   comCoord.parent('sketch-holder');
-  comCoord.position (width-200,160)
+  comCoord.position (20,reset.y+50)
   comCoord.changed(resetMasses);
 
 
@@ -37,11 +37,11 @@ function setup(){
   centery = height/2;
 
  SolarSystem = new GravSystem(orbiters);
-mass1Pos = createVector(centerx,centery);
+mass1Pos = createVector(centerx-30,centery);
 mass1Vel = createVector(vSat*1,0)
 
 
-mass2Pos = createVector(centerx-50,600);
+mass2Pos = createVector(centerx-80,centery+200);
 mass2Vel = createVector(+vSat,-vSat);
 mass1 =  orbiters.push(new Orbiter(mass1Pos,mass1Vel,createVector(0,0),100000, 'red',10));
 
@@ -138,16 +138,23 @@ function turnonoff() {
 }
 
 function resetMasses(){
+  clear(0)
   Trails = [];
   orbiters = [];
   SolarSystem = new GravSystem(orbiters);
-  mass1Pos = createVector(centerx,centery);
+  mass1Pos = createVector(centerx-30,centery);
   mass1Vel = createVector(vSat*1,0)
-  mass2Pos = createVector(centerx-50,600);
+  mass2Pos = createVector(centerx-80,centery+200);
   mass2Vel = createVector(+vSat,-vSat);
   mass1 =  orbiters.push(new Orbiter(mass1Pos,mass1Vel,createVector(0,0),100000, 'red',10));
   mass2 = orbiters.push(new Orbiter(mass2Pos,mass2Vel,createVector(0,0),.000001, 'blue',3));
-
+  for (i=0;i<orbiters.length;i++){
+    orbiters[i].display();
+  }
+  text("Speed: "+(orbiters[1].velocity.mag().toFixed(1)),orbiters[1].position.x,orbiters[1].position.y-30)
+  text("Speed: "+(orbiters[0].velocity.mag().toFixed(10)),orbiters[0].position.x,orbiters[0].position.y-30)
+  COM();
+COMDisplay();
 }
 
 // function touchEnded() {

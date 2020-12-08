@@ -1,5 +1,7 @@
+let sliderWidth;
+
 function setup() {
-  canvas = createCanvas(.8*windowWidth, .7*windowHeight);
+  canvas = createCanvas(windowWidth, .9*windowHeight);
   canvas.parent('sketch-holder');
   m = 3; // mass of block
   i = 30; // initial force applied
@@ -12,6 +14,7 @@ function setup() {
   currentMu = mus;
   moving = false;
   mahdiv = createDiv('');
+  sliderWidth = min(200,width/4)
   spawnControls();
   init();
 }
@@ -30,10 +33,11 @@ function draw() {
   block.wrapEdges();
   calcNetForce();
   stroke(0);
+  strokeWeight(2)
   line(-width, 0, width, 0);
   pop();
   displayStats();
-  console.log(block.velocity.x)
+  //console.log(block.velocity.x)
 }
 
 function displayStats() {
@@ -47,47 +51,51 @@ function displayStats() {
     "mu: <span class=\"nums\">" + currentMu.toFixed(2) + "</span><br>" )
   mahdiv.html(stats);
   mahdiv.parent('sketch-holder');
+  mahdiv.position(20,height-60)
 }
 
 function spawnControls() {
-  button1 = createButton('shove block');
+  button1 = createButton('shove');
   button1.mousePressed(shoveButton);
   button1.parent('sketch-holder');
-  button1.position(width*.8,height*.05);
+  button1.position(width-100,height*.05);
   button1.class("sim-button");
 
   button2 = createButton('reset');
   button2.mousePressed(init);
   button2.parent('sketch-holder');
-  button2.position(width*.8,height*.15)
+  button2.position(width-100,button1.y+50)
   button2.class("sim-button")
 
   massSlider = createSlider(1, 50, m);
   massSlider.parent('sketch-holder');
-  massSlider.position(width*.14,height*.08)
+  massSlider.position(20,height*.08)
   massSlider.class("sim-slider gray ");
+  massSlider.size(sliderWidth,0)
 
   massLabel = createP()
   massLabel.parent('sketch-holder');
-  massLabel.position(width*.01,height*.05)
+  massLabel.position(sliderWidth+30,height*.05)
 
   shoveSlider = createSlider(-80, 80, i);
   shoveSlider.parent('sketch-holder');
-  shoveSlider.position(width*.14,height*.18)
+  shoveSlider.position(20,height*.18)
   shoveSlider.class("sim-slider gray ");
+  shoveSlider.size(sliderWidth,0)
 
   shoveLabel = createP()
   shoveLabel.parent('sketch-holder');
-  shoveLabel.position(width*.01,height*.15)
+  shoveLabel.position(sliderWidth+30,height*.15)
 
   rampSlider = createSlider(0, 30, ra);
   rampSlider.parent('sketch-holder');
-  rampSlider.position(width*.14,height*.28)
+  rampSlider.position(20,height*.28)
   rampSlider.class("sim-slider gray ");
+  rampSlider.size(sliderWidth,0)
 
   rampLabel = createP()
   rampLabel.parent('sketch-holder');
-  rampLabel.position(width*.01,height*.25)
+  rampLabel.position(sliderWidth+30,height*.25)
 }
 
 function windowResized() {

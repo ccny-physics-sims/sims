@@ -1,7 +1,7 @@
 var theta, lengthV;
 var on = true;
 function setup() {
-  canvas = createCanvas(.8*windowWidth, 500);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
   // the length of the vector is 100!
   lengthV = min(width/8,100);
@@ -45,10 +45,10 @@ function setup() {
   alpha = .00005;
 
   btn_pause = createButton('Pause');
-  btn_pause.position(50,60);
+  btn_pause.position(20,20);
   btn_pause.mouseClicked(ptoggle);
   btn_pause.parent('sketch-holder');
-  btn_pause.class("sim-button slim");
+  btn_pause.class("sim-button");
 }
 
 

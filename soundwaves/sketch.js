@@ -8,7 +8,7 @@ var k = 0;
 function setup() {
 
   frameRate(20);
-  canvas=createCanvas(.7*windowWidth, .4*windowHeight);
+  canvas=createCanvas(windowWidth,0.9*windowHeight);
   canvas.parent('sketch-holder');
   wavelength = .2*width;
   amplitude = .15*wavelength;
@@ -54,16 +54,16 @@ function draw() {
   push();
   k++
   noStroke();
-  translate(amplitude*Math.sin(-vslider.value()*angularfrequency*(k-25)*.01),0);
-  rect(20,0,10,height);
-  rect(-30,-5+height/2,50,10);
+  translate(60+amplitude*Math.sin(-vslider.value()*angularfrequency*(k-25)*.01),0);
+  rect(0,0,10,height);
+  rect(-30,-5+height/2,30,10);
   pop();
 }
 
 // Jitter class
 function Waver(fill_) {
   var j = 0;
-  this.x = 30+Math.random() * width;
+  this.x = 80+(Math.random() * (width-80));
   this.originalx = this.x
   this.y = Math.random()*height;
   this.diameter = Math.random()*(6-3)+3;

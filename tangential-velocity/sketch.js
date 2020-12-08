@@ -1,7 +1,7 @@
 var theta, lengthV;
 
 function setup() {
-  canvas = createCanvas(800, 500);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
   // the length of the vector is 100!
   lengthV = 100;

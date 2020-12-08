@@ -4,7 +4,7 @@ var running = false;
 
 
 function setup(){
-canvas = createCanvas(windowWidth*.8, windowHeight*.7);
+canvas = createCanvas(windowWidth, 0.9*windowHeight);
 canvas.parent('sketch-holder');
 
   c = 0;
@@ -13,17 +13,18 @@ canvas.parent('sketch-holder');
   // onoff.mouseClicked(turnonoff);
   // onoff.position(50,30);
   // onoff.class("sim-button")
-
+  sliderWidth = min(300,width/3)
   reseter = createButton("Go!");
   reseter.parent('sketch-holder');
   reseter.mouseClicked(resetTheBalls);
-  reseter.position(20,30);
+  reseter.position(20,20);
   reseter.class("sim-button")
 
   discMassSlider = createSlider(0, 50, 10, 1);
   discMassSlider.position(width*.01,height*.2);
   discMassSlider.parent('sketch-holder');
   discMassSlider.class("sim-slider");
+  discMassSlider.size(sliderWidth,0)
   discMassSliderLabel = createP()
   discMassSliderLabel.position(10,height*.23);
   discMassSliderLabel.parent('sketch-holder');
@@ -32,6 +33,7 @@ canvas.parent('sketch-holder');
   boxMassSlider.position(width*.01,height*.35);
   boxMassSlider.parent('sketch-holder');
   boxMassSlider.class("sim-slider");
+  boxMassSlider.size(sliderWidth,0)
   boxMassSliderLabel = createP()
   boxMassSliderLabel.position(10,height*.38);
   boxMassSliderLabel.parent('sketch-holder');
@@ -39,7 +41,7 @@ canvas.parent('sketch-holder');
   accelerationLabel = createP();
   accelerationLabel.position(10,height*.44);
   accelerationLabel.parent('sketch-holder');
-  accelerationLabel.style('font-size', '2em')
+  accelerationLabel.style('font-size', '1em')
 
   //speedRoller = 10;
   g = .1;

@@ -27,7 +27,7 @@ function preload() {
 }
 
 function setup(){
-canvas = createCanvas(windowWidth*.9, windowHeight*.9);
+canvas = createCanvas(windowWidth, windowHeight*.9);
 canvas.parent('sketch-holder');
 //frameRate(15);
 imageMode(CENTER);
@@ -45,41 +45,41 @@ imageMode(CENTER);
   //orbit control slider
   SliderLabel = createP("manual orbit control");
   SliderLabel.parent('sketch-holder');
-  SliderLabel.position(30,80);
+  SliderLabel.position(30,60);
 
   Slider = createSlider(3*PI, 7*PI, 0 ,.04);
   Slider.size(200,30);
   Slider.parent('sketch-holder');
-  Slider.position(30,110);
+  Slider.position(30,100);
   Slider.class("sim-slider");
 
   //text boxes
 
   orbitCount = createP('Mercury Orbits: 0');
   orbitCount.parent('sketch-holder');
-  orbitCount.position(30,150)
+  orbitCount.position(30,Slider.y+30)
 
   rotationCount = createP('Mercury Rotations: 0');
   rotationCount.parent('sketch-holder');
-  rotationCount.position(30,170);
+  rotationCount.position(30,orbitCount.y+20);
 
   earthDayCount = createP('Earth Days: 0');
   earthDayCount.parent('sketch-holder');
-  earthDayCount.position(30,210);
+  earthDayCount.position(30,rotationCount.y+20);
 
   daynight = createP('Day/Night? ');
   daynight.parent('sketch-holder');
-  daynight.position(30,280)
+  daynight.position(30,.7*height)
 
   daynightstatus = createDiv('Day/Night? ');
   daynightstatus.parent('sketch-holder');
-  daynightstatus.position(60,320)
+  daynightstatus.position(60,daynight.y+40)
   daynightstatus.attribute('align', 'center');
   daynightstatus.style('text-align: center');
   daynightstatus.style('color: #42b3f4;')
 
   B = Slider.value()
-  
+
 
 }
 
@@ -202,7 +202,7 @@ daynight.html('Day/Night?')
 daynightstatus.html(daystatus)
 stroke(0)
 fill(skyLight)
-translate(70,400)
+translate(90,daynight.y+115)
 rect(-60,-80,120,80)
 push()
 fill(240,200,40)

@@ -1,7 +1,7 @@
 let order;
 let diameter = 10;
 function setup() {
-  canvas=createCanvas(windowWidth*.8, windowHeight*.7);
+  canvas=createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
 
   colorMode(HSB)
@@ -14,18 +14,18 @@ function setup() {
 
   orderEq = createSpan('1 &times 10<sup>'+order+'<sup>')
   orderEq.parent('sketch-holder')
-  orderEq.position(width*.66,height*.3)
-  orderEq.style('font-size','2em')
+  orderEq.position(width*.56,height*.3)
+  //orderEq.style('font-size','2em')
 
   orderEq1 = createSpan('diameter = 1 ')
   orderEq1.parent('sketch-holder')
   orderEq1.position(width*.25,height*.3+12)
-  orderEq1.style('font-size','2em')
+  //orderEq1.style('font-size','2em')
 
   timesBiggerLabel = createSpan(1*pow(10,order)/10+'&times bigger')
   timesBiggerLabel.parent('sketch-holder')
-  timesBiggerLabel.position(width*.66,height*.4)
-  timesBiggerLabel.style('font-size','2em')
+  timesBiggerLabel.position(width*.56,height*.4)
+  //timesBiggerLabel.style('font-size','2em')
   noStroke();
 
 }

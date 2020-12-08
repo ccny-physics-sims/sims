@@ -1,7 +1,7 @@
 
 var w;                // Width of entire wave
 var amplitude = 75.0; // Height of wave
-var wavelength = 100;   // How many pixels before the wave repeats
+var wavelength = 50;   // How many pixels before the wave repeats
 var dx;               // Value for incrementing x
 var yvalues;  // Using an array to store height values for the wave
 var k = 2*Math.PI/wavelength;
@@ -11,19 +11,19 @@ var dt = .1;
 function setup() {
 
   frameRate(30);
-  canvas = createCanvas(windowWidth, 400);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
   w = width+12;
 
-  y = new Array(windowWidth);
+  y = new Array(200);
 
   speedSlider = createSlider(-.2, .2, .05,.01);
   speedSlider.parent('sketch-holder');
-  speedSlider.position(300,50);
+  speedSlider.position(20,20);
   speedSlider.class("sim-slider gray");
   speedSliderLabel = createP('&omega; = '+abs(speedSlider.value()));
   speedSliderLabel.parent('sketch-holder');
-  speedSliderLabel.position(300,20);
+  speedSliderLabel.position(20,speedSlider.y+10);
 }
 
 function draw() {
@@ -82,7 +82,7 @@ function renderLine(color_,weight_) {
   strokeWeight(weight_);
   beginShape();
   for (var x = 0; x < y.length; x += 3) {
-    curveVertex(x, -y[x]);
+    curveVertex(map(x,0,y.length,0,width), -y[x]);
   }
   endShape();
   pop();

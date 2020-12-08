@@ -1,13 +1,14 @@
-//stuff that still needs work
-//-optimizing the program to run most efficiently
-//-fixing the scaling and axis values for the cat and raft vectors (make them real)
+let cat_img;
+function preload(){
+  cat_img = loadImage("mrTibbles.png");
+}
 
 
 function setup(){
-  canvas = createCanvas(windowWidth,windowHeight);
+  canvas = createCanvas(windowWidth,windowHeight*.9);
   canvas.parent("sketch-holder");
 
-  cat_img = loadImage("mrTibbles.png");
+
   imageMode(CORNER);
 
   v1 = createVector(width/2,height/2);
@@ -19,12 +20,12 @@ function setup(){
 
   catslider = createSlider(1,40,10);
   catslider.parent('sketch-holder');
-  catslider.position(20,500);
+  catslider.position(20,20);
   catslider.class("sim-slider gray");
   catslider.parent
   raftslider = createSlider(5,150,10);
   raftslider.parent('sketch-holder');
-  raftslider.position(20,550);
+  raftslider.position(20,catslider.y+80);
   raftslider.class("sim-slider gray");
   raftslider.parent
 
@@ -79,11 +80,8 @@ function draw(){
   push();
   noStroke();
   fill(0);
-  text("Mass of Cats",150,500);
-  text("Mass of Raft",150,550);
-  //text value of slider
-  text(raftslider.value().toString(),100,550);
-  text(catslider.value().toString(),100,500);
+  text("Mass of Cats: " +catslider.value(),20,catslider.y+50);
+  text("Mass of Raft: "+raftslider.value(),20,raftslider.y+50);
   pop();
 };
 function touchEnded(){

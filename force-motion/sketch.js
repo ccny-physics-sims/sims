@@ -56,7 +56,7 @@ function setup() {
 frameRate(30);
 
 
-canvas = createCanvas(windowWidth-60, windowHeight-60);
+canvas = createCanvas(windowWidth, windowHeight);
 canvas.parent('sketch-holder')
 //canvas = createCanvas(600,600);
 pos = createVector(random(0,width),random(0,height))

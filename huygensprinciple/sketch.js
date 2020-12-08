@@ -7,7 +7,7 @@ function preload() {
   img = loadImage("candle.png");
 }
 function setup() {
-  canvas = createCanvas(.8*windowWidth, .7*windowHeight);
+  canvas = createCanvas(windowWidth, .9*windowHeight);
   canvas.parent('sketch-holder')
   systems = [];
   frameRate(20);
@@ -16,13 +16,14 @@ function setup() {
   button.position(5, 5);
   button.mousePressed(clearWaves);
   button.addClass('sim-button');
+  imageMode(CENTER)
 
 }
 
 function draw() {
   background(255);
 
-  image(img, width/2, height/4);
+  image(img, width/2, height/2);
 
   for (i = 0; i < systems.length; i++) {
     systems[i].run();

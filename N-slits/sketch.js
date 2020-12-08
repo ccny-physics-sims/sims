@@ -8,9 +8,12 @@ var N = 0;
 const controlSpacing = 40
 
 function setup() {
-canvas=createCanvas(windowWidth*.8, .7*windowHeight);
+canvas=createCanvas(windowWidth, .9*windowHeight);
 canvas.parent('sketch-holder');
 noFill();
+
+sliderWidth = min(width/3,200)
+
 
 LightWavelength = createElement('p', 'Wavelength');
 LightWavelength.position(20, 20+controlSpacing*0);
@@ -18,7 +21,8 @@ LightWavelength.parent('sketch-holder');
 slider1 = createSlider(200,1000,400,10);
 slider1.parent('sketch-holder');
 slider1.position(200, controlSpacing);
-slider1.class("sim-slider gray");
+slider1.class("sim-slider");
+slider1.size(sliderWidth,0)
 
 DistanceBTNSlits = createElement('p', 'Distance between slits');
 DistanceBTNSlits.parent('sketch-holder');
@@ -28,6 +32,7 @@ slider2.parent('sketch-holder');
 slider2.position(200,controlSpacing*2 );
 slider2.value(1500);
 slider2.class("sim-slider gray");
+slider2.size(sliderWidth,0)
 
 CentralMaximum = createElement('p', 'Central Maximum');
 CentralMaximum.parent('sketch-holder');
@@ -36,6 +41,7 @@ slider4 = createSlider(0,1,.5,.01);
 slider4.parent('sketch-holder');
 slider4.position(200, controlSpacing*3);
 slider4.class("sim-slider gray");
+slider4.size(sliderWidth,0)
 
 NSlits = createElement('p','N-slits');
 NSlits.parent('sketch-holder');
@@ -44,6 +50,7 @@ slider5 = createSlider(2,20,8,1);
 slider5.parent('sketch-holder');
 slider5.position(200,controlSpacing*4);
 slider5.class("sim-slider gray");
+slider5.size(sliderWidth,0)
 
  y = new Array(2200);
 }
@@ -98,9 +105,9 @@ function renderFringes() {
     c = color('hsba('+hueFromLambda+', 100%, 100%,' + alphaFromInt*2 + ')');
 
     stroke(c)
-    strokeWeight(1)
+    strokeWeight(2)
     jScaled = map(j,0,y.length,0,width)
-    line(jScaled,height,jScaled,height*.9)
+    line(jScaled,height*.9,jScaled,height*.85)
 
     //curveVertex(jScaled,height*.8-y[j])
   }
@@ -108,6 +115,7 @@ function renderFringes() {
   pop()
   if(int0 != 0){
   stroke(color('hsba('+hueFromLambda+', 100%, 100%,' + 1 + ')'));
-  line(width/2,height,width/2,height*.9)
+  strokeWeight(2)
+  line(width/2,height*.9,width/2,height*.85)
   }
 }

@@ -2,7 +2,7 @@ var xspacing = 12;    // Distance between each horizontal location
 var w;                // Width of entire wave
 var theta = 0.0;      // Start angle at 0
 var amplitude = 75.0; // Height of wave
-var period = 200.0;   // How many pixels before the wave repeats
+var period = 100.0;   // How many pixels before the wave repeats
 var dx;               // Value for incrementing x
 var yvalues;  // Using an array to store height values for the wave
 var phaseSlider;
@@ -16,22 +16,22 @@ function preload() {
 function setup() {
 
   frameRate(10);
-  canvas = createCanvas(710, 400);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
   w = width+12;
 
   dx = (TWO_PI / period) * xspacing;
-  yvalues = new Array(floor(w/xspacing));
+  yvalues = new Array(200);
 
   phaseSlider = createSlider(0, TWO_PI, HALF_PI);
   phaseSlider.parent('sketch-holder');
   phaseSlider.elt.step = .01;
-  phaseSlider.position(300,50);
-  phaseSlider.class("sim-slider gray");
+  phaseSlider.position(20,20);
+  phaseSlider.class("sim-slider");
   phaseLabel = createP();
   phaseLabel.parent('sketch-holder');
-  phaseLabel.position(300,0);
-
+  phaseLabel.position(20,phaseSlider.y+30);
+  imageMode(CENTER)
 
 }
 
@@ -39,15 +39,15 @@ function draw() {
   background(255);
   phase = phaseSlider.value();
 
-  translate(50,0)
+  //translate(50,0)
   calcWave(0);
   renderWave(color(250,0,0),1);
-  image(img, 180, 170);
+  image(img, 90+180, height/2);
 
 
   calcWave(phase);
   renderWave(color(0,0,250),1);
-  image(img, 175-phase*30, 170);
+  image(img, 90+180-phase*30, height/2);
 
   calcSum();
   renderWave(color(250,0,250),2);

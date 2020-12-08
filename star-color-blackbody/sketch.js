@@ -5,7 +5,7 @@ let temp;
 let aSlider;
 
 function setup() {
-  canvas = createCanvas(.9*windowWidth, .7*windowHeight);
+  canvas = createCanvas(windowWidth, .9*windowHeight);
   canvas.parent('sketch-holder');
 
   containerDiv = createDiv()
@@ -13,28 +13,28 @@ function setup() {
   //containerDiv.style('width', '500 px' )
 
   aSlider = createSlider(2000,15000,5000,1);
-  aSlider.parent(containerDiv);
-  aSlider.style('width', width*.33+'px');
+  aSlider.parent('sketch-holder')
+  aSlider.size(width/3,0);
   background(250);
   frameRate(30);
   //lets make an array to fill
   aTextBox = createInput('');
   aTextBox.parent('sketch-holder');
-  aTextBox.position(50,40);
-  aTextBox.size(80)
+  aTextBox.position(20,20);
+  aTextBox.size(60)
 
   aTextBox.class('sim-textbox')
   //aTextBox.style('height','40px')
-  aSlider.position(aTextBox.x, aTextBox.y+100)
+  aSlider.position(aTextBox.x, aTextBox.y+80)
 aSlider.input(sliderChange);
 aSlider.class("sim-slider");
 
 aTextBox.value(aSlider.value());
 
-button = createButton('Set Temperature');
+button = createButton('Set T');
 button.parent('sketch-holder');
 button.position(aTextBox.x + aTextBox.width+30, aTextBox.y);
-button.class('sim-button ')
+button.class('sim-button')
 button.mousePressed(updateValue);
 
 y = new Array(500);
@@ -82,8 +82,8 @@ function draw() {
     fill(100)
     noStroke()
     textSize(18)
-    text('2000 K', aSlider.x, aSlider.y+20)
-    text('15000 K', aSlider.x+width*.33-10, aSlider.y+20)
+    text('2000 K', aSlider.x+30, aSlider.y+30)
+    text('15000 K', aSlider.x+width/3-10, aSlider.y+30)
     translate(0, .9*height)
     //x axis
     stroke(1)

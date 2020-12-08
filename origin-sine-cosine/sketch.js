@@ -24,7 +24,8 @@ var alignY = 10;
 
 // setup the stuffs
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(windowWidth, windowHeight*.9);
+  canvas.parent('sketch-holder')
   createToggles();
   spawnSliders();
   textSize(16);
@@ -38,7 +39,7 @@ function draw() {
   //circle business
   push();
   // center the unit circle
-  translate(windowWidth / 2, windowHeight * .5);
+  translate(width / 2, height * .5);
   // get x and y coords for point on circle at a given time
   x = amp * cos(freq * t);
   y = amp * sin(freq * t);
@@ -168,13 +169,13 @@ function drawCosSpot(x, amp) {
 function updateSettings(x, y) {
   amp = ampSlider.value();
   freq = -freqSlider.value();
-  text("AMPLITUDE: " + amp, alignX, windowHeight - alignY * 14);
-  text("FREQUENCY: " + Math.abs(freq), alignX, windowHeight - alignY * 8);
-  text("y(t) = amplitude * sin(frequency*t)\n\n" + (y.toFixed(0) * -1), windowWidth - 250, alignY * 3);
-  push();
-  textAlign(LEFT);
-  text("\n\n\t\t\t = " + amp + " * [sin(" + freq * -1 + "*" + t.toFixed(2) + ")]", windowWidth - 250, alignY * 3);
-  pop();
+  text("AMPLITUDE: " + amp, alignX, height - alignY * 14);
+  text("FREQUENCY: " + Math.abs(freq), alignX, height - alignY * 8);
+  //text("y(t) = A * sin(f*t)", width - 150, alignY * 3);
+  // push();
+  // textAlign(LEFT);
+  // text("\n\n\t\t\t = " + amp + " * [sin(" + freq * -1 + "*" + t.toFixed(2) + ")]", width - 150, alignY * 3);
+  // pop();
 
 }
 
@@ -182,14 +183,14 @@ function spawnSliders() {
   push();
   ampSlider = createSlider(0, 200, amp);
   freqSlider = createSlider(0, 100, freq);
-  ampSlider.position(alignX, windowHeight - alignY * 14);
-  freqSlider.position(alignX, windowHeight - alignY * 8);
+  ampSlider.position(20, height - alignY * 12);
+  freqSlider.position(20, height - alignY * 6);
   freqSlider.mousePressed(turnonoff2);
   freqSlider.mouseReleased(turnonoff2);
   ampSlider.parent('sketch-holder');
   freqSlider.parent('sketch-holder');
-  ampSlider.class("sim-slider gray ");
-  freqSlider.class("sim-slider gray");
+  ampSlider.class("sim-slider  ");
+  freqSlider.class("sim-slider ");
   pop();
 }
 
@@ -197,16 +198,20 @@ function createToggles() {
   push();
   showSine = true;
   toggleSineButton = createButton('toggle sine');
-  toggleSineButton.position(alignX, alignY * 1);
+  toggleSineButton.position(20, 20 * 1);
   toggleSineButton.mousePressed(toggleSine);
+  toggleSineButton.class('sim-button')
   showCos = true;
   toggleCosineButton = createButton('toggle cosine');
-  toggleCosineButton.position(alignX, alignY * 5);
+  toggleCosineButton.class('sim-button')
+  toggleCosineButton.position(20, toggleSineButton.y+50);
   toggleCosineButton.mousePressed(toggleCos);
   running = true;
+
   onoff = createButton('start');
-  onoff.position(alignX, alignY * 9);
+  onoff.position(20, toggleCosineButton.y+50);
   onoff.mousePressed(turnonoff);
+  onoff.class('sim-button')
 
   toggleSineButton.parent('sketch-holder');
   toggleCosineButton.parent('sketch-holder');

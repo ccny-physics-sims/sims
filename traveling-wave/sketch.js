@@ -10,7 +10,7 @@ var omega = 2;
 function setup() {
 
   //frameRate(30);
-  canvas = createCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
   w = width+12;
 

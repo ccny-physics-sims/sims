@@ -20,41 +20,51 @@ var onoff;
 function setup() {
 
   frameRate(30);
-  canvas=createCanvas(700, 400);
+  canvas=createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
+  sliderWidth = min(300,width/3)
   //these are all for the labels and sliders
   onoff = createButton("stop");
   onoff.parent('sketch-holder');
   onoff.mouseClicked(turnonoff);
-  onoff.position(650,30);
+  onoff.position(width-80,20);
   onoff.class("sim-button")
   equation = createP("y  = sin( k x + &omega; t)");
   equation.parent('sketch-holder');
-  equation.position(250, 320);
+  equation.position(20, .8*height);
   equation.style("font-family: Times, serif; background: #e4e4e4; width: 220px; text-align: center; padding: 5px 10px ; border:thin solid black; border-radius: 5px;");
+  amplitudeSlider = createSlider(0, 10, 7.5,0.1);
+  amplitudeSlider.parent('sketch-holder');
+  amplitudeSlider.position(20,20);
+  amplitudeSlider.class("sim-slider");
+  amplitudeSlider.size(sliderWidth,0)
+
   ampSliderLabel = createP("Amplitude");
   ampSliderLabel.parent('sketch-holder');
-  ampSliderLabel.position(450,0);
+  ampSliderLabel.position(20,amplitudeSlider.y);
+
+  omegaSlider = createSlider(-10, 10, 2);
+  omegaSlider.parent('sketch-holder');
+  omegaSlider.position(20,amplitudeSlider.y+60);
+  omegaSlider.class("sim-slider");
+  omegaSlider.size(sliderWidth,0)
 
   omegaSliderLabel = createP("Angular Frequency");
   omegaSliderLabel.parent('sketch-holder');
-  omegaSliderLabel.position(250,0);
-  wavelengthSliderLabel = createP("Wavelength");
-  wavelengthSliderLabel.parent('sketch-holder');
-  wavelengthSliderLabel.position(50,0);
+  omegaSliderLabel.position(20,omegaSlider.y);
+
   wavelengthSlider = createSlider(10, 80, 25);
   wavelengthSlider.parent('sketch-holder');
-  wavelengthSlider.position(50,30);
+  wavelengthSlider.position(20,omegaSlider.y+60);
   wavelengthSlider.class("sim-slider");
-  omegaSlider = createSlider(-10, 10, 2);
-  omegaSlider.parent('sketch-holder');
-  omegaSlider.position(250,30);
-  omegaSlider.class("sim-slider");
-  amplitudeSlider = createSlider(0, 10, 7.5);
-  amplitudeSlider.parent('sketch-holder');
-  amplitudeSlider.elt.step = 0.1;
-  amplitudeSlider.position(450,30);
-  amplitudeSlider.class("sim-slider");
+  wavelengthSlider.size(sliderWidth,0)
+
+  wavelengthSliderLabel = createP("Wavelength");
+  wavelengthSliderLabel.parent('sketch-holder');
+  wavelengthSliderLabel.position(20,wavelengthSlider.y);
+
+
+
   //
 
   w = width;

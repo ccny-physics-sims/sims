@@ -1,8 +1,8 @@
 aForceVector = [];
 
 function setup() {
-  createCanvas(500, 500);
-
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
+  canvas.parent('sketch-holder')
 
   startPoint = createVector(width / 2, height / 2);
   vdisp = createVector(random(50, 150), random(-50, -150));

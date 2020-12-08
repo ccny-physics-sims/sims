@@ -12,7 +12,7 @@ var count = 1;
 
 function setup() {
 
-  canvas = createCanvas(600, 600);
+  canvas = createCanvas(windowWidth,0.9*windowHeight);
   canvas.parent('sketch-holder');
 
   frameRate(25);

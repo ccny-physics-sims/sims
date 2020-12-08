@@ -9,13 +9,13 @@ var slider;
 const controlSpacing = 40
 
 function setup() {
-canvas = createCanvas(windowWidth*.8, .7*windowHeight);
+canvas = createCanvas(windowWidth, .9*windowHeight);
 canvas.parent('sketch-holder');
 noFill();
 frameRate(30);
 
 
-
+sliderWidth = min(width/3,200)
 LightWavelength = createElement('p', 'Wavelength');
 LightWavelength.position(20, 20+controlSpacing*0);
 LightWavelength.parent('sketch-holder');
@@ -24,16 +24,19 @@ slider1 = createSlider(200,1000,400,10);
 slider1.parent('sketch-holder');
 slider1.position(190, controlSpacing);
 slider1.class("sim-slider gray");
+slider1.size(sliderWidth,0)
 
 
 DistanceBTNSlits = createElement('p', 'Distance between slits');
 DistanceBTNSlits.parent('sketch-holder');
 DistanceBTNSlits.position(20,20+controlSpacing*1);
+
 slider2 = createSlider(10000,50000,100);
 slider2.parent('sketch-holder');
 slider2.position(190,controlSpacing*2 );
 slider2.value(50000);
 slider2.class("sim-slider gray");
+slider2.size(sliderWidth,0)
 
 SlitWidth = createElement('p', 'Slit Width');
 SlitWidth.parent('sketch-holder');
@@ -43,6 +46,7 @@ slider3.parent('sketch-holder');
 slider3.position(190, controlSpacing*3);
 slider3.value(8000);
 slider3.class("sim-slider gray");
+slider3.size(sliderWidth,0)
 
 CentralMaximum = createElement('p', 'Central Maximum');
 CentralMaximum.position(20, 20+controlSpacing*3);
@@ -52,13 +56,14 @@ slider4.parent('sketch-holder');
 slider4.position(190, controlSpacing*4);
 
 slider4.class("sim-slider gray");
+slider4.size(sliderWidth,0)
 
  y = new Array(700);
 
 
  diffraction = createCheckbox('include diffraction', false);
  diffraction.parent('sketch-holder');
- diffraction.position(width*.7,80)
+ diffraction.position(20,slider4.y+40)
 }
 
 function draw() {
@@ -119,17 +124,18 @@ function renderFringes() {
     c = color('hsba('+hueFromLambda+', 100%, 100%,' + alphaFromInt*2 + ')');
 
     stroke(c)
-    strokeWeight(1)
+    strokeWeight(2)
     jScaled = map(j,0,y.length,0,width)
-    line(jScaled,height,jScaled,height*.9)
+    line(jScaled,height*.9,jScaled,height*.85)
 
     //curveVertex(jScaled,height*.8-y[j])
   }
 
   pop()
   if(int0 != 0){
+  strokeWeight(2)
   stroke(color('hsba('+hueFromLambda+', 100%, 100%,' + 1 + ')'));
-  line(width/2,height,width/2,height*.9)
+  line(width/2,height*.9,width/2,height*.85)
   }
 }
 

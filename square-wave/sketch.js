@@ -1,32 +1,35 @@
-var n = 100;
+
 var yvalues = [];
 var xspacing = 1;
 var wavelength = 300;
 var k = 2*Math.PI/wavelength;
 var amplitude = 20;
-var strokeColor = new Array(n).fill(0);
+let n;
+let strokeColor;
 var sinePoints = [];
 function setup() {
 
   frameRate(30);
-  canvas = createCanvas(windowWidth*.9, 400);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
 
   radio = createRadio();
   radio.parent('sketch-holder');
   radio.position(0,20);
-  radio.option('n = 1', 1);
-  radio.option('n = 2', 2);
-  radio.option('n = 4', 4);
-  radio.option('n = 10', 10);
-  radio.option('n = 50', 50);
+  radio.option(1, '1');
+  radio.option(2, '2');
+  radio.option(3, '3');
+  radio.option(10, '10');
+  radio.option(50, '50');
   //radio.style('width', '60px');
   radio.changed(refresh);
-  radio.value(1);
-  radio.class('sim-radio');
+  n = radio.selected('1')
+
+  //radio.class('sim-radio');
+  strokeColor = new Array(n).fill(0);
   textAlign(CENTER);
   noLoop();
-  for (i=0;i<n;i++){
+  for (i=0;i<50;i++){
     strokeColor[i] = color(random(0,250),random(0,250),random(0,250),map(i,0,100,200,0));
   }
 

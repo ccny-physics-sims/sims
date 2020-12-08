@@ -2,7 +2,7 @@ var aVector=[]
 var G = 1;
 var MassMoon = 1;
 var mass = 1;
-var REarth = 100;
+
 var r;
 var howMany = 16;
 var theta = [];
@@ -11,31 +11,31 @@ var massMoonSlider;
 var s;
 
 let img;
-
+let REarth;
 function setup() {
-  canvas=createCanvas(windowWidth*.8, windowHeight*.6);
+  canvas=createCanvas(windowWidth, windowHeight*.9);
   canvas.parent('sketch-holder');
 
   imageMode(CENTER);
   centerx = width/3;
   centery = height/2;
 
-
-
-    rSlider = createSlider(REarth+70, 450, 450, 1);
-    rSlider.position(30,height*.1);
+  maxMoon = min(450,width/2)
+  REarth = min(100,width/8)
+    rSlider = createSlider(REarth+70, maxMoon, maxMoon, 1);
+    rSlider.position(20,20);
     rSlider.parent('sketch-holder');
     rSlider.class("sim-slider");
 
-    massMoonSlider = createSlider(10, 100, 100, 1);
-    massMoonSlider.position(30,rSlider.y+80);
+    massMoonSlider = createSlider(10, 100, 50, 1);
+    massMoonSlider.position(20,rSlider.y+80);
     massMoonSlider.parent('sketch-holder');
     massMoonSlider.class("sim-slider");
 
     diff  = createCheckbox('Differential Forces?', true);
     diff.parent('sketch-holder');
     diff.style('color','black')
-    diff.position (30,massMoonSlider.y+100)
+    diff.position (20,massMoonSlider.y+60)
 
 
   startPoint = createVector(0, 0);
@@ -57,8 +57,8 @@ function draw() {
   fill('black');
   textSize(18)
 
-  text('Moon Position',20,rSlider.y+10,150,90);
-  text('Moon Mass',20,massMoonSlider.y+10,150,90);
+  text('Moon Position',20,rSlider.y+20,150,90);
+  text('Moon Mass',20,massMoonSlider.y+20,150,90);
   pop();
   MassMoon = massMoonSlider.value();
   r = rSlider.value();

@@ -3,7 +3,7 @@ var forceSlider;
 var triangleHeight, triangleBase;
 
 function setup() {
-  canvas=createCanvas(.8*windowWidth,.7*windowHeight,);
+  canvas=createCanvas(windowWidth,.9*windowHeight,);
   canvas.parent('sketch-holder');
 
   angleSlider = createSlider(0, 90, 30, 1);
@@ -62,8 +62,8 @@ function draw() {
   box_fbd.update();
   box_fbd.display();
 
-  angleSliderLabel.html('&theta; = '+angleSlider.value() +'º')
-  thetaLabel.position(width/2-triangleBase/2+50,height/2+60)
+  angleSliderLabel.html('&theta; = '+angleSlider.value() +'&deg;')
+  thetaLabel.position(width/2-triangleBase/2+map(angleSlider.value(),0,90,60,5),height/2+45)
 }
 
 function drawCoordinates() {

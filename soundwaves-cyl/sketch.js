@@ -9,9 +9,9 @@ var k = 0;
 function setup() {
   frameRate(20);
 
-  canvas = createCanvas(Math.min(400, windowWidth),Math.min(400, windowHeight));
+  canvas = createCanvas(windowWidth,0.9*windowHeight);
   canvas.parent('sketch-holder');
-  wavelength = .2*width;
+  wavelength = .1*width;
   amplitude = .3*wavelength;
   angularfrequency = TWO_PI;
   waveconstant = TWO_PI/wavelength;

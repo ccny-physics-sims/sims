@@ -4,7 +4,7 @@ var running = false;
 
 
 function setup(){
-canvas = createCanvas(windowWidth*.9, windowHeight*.9);
+canvas = createCanvas(windowWidth, windowHeight*.9);
 canvas.parent('sketch-holder');
 
 frameRate(30);
@@ -17,13 +17,13 @@ frameRate(30);
 
 
   posThrow = createVector(.05*width,.3*height)
-  velThrow = createVector(4,0);
+  velThrow = createVector(.005*width,0);
   accel = createVector(0,0);
 
   //what is gravity?
   gravity = createVector(0,.5);
 
-  //make the ball! It is an instance of the mover object
+  //make the ball! It is an instance of the kineticmass object
 
 
   ballThrow = new KineticMass(posThrow,velThrow,accel,15,'red');

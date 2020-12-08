@@ -20,7 +20,7 @@ var onoff;
 function setup() {
 
   frameRate(30);
-  canvas = createCanvas(windowWidth*.95, 400);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
   //these are all for the labels and sliders
   onoff = createButton("start");
@@ -28,30 +28,38 @@ function setup() {
   onoff.mouseClicked(turnonoff);
   onoff.position(width-100,30);
   onoff.class("sim-button")
+
+  let sliderWidth = min(300,width/3)
+
   equation = createP("<p>n = 1</p>");
   equation.parent('sketch-holder')
-  equation.position(width*3/4, 70);
+  equation.position(width*3/4, height/3);
   equation1 = createP("<p>n = 1</p>");
   equation1.parent('sketch-holder')
-  equation1.position(width*1/4, 70);
+  equation1.position(width*1/4, height/3);
+
+  omegaSlider = createSlider(-20, 20, 4);
+  omegaSlider.parent('sketch-holder');
+  omegaSlider.position(20,20);
+  omegaSlider.class("sim-slider");
+  omegaSlider.size(sliderWidth,30)
 
   omegaSliderLabel = createP("Frequency");
-  omegaSliderLabel.position(50,0);
+  omegaSliderLabel.position(20,omegaSlider.y+30);
   omegaSliderLabel.parent('sketch-holder')
-  iorSliderLabel = createP("Index of Refraction");
-  iorSliderLabel.parent('sketch-holder')
-  iorSliderLabel.position(50,50);
+
   iorSlider = createSlider(1, 3, 1);
   iorSlider.parent('sketch-holder');
   iorSlider.elt.step=0.1;
-  iorSlider.position(200,40);
+  iorSlider.position(20,omegaSlider.y+70);
   iorSlider.class("sim-slider");
-  iorSlider.size(width/5,30)
-  omegaSlider = createSlider(-20, 20, 4);
-  omegaSlider.parent('sketch-holder');
-  omegaSlider.position(200,00);
-  omegaSlider.class("sim-slider");
-  omegaSlider.size(width/5,30)
+  iorSlider.size(sliderWidth,30)
+
+  iorSliderLabel = createP("Index of Refraction");
+  iorSliderLabel.parent('sketch-holder')
+  iorSliderLabel.position(20,iorSlider.y+30);
+
+
 
   w = width;
 
@@ -68,9 +76,9 @@ function draw() {
   push();
   fill(240);
   noStroke();
-  rect(0,100,width/2, height-200);
+  rect(0,height/3,width/2, height/3);
   fill(240-20*(iorSlider.value()-1));
-  rect(width/2,100,width, height-200);
+  rect(width/2,height/3,width, height/3);
   pop();
 
   push();

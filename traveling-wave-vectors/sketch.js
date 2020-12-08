@@ -1,10 +1,9 @@
 var xspacing = 10;    // Distance between each horizontal location
 var w;                // Width of entire wave
 var amplitude = 75.0; // Height of wave
-var wavelength = 400;   // How many pixels before the wave repeats
 var dx;               // Value for incrementing x
 var yvalues;  // Using an array to store height values for the wave
-var k = 2*Math.PI/wavelength;
+
 var omega = 1;
 var velVector;
 var xpositions = [];
@@ -12,18 +11,22 @@ var aVector = [];
 var t = 0;
 var dt=1;
 
+let wavelength, k;
+
 function setup() {
 
   //frameRate(30);
-  canvas = createCanvas(710, 400);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
   w = width+12;
+  wavelength = min(400,width/3)
+  k = 2*Math.PI/wavelength;
 
   dx = (TWO_PI / wavelength) * xspacing;
   //yvalues = new Array(floor(w/xspacing));
     y = new Array(windowWidth);
     for (i=0;i<10;i++){
-    xpositions[i]=wavelength*(i+3)/8;
+    xpositions[i]=i*width/10;
     }
     for (i=0;i<xpositions.length;i++){
       addAVector()
@@ -32,12 +35,12 @@ function setup() {
     omegaSlider = createSlider(-5,5,1,.1)
     omegaSlider.parent('sketch-holder');
     omegaSlider.class("sim-slider gray");
-    omegaSlider.position(50,50);
+    omegaSlider.position(20,20);
 
     omegaSliderLabel = createP();
     omegaSliderLabel.parent('sketch-holder');
     omegaSliderLabel.html('Change Wave Speed');
-    omegaSliderLabel.position(50,20);
+    omegaSliderLabel.position(20,omegaSlider.y+10);
 
 
 

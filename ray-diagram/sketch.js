@@ -18,7 +18,8 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    canvas = createCanvas(windowWidth, windowHeight*.9);
+    canvas.parent('sketch-holder')
     frameRate(30);
 
     imageMode(CENTER);

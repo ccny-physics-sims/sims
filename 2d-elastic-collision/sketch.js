@@ -9,18 +9,18 @@
   var velocities = [];
   function setup() {
 
-    canvas = createCanvas(.8*windowWidth, .5*windowHeight);
+    canvas = createCanvas(windowWidth, .90*windowHeight);
     canvas.parent('sketch-holder')
     onoff = createButton("start");
     onoff.parent('sketch-holder');
     onoff.mouseClicked(turnonoff);
-    onoff.position(50,30);
+    onoff.position(20,20);
     onoff.class("sim-button")
 
     reseter = createButton("Reset");
     reseter.parent('sketch-holder');
     reseter.mouseClicked(resetTheBalls);
-    reseter.position(150,30);
+    reseter.position(20,onoff.y+50);
     reseter.class("sim-button")
     //frameRate(5)
     Molecules = new Group();

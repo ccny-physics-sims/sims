@@ -14,7 +14,7 @@ function preload() {
   earthImage = loadImage('earth-polar-view.png');
 }
 function setup(){
-canvas = createCanvas(windowWidth*.9,windowHeight*.9);
+canvas = createCanvas(windowWidth,0.9*windowHeight);
 canvas.parent('sketch-holder');
 frameRate(30);
 
@@ -22,14 +22,15 @@ frameRate(30);
 
   textSize(18)
 
-  SliderLabel = createP("time advance");
-  SliderLabel.parent('sketch-holder');
-  SliderLabel.position(30,0);
+
 
   Slider = createSlider(0, 20, 0 ,.05);
   Slider.parent('sketch-holder');
   Slider.position(30,40);
   Slider.class("sim-slider");
+  SliderLabel = createP("time advance");
+  SliderLabel.parent('sketch-holder');
+  SliderLabel.position(30,Slider.y-50);
 
 //noSmooth();
 //frameRate(15)
@@ -39,19 +40,18 @@ B = Slider.value()
 
 solarDays = createP('Solar Days: 0');
 solarDays.parent('sketch-holder');
-solarDays.position(30,120)
+solarDays.position(20,Slider.y+40)
 
 siderealDays = createP('Sidereal Days: 0');
 siderealDays.parent('sketch-holder');
-siderealDays.position(30,150);
-  addQmark('bottom-left')
+siderealDays.position(20,solarDays.y+30);
 
 }
 
 function draw(){
 background(255)
 fill(255);
-A = width/4;
+A = min(width/4,height/4);
 B = Slider.value()*.01
 
 

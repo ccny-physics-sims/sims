@@ -1,18 +1,19 @@
 function setup() {
-  canvas = createCanvas(windowWidth*.8, windowHeight*.7);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
   background(250);
   frameRate(30);
   textSize(18)
   //lets make an array to fill
   y = new Array(200);
-
-  amplitudeControl = createSlider(-200,200,50,0);
+  ampMax = min(200,height/4)
+  amplitudeControl = createSlider(-ampMax,ampMax,50,0);
   amplitudeControl.position(30,height*.05)
   amplitudeControl.parent('sketch-holder')
   amplitudeControl.class("sim-slider");
+
   amplitudeControlLabel = createP("Amplitude");
-  amplitudeControlLabel.position(30,0);
+  amplitudeControlLabel.position(30,amplitudeControl.y);
   amplitudeControlLabel.parent('sketch-holder')
 
 
@@ -20,8 +21,9 @@ function setup() {
   omegaControl.position(30,height*.15)
   omegaControl.parent('sketch-holder')
   omegaControl.class("sim-slider");
+
   omegaControlLabel = createP("Omega");
-  omegaControlLabel.position(30,height*.1);
+  omegaControlLabel.position(30,omegaControl.y);
   omegaControlLabel.parent('sketch-holder')
 }
 
@@ -33,7 +35,7 @@ function draw() {
   translate(80, height / 2)
   //x axis
   line(0, 0, width, 0)
-  line(0,-200,0,200)
+  line(0,-ampMax*1.1,0,ampMax*1.1)
   widthScale = y.length/width;
   amplitude = amplitudeControl.value();
   omega = omegaControl.value();

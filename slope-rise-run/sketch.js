@@ -1,13 +1,14 @@
 var coA,coB,coC;
 function setup() {
-  canvas = createCanvas(floor(.9*windowWidth),.8*windowHeight);
+  canvas = createCanvas(windowWidth,0.9*windowHeight);
   canvas.parent('sketch-holder')
   background(250);
   frameRate(30);
   //lets make an array to fill
   y = new Array(width);
 
-  coB = width*2;
+  coB = max(900,width);
+  //coB = width/4;
   textSize(18);
 }
 

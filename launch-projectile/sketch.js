@@ -5,7 +5,7 @@ let theta;
 let v_0;
 
 function setup(){
-canvas = createCanvas(windowWidth*.8, windowHeight*.8);
+canvas = createCanvas(windowWidth, windowHeight*.9);
 canvas.parent('sketch-holder');
 
 frameRate(30);

@@ -1,6 +1,6 @@
 var coA,coB,coC,slope;
 function setup() {
-  canvas = createCanvas(.8*windowWidth,.7*windowHeight);
+  canvas = createCanvas(windowWidth,.9*windowHeight);
   canvas.parent('sketch-holder')
   background(250);
   frameRate(30);

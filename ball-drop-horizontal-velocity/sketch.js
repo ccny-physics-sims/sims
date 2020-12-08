@@ -4,7 +4,7 @@ var running = false;
 let onoff;
 
 function setup(){
-canvas = createCanvas(windowWidth*.8, windowHeight*.7);
+canvas = createCanvas(windowWidth, windowHeight*.9);
 canvas.parent('sketch-holder');
 
 frameRate(30);
@@ -12,7 +12,7 @@ frameRate(30);
   onoff = createButton("Release");
   onoff.parent('sketch-holder');
   onoff.mouseClicked(turnonoff);
-  onoff.position(50,30);
+  onoff.position(20,20);
   onoff.class("sim-button")
 
   posDrop = createVector(.1*width,.2*height)

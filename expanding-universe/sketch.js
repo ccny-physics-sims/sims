@@ -15,7 +15,7 @@ function preload() {
 
 
 function setup() {
-  canvas = createCanvas(.8*windowHeight,.8*windowHeight)
+  canvas = createCanvas(windowWidth,.9*windowHeight)
   //canvas = createCanvas(500, 500);
   canvas.parent('sketch-holder');
 
@@ -80,12 +80,16 @@ offsety=(centery-newY)*(expScale - 1);;
 
 image(deepfieldalpha, offsetx, offsety, deepfieldalpha.width*expScale, deepfieldalpha.height*expScale);
 
+// fill('white')
+// text(mouseY,0,0)
 }
 
 function touchEnded() {
   //ellipse(mouseX, mouseY, 5, 5);
   // prevent default
+  if (mouseY > 100){
   moveUniverse()
+  }
   return false;
 }
 

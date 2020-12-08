@@ -23,32 +23,37 @@ var c=1;
 function setup() {
 
   frameRate(20);
-  canvas = createCanvas(.9*windowWidth, .7*windowHeight);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
 
+  sliderWidth = min(300,width/3)
   //these are all for the labels and sliders
   // onoff = createButton("stop");
   // onoff.mouseClicked(turnonoff);
   // onoff.position(650,30);
   // onoff.class("pure-button")
   equation = createP("y  = ");
-  equation.position(50, height*.04);
   equation.parent('sketch-holder')
+  equation.position(50, 0);
+
 
   cSlider = createSlider(-40, 40, 0,1);
   cSlider.position(50,height*.15);
   cSlider.parent('sketch-holder')
   cSlider.class("sim-slider gray");
+  cSlider.size(sliderWidth,0)
 
   bSlider = createSlider(-20, 20, 1,1);
   bSlider.position(50,height*.25);
   bSlider.parent('sketch-holder')
   bSlider.class("sim-slider gray");
+  bSlider.size(sliderWidth,0)
 
   aSlider = createSlider(-4, 4, 1,.1);
   aSlider.position(50,height*.35);
   aSlider.parent('sketch-holder')
   aSlider.class("sim-slider gray");
+  aSlider.size(sliderWidth,0)
 
   cSliderLabel = createP("c");
   cSliderLabel.position(30,height*.15-20);

@@ -23,7 +23,7 @@ var optionsRadio;
 
 function setup() {
 
-  canvas = createCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(windowWidth, windowHeight*0.9);
   canvas.parent('sketch-holder');
 
   frameRate(30)//60 too fast??
@@ -43,7 +43,7 @@ function setup() {
   optionsRadio.option('Im [Psi]', 'Im');
   optionsRadio.option('P |Psi|^2', 'P');
   optionsRadio.value('Re');
-  optionsRadio.class("sim-radio");
+  //optionsRadio.class("sim-radio");
   //optionsRadio.changed(switchMethodofTransportation);
   leftEq = createP('&Psi;(x,t) = (A<sub>I</sub> e<sup>k<sub>1</sub>x</sup>  + A<sub>R</sub> e<sup>-k<sub>1</sub>x</sup> )e<sup>-i (E / &hbar;) t</sup> ');
   leftEq.style('font-style: italic ;  font-size: 14pt;')
@@ -175,10 +175,7 @@ function DrawStuff() {
    rect(0,0,width,ground)
   pop()
 
-  push()
-    textSize(20)
-    text("1-D Quantum Scattering",width/2-100,20)
-  pop()
+
 
 
 

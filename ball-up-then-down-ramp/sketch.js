@@ -4,7 +4,7 @@ var running = false;
 
 
 function setup(){
-canvas = createCanvas(windowWidth*.8, windowHeight*.7);
+canvas = createCanvas(windowWidth, windowHeight*.9);
 canvas.parent('sketch-holder');
 
   c = 0;
@@ -67,7 +67,7 @@ canvas.parent('sketch-holder');
   // accelVectorDrop.grab = false;
 
 //noSmooth();
-//frameRate(15)
+frameRate(30)
 noLoop();
 }
 

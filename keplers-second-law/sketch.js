@@ -11,7 +11,7 @@ var count;
 let orbitCenter;
 
 function setup(){
-  canvas=createCanvas(windowWidth*.8, windowHeight*.7);
+  canvas=createCanvas(windowWidth, windowHeight*.9);
   canvas.parent('sketch-holder');
 
   frameRate(30);

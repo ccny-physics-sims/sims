@@ -6,7 +6,8 @@ var Trails = [];
 var SolarSystem;
 function setup(){
   frameRate(30);
-  createCanvas(windowWidth, windowHeight);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
+  canvas.parent('sketch-holder')
   v1 = 1;
   massRatio = 2;
 

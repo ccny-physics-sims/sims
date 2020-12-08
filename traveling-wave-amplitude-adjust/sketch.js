@@ -10,7 +10,7 @@ var omega = 2;
 function setup() {
 
   frameRate(30);
-  canvas = createCanvas(710, 400);
+  canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
   w = width+12;
 
@@ -21,12 +21,12 @@ function setup() {
 
     amplitudeAdjust = createSlider(0,200,50,1);
     amplitudeAdjust.parent('sketch-holder');
-    amplitudeAdjust.position(100,35);
+    amplitudeAdjust.position(20,20);
     amplitudeAdjust.class("sim-slider gray");
 
     amplitudeAdjustLabel = createP();
     amplitudeAdjustLabel.parent('sketch-holder');
-    amplitudeAdjustLabel.position(100,5)
+    amplitudeAdjustLabel.position(20,amplitudeAdjust.y+20)
 
 }
 

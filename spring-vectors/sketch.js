@@ -6,26 +6,26 @@ var play;
 var mass, springk, amplitude, mu;
 function setup() {
 
-  canvas = createCanvas(windowWidth*.8, 500);
+  canvas = createCanvas(windowWidth,0.9*windowHeight);
   canvas.parent('sketch-holder');
   frameRate(30);
   play = true;
 
   //Create sliders and buttons
   playButton = createButton('pause');
-  playButton.position(20,25);
+  playButton.position(20,20);
   playButton.mousePressed(togglePlayButton);
   playButton.value = true;
-  playButton.class("sim-button gray");
+  playButton.class("sim-button ");
   playButton.parent('sketch-holder');
 
-
+  springScale = min(250,width/3)
   //Spring(pos_, k_, m_, relaxedLength_, oscAmp_)
   springk = 30;
   mass=5;
   amplitude=.5;
   mu=0;
-  spring = new Spring(createVector(width/4,height/2),springk,mass,250,amplitude,mu);
+  spring = new Spring(createVector(width/6,height/2),springk,mass,springScale,amplitude,mu);
 
   //spring = new Spring(createVector(10,height/2),30,5,250,.5,0);
   spring.rotation =0;
@@ -58,7 +58,7 @@ spring.update();
 spring.display();
 push();
 stroke(180);
-line(250+width/4,0,250+width/4,height)
+line(springScale+width/6,0,springScale+width/6,height)
 pop();
 
 push();
