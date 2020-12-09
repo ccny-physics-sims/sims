@@ -3,6 +3,7 @@ let h = 6.62607004E-34
 let kb = 1.38064852E-23
 let temp;
 let aSlider;
+let xscaleT;
 
 function setup() {
   canvas = createCanvas(windowWidth, .9*windowHeight);
@@ -37,13 +38,15 @@ button.position(aTextBox.x + aTextBox.width+30, aTextBox.y);
 button.class('sim-button')
 button.mousePressed(updateValue);
 
-y = new Array(500);
+y = new Array(100);
+
+xscaleT = y.length
 }
 
 
 function draw() {
   background(255)
-  stroke(0)
+  //stroke(0)
   //move things to the middle
   rgb = temptoRGB(aSlider.value())
   temp = aSlider.value();
@@ -93,6 +96,7 @@ function draw() {
     //calculate this points
     calcFunction();
     //display discrete points
+    //noStroke();
     renderPoints();
     //display connected line
     //renderLine();
@@ -107,7 +111,7 @@ function draw() {
     textSize(24);
     text('Max = '+peakLambda.toFixed(0)+' nm',peakLambdaScaled,35 )
 
-
+    noLoop()
 }
 
 function calcFunction() {
@@ -122,15 +126,16 @@ function calcFunction() {
 
 function renderPoints() {
   //this function puts ellipses at all the positions defined above.
-  noStroke()
+  //noStroke()
 
-  for (var x = 0; x < y.length; x += 3) {
+  for (var x = 0; x < y.length; x += 1) {
     xscaled = map(x,0,y.length,0,1000)
     yscaled = map(y[x],0,max(y),0,height/2)
     xwindowScaled = map(xscaled,0,1000,0,width)
     //xscaled = map(x,0,1000,0,width)
 
     specColor = getRGB(xscaled)
+
     if (xscaled >= 370 && xscaled <= 750){
       fill(specColor);
       stroke(specColor)
@@ -144,7 +149,8 @@ function renderPoints() {
       fill(255)
       stroke('red')
     }
-    ellipse(xwindowScaled, -yscaled, 8, 8);
+
+    circle(xwindowScaled, -yscaled, 8);
 
   }
 
@@ -158,7 +164,7 @@ function renderLine() {
   stroke('blue');
 
   beginShape();
-  for (var x = 0; x < y.length; x += 2) {
+  for (var x = 0; x < y.length; x += 3) {
     yscaled = map(y[x],0,max(y),0,height/2)
     xscaled = map(x,0,y.length,0,1000)
     xwindowScaled = map(xscaled,0,1000,0,width)
@@ -170,10 +176,15 @@ function renderLine() {
 
 function updateValue(){
   aSlider.value(aTextBox.value())
+  redraw();
+
 }
 
 function sliderChange() {
   aTextBox.value(aSlider.value());
+  // calcFunction()
+  // renderPoints();
+  redraw();
 }
 
 function temptoRGB(kelvin) {
