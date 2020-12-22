@@ -4,6 +4,7 @@ let autoadvance = false;
 function setup() {
   canvas = createCanvas(windowWidth,windowHeight)
   canvas.parent('sketch-holder')
+  frameRate(30)
   planetSpacer = width/20
   //start stop button
   onoff = createButton("PLAY");

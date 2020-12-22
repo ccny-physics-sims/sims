@@ -8,7 +8,7 @@ let theTime = 0;
 function setup(){
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('sketch-holder');
-
+  frameRate(30)
   planetSpacer = max(width/10,height/10);
 
   rectMode(CENTER);
