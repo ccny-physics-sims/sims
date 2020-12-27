@@ -9,6 +9,8 @@ function setup(){
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('sketch-holder');
   frameRate(30)
+  timeScale = map(width,500,1820,5,20)
+
   planetSpacer = max(width/20,height/20);
 
   rectMode(CENTER);
