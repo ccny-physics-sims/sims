@@ -5,6 +5,7 @@ function setup() {
   canvas = createCanvas(windowWidth,windowHeight)
   canvas.parent('sketch-holder')
   frameRate(30)
+  timeScale = map(width,500,1820,5,20)
   planetSpacer = width/20
   //start stop button
   onoff = createButton("PLAY");
