@@ -117,6 +117,7 @@ class OrbitingPlanet {
 
     line(this.a*cos(this.rotation),20,this.a*cos(this.rotation),50)
     textAlign(CENTER);
+    noStroke()
     fill('white')
     text(this.label,this.a*cos(this.rotation),70)
     pop()
