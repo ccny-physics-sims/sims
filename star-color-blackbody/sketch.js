@@ -12,7 +12,7 @@ let tempsA = [];
 let closest;
 function preload() {
   //table from https://arxiv.org/abs/2101.06254
-  table = loadTable("temp2RGB-HarreHeller2021_arxiv2101.06254.csv", "csv", "header");
+  table = loadTable("t2RGB-HarreHeller2021-arxiv210106254.csv", "csv", "header");
 }
 
 function setup() {
