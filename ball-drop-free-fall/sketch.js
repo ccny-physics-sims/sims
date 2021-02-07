@@ -36,7 +36,7 @@ frameRate(30);
   ballDrop.tailFill = 'darkorange';
   ballDrop.bottomBounce = 100;
 
-  ballDrop.tailLength = 100;
+  ballDrop.tailLength = 25;
   ballDrop.tailSpacing = 10;
 
 
@@ -63,7 +63,7 @@ noLoop();
 function draw(){
   background('#d3edf8')
   image(img, 0, height*.9);
-  cursor(CROSS)
+  //cursor(CROSS)
   push()
   fill('peru')
   noStroke();
@@ -79,12 +79,15 @@ function draw(){
       stroke('rgba('+red(color(ballDrop.tailStroke))+','+green(color(ballDrop.tailStroke))+','+blue(color(ballDrop.tailStroke))+','+1+')');
       fill('rgba('+red(color(ballDrop.tailFill))+','+green(color(ballDrop.tailFill))+','+blue(color(ballDrop.tailFill))+','+.5+')');
       ellipse(tailA[i].x,tailA[i].y,7,7);
+      stroke('black')
+      line(mouseX-50,mouseY,mouseX+50,mouseY)
+
     }
     pop();
   push()
   noStroke()
   fill(0)
-  text((height-mouseY).toFixed(0), mouseX+10,mouseY-10)
+  text('y = '+(height-mouseY).toFixed(0), mouseX+10,mouseY-10)
   pop()
 
 
