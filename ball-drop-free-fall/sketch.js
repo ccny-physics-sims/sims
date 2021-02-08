@@ -146,7 +146,7 @@ function resetTheBalls(){
 
     }
 
-    function touchStarted() {
-
-      return false;
-    }
+    // function touchStarted() {
+    //
+    //   return false;
+    // }
