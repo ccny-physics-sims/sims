@@ -20,7 +20,7 @@ frameRate(30);
   onoff.mouseClicked(turnonoff);
   onoff.position(20,20);
   onoff.class("sim-button")
-
+  cursor(CROSS);
   posDrop = createVector(.5*width,.2*height)
   velDrop = createVector(0,0);
   accel = createVector(0,0);
@@ -71,7 +71,7 @@ function draw(){
   pop()
   ballDrop.applyForce(gravity);
   //update the position
-  if((frameCount-1)%ballDrop.tailSpacing==0){
+  if((frameCount-1)%ballDrop.tailSpacing==0 && tailA.length < ballDrop.tailLength){
   tailA.push(ballDrop.position.copy());
   }
   push();
@@ -79,16 +79,21 @@ function draw(){
       stroke('rgba('+red(color(ballDrop.tailStroke))+','+green(color(ballDrop.tailStroke))+','+blue(color(ballDrop.tailStroke))+','+1+')');
       fill('rgba('+red(color(ballDrop.tailFill))+','+green(color(ballDrop.tailFill))+','+blue(color(ballDrop.tailFill))+','+.5+')');
       ellipse(tailA[i].x,tailA[i].y,7,7);
-      stroke('black')
-      line(mouseX-50,mouseY,mouseX+50,mouseY)
-
+      stroke('gray')
+      //line(mouseX-150,mouseY,mouseX+150,mouseY)
     }
     pop();
-  push()
-  noStroke()
-  fill(0)
-  text('y = '+(height-mouseY).toFixed(0), mouseX+10,mouseY-10)
-  pop()
+
+  if (mouseY > height*.1) {
+    stroke('#aaa')
+    line(mouseX-150,mouseY,mouseX+150,mouseY)
+    push()
+    noStroke()
+    fill(0)
+    text('y = '+(height-mouseY).toFixed(0), mouseX+10,mouseY-10)
+    pop()
+  }
+
 
 
 
@@ -103,8 +108,6 @@ function draw(){
   }
   else {
     ballDrop.update();
-
-
   }
   ballDrop.display();
 };
@@ -141,4 +144,9 @@ function resetTheBalls(){
       }
 
 
+    }
+
+    function touchStarted() {
+
+      return false;
     }
