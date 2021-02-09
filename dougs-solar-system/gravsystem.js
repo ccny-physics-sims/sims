@@ -14,7 +14,7 @@ GravSystem.prototype.compute_forces = function() {
             var p2 = orbiters[j];
 
             var d = p5.Vector.sub(p.position, p2.position);
-            var norm = Math.sqrt(1 + d.magSq());
+            var norm = Math.sqrt(5 + d.magSq());
             var mag = gravity / (norm * norm * norm);
 
             p.acceleration.sub(p5.Vector.mult(d,(mag * p2.mass)));
