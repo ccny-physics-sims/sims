@@ -58,7 +58,7 @@ function setup(){
 
 function createGravSystem() {
   SolarSystem = new GravSystem(orbiters);
-  mass1 = orbiters.push(new Orbiter(createVector(width/2+Number(aBox[1].value()),height/2),createVector(0,0),createVector(0,0),massSlider[1].value(), 'gold'));
+  mass1 = orbiters.push(new Orbiter(createVector(width/2+Number(aBox[1].value()),height/2),createVector(Number(velxBox[1].value()),Number(velyBox[1].value())),createVector(0,0),massSlider[1].value(), 'gold'));
   paths.push(new Path('gold'));
   mass2 = orbiters.push(new Orbiter(createVector(width/2+Number(aBox[2].value()),height/2),createVector(Number(velxBox[2].value()),Number(velyBox[2].value())),createVector(0,0),massSlider[2].value(), 'red'));
   paths.push(new Path('red'));
