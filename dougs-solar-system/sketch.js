@@ -59,9 +59,9 @@ NS4Params["noOfBodies"] = 4;
 NS4Params["colors"] = ['gold','red','blue','green'];
 
 let NSSParams=[];
-NSSParams["masses"] =  [8000,100,400,500];
-NSSParams["distance"] = [0,80,200,320];
-NSSParams["velocities"] = [[0,1],[0,-18],[0,-14],[0,-13]];
+NSSParams["masses"] =  [8000,40,60,100];
+NSSParams["distance"] = [0,70,200,320];
+NSSParams["velocities"] = [[0,0],[0,-22],[0,-14],[0,-10]];
 NSSParams["noOfBodies"] = 4;
 NSSParams["colors"] = ['gold','red','blue','green'];
 
