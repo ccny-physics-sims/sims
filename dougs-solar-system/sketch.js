@@ -33,7 +33,7 @@ BINParams["colors"] = ['red','blue'];
 let TBPParams=[];
 TBPParams["masses"] =  [2000,800,400];
 TBPParams["distance"] = [-100,0,100];
-TBPParams["velocities"] = [[10,1],[-3,-1],[4,6]];
+TBPParams["velocities"] = [[4,1],[-3,-6],[-4,7]];
 TBPParams["noOfBodies"] = 3;
 TBPParams["colors"] = ['red','blue','green'];
 

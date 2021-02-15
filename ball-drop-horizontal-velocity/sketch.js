@@ -3,6 +3,11 @@ var Trails = [];
 var running = false;
 let onoff;
 
+let img;
+function preload() {
+  img = loadImage('ground.png');
+}
+
 function setup(){
 canvas = createCanvas(windowWidth, windowHeight*.9);
 canvas.parent('sketch-holder');
@@ -75,15 +80,30 @@ noLoop();
 }
 
 function draw(){
-  background(255)
+  background('#d3edf8')
+  image(img, 0, height*.9);
   ballDrop.applyForce(gravity);
   ballThrow.applyForce(gravity);
   //update the position
-  ballDrop.update();
-  ballThrow.update();
+  // ballDrop.update();
+  // ballThrow.update();
   //make the ball bounce
   //ball.wrapEdgesBounceFloor();
   //display changes
+
+  if (ballDrop.position.y > height+40) {
+    //resetTheBalls();
+    onoff.html('Reset')
+    ballDrop.velocity = createVector(0,0)
+    ballDrop.acceleration = createVector(0,0)
+    line(0,mouseY,width,mouseY)
+    //line(0,mouseY,width,mouseY)
+  }
+  else {
+    ballDrop.update();
+    ballThrow.update();
+
+  }
   ballDrop.display();
   ballThrow.display();
   //update the position vector by setting its target to be equal to the balls position
@@ -116,13 +136,9 @@ function draw(){
   stroke(150);
   line(0,ballDrop.position.y,width,ballDrop.position.y);
   pop();
-  if (ballDrop.position.y > height+40) {
-    //resetTheBalls();
-    onoff.html('Reset')
-    ballDrop.velocity = createVector(0,0)
-    ballDrop.acceleration = createVector(0,0)
-    line(0,mouseY,width,mouseY)
-  }
+
+
+
 };
 
 
