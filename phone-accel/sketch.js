@@ -78,7 +78,7 @@ function draw() {
      return;
    }
 
-   ay = rotationY*.01;
+   ay = rotationY;
 
   // if (window.DeviceMotionEvent != undefined) {
   // 	window.ondevicemotion = function(e) {
