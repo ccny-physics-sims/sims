@@ -12,7 +12,7 @@ function setup(){
 canvas = createCanvas(windowWidth, windowHeight*.9);
 canvas.parent('sketch-holder');
 
-frameRate(30);
+//frameRate(30);
 
 // VelSlider = createSlider(-3, 3, 0 ,.05);
 // VelSlider.parent('sketch-holder');
