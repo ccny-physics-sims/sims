@@ -32,12 +32,12 @@ canvas.parent('sketch-holder');
   cursor(CROSS);
   imageMode(CENTER);
 
-  posDrop = createVector(.1*width,.3*height)
+  posDrop = createVector(.1*width,height/2-200)
   velDrop = createVector(1,0);
   accel = createVector(0,0);
 
   //what is gravity?
-  gravity = createVector(0,1);
+  gravity = createVector(0,.5);
 
   //make the ball! It is an instance of the mover object
   ballDrop = new KineticMass(posDrop,velDrop,accel,10,'gray');
@@ -47,7 +47,7 @@ canvas.parent('sketch-holder');
   ballDrop.tailFill = 'blue';
   ballDrop.bottomBounce = height/2-50;
 
-  ballDrop.tailLength = 10;
+  ballDrop.tailLength = 20;
   ballDrop.tailSpacing = 5;
   //ballDrop.bounceEdges = true;
 
