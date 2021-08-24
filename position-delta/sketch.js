@@ -33,7 +33,7 @@ function setup() {
 
   deltaXLabel = createP()
   deltaXLabel.style('font-size', '20px')
-  deltaXLabel.position(posDrop.x, posDrop.y+20)
+  deltaXLabel.position(posDrop.x, posDrop.y)
   katex.render('\\\Delta x',deltaXLabel.elt)
   noLoop();
 }
@@ -63,7 +63,7 @@ fill(100)
 rect(0,0,leftWall,height)
 rect(width-rightWall,0,rightWall,height)
 
-deltaXLabel.position(particle.position.x-10, particle.position.y+120)
+deltaXLabel.position(particle.position.x-10, particle.position.y)
   particle.display()
 
 }
