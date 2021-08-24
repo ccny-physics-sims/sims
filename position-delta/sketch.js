@@ -31,7 +31,7 @@ function setup() {
   leftWall = width*.33;
   rightWall = width*.33;
 
-  deltaXLabel = createP()
+  deltaXLabel = createDiv()
   deltaXLabel.style('font-size', '20px')
   deltaXLabel.position(posDrop.x, posDrop.y)
   katex.render('\\\Delta x',deltaXLabel.elt)
