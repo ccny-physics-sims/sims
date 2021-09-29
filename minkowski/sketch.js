@@ -34,6 +34,12 @@ function setup() {
   vsliderLabel.style("font-family","Times, serif")
   vsliderLabel.style("font-size","1.2em")
 
+  instructionsLabel = createP("Click to add events &rarr; ");
+  instructionsLabel.parent('sketch-holder');
+  instructionsLabel.position(vslider.x,vsliderLabel.y+50);
+  instructionsLabel.style("font-family","Times, serif")
+  instructionsLabel.style("font-size","1.2em")
+
   unprimetlabel = createP("ct")
   unprimetlabel.parent('sketch-holder');
   unprimetlabel.position(origin.x-30,20)
