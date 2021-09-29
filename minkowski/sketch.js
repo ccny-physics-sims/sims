@@ -21,7 +21,7 @@ function setup() {
   onoff.class("sim-button");
   onoff.parent("sketch-holder")
 
-  vslider = createSlider(0,1,.5,.01);
+  vslider = createSlider(-1,1,.5,.01);
   vslider.style('width', '200px');
   vslider.input(vsliderChange);
   vslider.position(50,50);
