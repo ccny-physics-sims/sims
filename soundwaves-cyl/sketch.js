@@ -21,7 +21,7 @@ function setup() {
   running = true;
   noStroke();
   for (var i=0; i<700; i++) {
-    molecules.push(new Waver(150));
+    molecules.push(new Waver(100));
   }
   // Create a few red ones for visilibity
   for (var i=0; i<10; i++) {
