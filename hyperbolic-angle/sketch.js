@@ -1,5 +1,5 @@
 
-let unit = 200;
+let unit;
 let origin;
 let alpha;
 let hyperbolaFill = 'rgba(48, 138, 255, 0.34)';
@@ -15,7 +15,7 @@ function setup() {
   origin = createVector(width/2,height/2)
 
 
-
+  unit = min(250,width/3)
 
   vslider = createSlider(0,6.28,1,.01);
   vslider.style('width', '200px');
