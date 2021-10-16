@@ -29,26 +29,28 @@ function setup() {
 
   onoff = createButton("start");
   onoff.mouseClicked(turnonoff);
-  onoff.position(windowWidth*.9,30);
-  onoff.class("sim-button");
+  onoff.position(20,20);
+  onoff.class("sim-button slim");
+  onoff.style("background", "#aeae")
   onoff.parent("sketch-holder");
 
 
   resetTime = createButton("Reset");
   resetTime.mouseClicked(resetCounter);
-  resetTime.position(windowWidth*.9,80);
-  resetTime.class("sim-button");
+  resetTime.position(onoff.x,onoff.y+50);
+  resetTime.class("sim-button slim");
+
   resetTime.parent("sketch-holder");
 
   checkbox = createCheckbox('Sound?', true);
   checkbox.changed(turnSoundOnOff);
   checkbox.parent("sketch-holder");
-  checkbox.position(windowWidth*.9,resetTime.y+50)
+  checkbox.position(onoff.x,resetTime.y+50)
 
   checkboxC = createCheckbox('Relativisitic?', true);
   checkboxC.changed(changeSpeedofLight);
   checkboxC.parent("sketch-holder");
-  checkboxC.position(windowWidth*.9,checkbox.y+50)
+  checkboxC.position(onoff.x,checkbox.y+50)
 
   sliderWidth = str(min(200,.2*width))
   colorMode(HSB, 100);
@@ -56,7 +58,7 @@ function setup() {
     sliders[i] = createSlider(0,.99,.2*i,.01);
     sliders[i].style('width', '50');
     sliders[i].parent('sketch-holder');
-    sliders[i].position(80,50*(i+1));
+    sliders[i].position(80,checkboxC.y+20+50*(i+1));
     sliders[i].class('sim-slider');
     sliders[i].input(sliderChange);
     sliders[i].size(sliderWidth,0)
@@ -126,7 +128,7 @@ if (counter<2*height/3){
 
 
   stroke(50)
-  line(-width,-counter,width,-counter)
+  line(0,-counter,width,-counter)
   if(c==1){
     for (var i=0;i<numberOfEvents;i++){
     hyperbolas[i].show();
