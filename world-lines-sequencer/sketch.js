@@ -50,15 +50,16 @@ function setup() {
   checkboxC.parent("sketch-holder");
   checkboxC.position(windowWidth*.9,checkbox.y+50)
 
-  sliderWidth = min(200,.2*width)
+  sliderWidth = str(min(200,.2*width))
   colorMode(HSB, 100);
   for (var i=0;i<numberOfLines;i++) {
     sliders[i] = createSlider(0,.99,.2*i,.01);
-    sliders[i].style('width', sliderWidth);
+    sliders[i].style('width', '50');
     sliders[i].parent('sketch-holder');
     sliders[i].position(80,50*(i+1));
     sliders[i].class('sim-slider');
     sliders[i].input(sliderChange);
+    sliders[i].size(sliderWidth,0)
 
     sliderLabel[i] = createP('v')
     sliderLabel[i].parent('sketch-holder');
