@@ -10,8 +10,18 @@ let polySynth;
 let numberOfLines = 5;
 let numberOfEvents = 20;
 let eventSpacing;
+let sliders = [];
+let sliderLabel = [];
+let checkbox;
+let soundonoff = true;
 
+var pitches = [57,60,62,64,67,69,72,74,76,79,81,84]
+var pentatonic_scale = ['C2','E2','G2','A3','C3','E3','G3','A4','C4','E4','G4','A5','C5','E5','G5','A6','C6','E6','G6','A7','C7'];
+//var notes = ['A','B','C#','D','E','F#','G#']
+//var notes = ['A','C#','E','A','E']
+var notes = ['C5','E5','G5','C6','E6']
 
+//var notes = ['A','C#','E','F']
 
 function setup() {
   canvas=createCanvas(windowWidth,0.9*windowHeight);
@@ -21,29 +31,44 @@ function setup() {
   onoff.mouseClicked(turnonoff);
   onoff.position(windowWidth*.9,30);
   onoff.class("sim-button");
-  onoff.parent("sketch-holder")
+  onoff.parent("sketch-holder");
 
+
+  resetTime = createButton("Reset");
+  resetTime.mouseClicked(resetCounter);
+  resetTime.position(windowWidth*.9,80);
+  resetTime.class("sim-button");
+  resetTime.parent("sketch-holder");
+
+  checkbox = createCheckbox('Sound?', true);
+  checkbox.changed(turnSoundOnOff);
+  checkbox.parent("sketch-holder");
+  checkbox.position(windowWidth*.9,resetTime.y+50)
+
+  checkboxC = createCheckbox('Relativisitic?', true);
+  checkboxC.changed(changeSpeedofLight);
+  checkboxC.parent("sketch-holder");
+  checkboxC.position(windowWidth*.9,checkbox.y+50)
+
+  sliderWidth = min(200,.2*width)
   colorMode(HSB, 100);
+  for (var i=0;i<numberOfLines;i++) {
+    sliders[i] = createSlider(0,.99,.2*i,.01);
+    sliders[i].style('width', sliderWidth);
+    sliders[i].parent('sketch-holder');
+    sliders[i].position(80,50*(i+1));
+    sliders[i].class('sim-slider');
+    sliders[i].input(sliderChange);
 
-  vslider = createSlider(0,.99,.85,.01);
-  vslider.style('width', '200px');
-  vslider.input(vsliderChange);
-  vslider.position(50,50);
-  vslider.class('sim-slider');
-  vslider.parent('sketch-holder');
+    sliderLabel[i] = createP('v')
+    sliderLabel[i].parent('sketch-holder');
+    sliderLabel[i].position(10,sliders[i].y-18);
 
-  refvslider = createSlider(-.99,.99,.64,.01);
-  refvslider.style('width', '200px');
-  refvslider.input(refvsliderChange);
-  refvslider.position(50,vslider.y+50);
-  refvslider.class('sim-slider');
-  refvslider.parent('sketch-holder');
-
-
+  }
 
   frameRate(20);
 
-
+  polySynth = new p5.PolySynth();
 
 
   for (var i=0;i<numberOfLines;i++){
@@ -58,6 +83,10 @@ function setup() {
   }
 
   eventSpacing = (2*height/3)/numberOfEvents
+  for (var i=0;i<numberOfLines;i++) {
+    sliderLabel[i].html('v = '+sliders[i].value()+ '<i>c</i>');
+  }
+
 
   //noLoop()
 }
@@ -65,28 +94,25 @@ function setup() {
 function draw() {
   background(250);
   stroke(0)
-strokeWeight(1)
+  strokeWeight(1)
   translate(width/2,2*height/3)
   //objPrimeSpeed = vslider.value();
   // obj2speed = 0.0;
   // makeObjPrime(10,objPrimeSpeed);
   // makeObj(10,obj2speed);
 
-  refSpeed = refvslider.value()
-  primeSpeed = vslider.value()
+  refSpeed = 0
+  //primeSpeed = vslider.value()
   stroke(0)
   noFill()
 
     for (var i=0;i<numberOfLines;i++){
-      systems[i].update((( primeSpeed * (i-(numberOfLines-2)) / (numberOfLines-1) )  + refSpeed )/(1+primeSpeed*refSpeed/c**2))
+      systems[i].update(sliders[i].value())
       systems[i].show()
     }
     stroke(0)
     makeAxis();
-    for (var i=0;i<numberOfEvents;i++){
-    hyperbolas[i].show();
 
-    }
 
 if (running) {
 if (counter<2*height/3){
@@ -96,13 +122,20 @@ if (counter<2*height/3){
     counter =0;
   }
 }
+
+
   stroke(50)
-  strokeWeight(1)
   line(-width,-counter,width,-counter)
+  if(c==1){
+    for (var i=0;i<numberOfEvents;i++){
+    hyperbolas[i].show();
+
+    }
   rotate(HALF_PI/2)
   stroke('orange')
   strokeWeight(2)
   makeAxis()
+}
   //console.log(counter);
 
 }
@@ -113,14 +146,28 @@ function makeAxis() {
   line(0,-height,0,height)
   line(-width,0,width,0)
 }
+function resetCounter() {
+  counter = 0;
+}
 
+function changeSpeedofLight() {
+  if (c == 1) {
+    c = 1000
+  }
+  else if (c==1000){
+    c = 1
+  }
+}
 function turnonoff() {
   if (!running){
+    userStartAudio();
     running = true;
+    onoff.html('stop')
     //loop();
   }
   else if (running) {
     running = false;
+    onoff.html('start')
     //noLoop();
   }
 }
@@ -172,29 +219,30 @@ class AnEvent {
     this.theSystemNo = theSystem
     stroke(0,0,80)
     line(0,0,this.xposPrime,-this.timePrime)
-
+    fill(map(this.eventNo,0,numberOfEvents,0,100),100,80)
+    noStroke()
     if (abs(this.timePrime-counter)<3 ){
       //stroke(0)
       //fill(255)
-      ellipse(this.xposPrime,-this.timePrime,9)
+        ellipse(this.xposPrime,-this.timePrime,10)
+      if (!this.played && soundonoff){
+        //console.log('trigger')
+
+        //let noteToPlay = notes[this.eventNo%7]+str(1+this.theSystemNo+Math.floor(this.eventNo/7))
+        //let noteToPlay = notes[this.eventNo%notes.length]+str(3+Math.floor(this.eventNo/notes.length))
+          let noteToPlay = notes[this.theSystemNo]
+        //console.log(noteToPlay);
+        polySynth.play(noteToPlay, .5, 0, .1);
+        this.played = true
       }
       //this.played = false;
-
+    }
     else {
       this.played = false
       noStroke()
-      fill(map(this.eventNo,0,numberOfEvents,0,100),100,80)
+
       ellipse(this.xposPrime,-this.timePrime,7)
     }
-
-    // if (abs(this.timePrime-counter)==1)
-    // {
-    //   console.log('triggered')
-    //   //polySynth.play('C3', .5, 0, .2);
-    //
-    // }
-
-    //ellipse(0,0,10)
 
 
 
@@ -203,8 +251,8 @@ class AnEvent {
 
 class InvHyper {
   constructor(eventNo) {
-    this.yvalues = new Array(41);
-    this.xvalues = new Array(41);
+    this.yvalues = new Array(31);
+    this.xvalues = new Array(31);
     this.eventNo = eventNo;
 
   }
@@ -217,7 +265,7 @@ class InvHyper {
   show() {
     noFill()
     stroke(map(this.eventNo,0,numberOfEvents,0,100),100,80,20)
-    strokeWeight(5)
+
     beginShape()
     for (var i = 0;i<this.yvalues.length;i++){
       //ellipse(this.xvalues[i],-this.yvalues[i],2)
@@ -227,12 +275,21 @@ class InvHyper {
   }
 }
 
-
-function vsliderChange() {
+function turnSoundOnOff() {
+  if (!soundonoff) {
+    soundonoff = true;
+  }
+  else {
+    soundonoff = false;
+  }
+}
+function sliderChange() {
   //objPrimeSpeed = vslider.value();
   //makeObjPrime(10,objPrimeSpeed);
-  primeSpeed = vslider.value()
-  //redraw();
+  //primeSpeed = vslider.value()
+  for (var i=0;i<numberOfLines;i++) {
+    sliderLabel[i].html('v = '+sliders[i].value()+ '<i>c</i>');
+  }
 }
 
 function refvsliderChange() {
