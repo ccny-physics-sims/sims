@@ -9,7 +9,7 @@ let running = false;
 let polySynth;
 let numberOfLines = 5;
 let numberOfEvents = 20;
-let eventSpacing;
+let eventSpacing = 0;
 let sliders = [];
 let sliderLabel = [];
 let checkbox;
@@ -73,6 +73,7 @@ function setup() {
 
   polySynth = new p5.PolySynth();
 
+  eventSpacing = (2*height/3)/numberOfEvents
 
   for (var i=0;i<numberOfLines;i++){
   systems.push(new EventGroup(0.0,i));
@@ -85,7 +86,7 @@ function setup() {
   hyperbolas[i].calculateHyperbolas();
   }
 
-  eventSpacing = (2*height/3)/numberOfEvents
+
   for (var i=0;i<numberOfLines;i++) {
     sliderLabel[i].html('v = '+sliders[i].value()+ '<i>c</i>');
   }
@@ -262,7 +263,7 @@ class InvHyper {
   calculateHyperbolas() {
     for (var i = 0;i<this.yvalues.length;i++){
       this.xvalues[i] = i-this.yvalues.length/2
-      this.yvalues[i] = sqrt(((this.xvalues[i])**2)+((this.eventNo+1)*23.22/40)**2)
+      this.yvalues[i] = sqrt(((this.xvalues[i])**2)+((this.eventNo+1)*(eventSpacing/40))**2)
     }
   }
   show() {
