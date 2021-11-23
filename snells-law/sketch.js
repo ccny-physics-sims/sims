@@ -94,15 +94,55 @@ function draw() {
   lineStart.y = sourceCoords.y
   line(lineStart.x,lineStart.y,origin.x,origin.y)
   theta = atan2(origin.x-sourceCoords.x,origin.y-sourceCoords.y)
-  //console.log(phi)
+  //console.log(theta)
   if (sourceCoords.y<origin.y){
   //line(origin.x,origin.y,width/2,height)
-  phi = asin(sin(theta)*n1/n2)
-  line(origin.x,origin.y,origin.x+tan(phi)*height/2,height)
+
+  if(abs(sin(theta)*n1/n2) <= 1){
+    phi = asin(sin(theta)*n1/n2)
+    line(origin.x,origin.y,origin.x+tan(phi)*height/2,height)
   }
   else {
+    phi = theta
+    push()
+    stroke('pink')
+    strokeWeight(1)
+    drawingContext.shadowColor = 'red';
+    translate(origin.x,origin.y)
+    if (sourceCoords.x<origin.x){
+    rotate(theta-PI/2)
+    }
+    else {
+      rotate(theta-PI/2)
+    }
+    line(0,0,width,0)
+
+    pop()
+  }
+  }
+
+  else {
+    if(abs(sin(theta)*n2/n1) <= 1){
     phi = asin(sin(theta)*n2/n1)
     line(origin.x,origin.y,origin.x+tan(phi)*height/2,0)
+    }
+    else {
+      phi = theta
+      push()
+      stroke('pink')
+      strokeWeight(1)
+      drawingContext.shadowColor = 'red';
+      translate(origin.x,origin.y)
+      if (sourceCoords.x<origin.x){
+      rotate(theta-PI/2)
+      }
+      else {
+        rotate(theta-PI/2)
+      }
+      line(0,0,width,0)
+
+      pop()
+    }
   }
   pop()
   push()
@@ -119,7 +159,7 @@ function draw() {
 
 
 function mouseDragged() {
-  if (mouseX > sliderWidth+50) {
+  if (mouseX > sliderWidth+50 || mouseY > n2slider.y+50) {
     if(hitting){
   sourceCoords.x = mouseX
   sourceCoords.y = mouseY
