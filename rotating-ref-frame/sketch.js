@@ -10,14 +10,14 @@ function setup() {
   frameRate(30)
   onoff = createButton("start");
   onoff.mouseClicked(turnonoff);
-  onoff.position(windowWidth*.85,30);
+  onoff.position(windowWidth*.85,10);
   onoff.class("sim-button");
   onoff.parent("sketch-holder")
   checkerBG = loadImage('checkerboard.jpg'); // Load the image
   imageMode(CENTER);
   reset = createButton("reset");
   reset.mouseClicked(resetSketch);
-  reset.position(windowWidth*.85,80);
+  reset.position(windowWidth*.85,onoff.y+50);
   reset.class("sim-button");
   reset.parent("sketch-holder")
   if (width >= height){
@@ -30,17 +30,18 @@ function setup() {
      toTranslate2 = createVector(0,height/4)
      diskRadius = height/8
    }
-
+  sliderWidth = min(width/3,200)
   vslider = createSlider(0,3,(omegaGlobal*diskRadius)*sqrt(2),.01);
   vslider.style('width', '200px');
   vslider.input(changeV0);
-  vslider.position(50,30);
+  vslider.position(20,20);
   vslider.class('sim-slider');
   vslider.parent('sketch-holder');
+  vslider.size(sliderWidth,0)
 
   vsliderlabel = createP("Speed: "+vslider.value());
   vsliderlabel.parent('sketch-holder');
-  vsliderlabel.position(vslider.x+200,vslider.y);
+  vsliderlabel.position(vslider.x+sliderWidth+5,vslider.y-20);
 
   thetaslider = createSlider(0,180,45,1);
   thetaslider.style('width', '200px');
@@ -48,10 +49,10 @@ function setup() {
   thetaslider.position(vslider.x,vslider.y+50);
   thetaslider.class('sim-slider');
   thetaslider.parent('sketch-holder');
-
+  thetaslider.size(sliderWidth,0)
   thetasliderLabel = createP("Angle: "+thetaslider.value()+'&deg;')
   thetasliderLabel.parent('sketch-holder');
-  thetasliderLabel.position(thetaslider.x+200,thetaslider.y);
+  thetasliderLabel.position(thetaslider.x+sliderWidth+5,thetaslider.y-20);
   origin = createVector(0,0)
   origin2 = createVector(0,0)
 
@@ -250,30 +251,7 @@ class RotFrame {
      rotate(-this.bgrotation)
 
      image(checkerBG,0,0,diskRadius*2.5,diskRadius*2.5)
-  //   for (let i = -5; i < 5; i++) {
-  //   for (let j = -5; j < 5; j++) {
-  //     if (j % 2 == 0) {
-  //       if (i % 2 == 0) {
-  //       	fill(50);
-  //       }
-  //       else {
-  //         fill(230);
-  //       }
-  //     }
-  //     else {
-  //       if (i % 2 == 0) {
-  //       	fill(230);
-  //       }
-  //       else {
-  //         fill(50);
-  //       }
-  //     }
-  //     rect(i * 50, j * 50, 50, 50);
-  //     //fill('red')
-  //     //text(i,i*50,j*50)
-  //     //console.log(i, j);
-  //   }
-  // }
+
     pop()
 
     push()
@@ -303,7 +281,7 @@ class RotFrame {
     //   ellipse(this.trails2[i].x,this.trails2[i].y,5);
     // }
     fill(0)
-    text(this.label,-40,-diskRadius-60)
+    text(this.label,-40,-diskRadius*1.3)
 
   }
 }
