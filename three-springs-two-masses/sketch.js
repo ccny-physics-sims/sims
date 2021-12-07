@@ -55,9 +55,10 @@ function setup() {
   gravity = createVector(0,0)
   //frameRate(1)
   //oLoop()
-  graphScale = createVector(400,100)
-
   gravSystemWidth = min(width*.9,600)
+
+  graphScale = createVector(gravSystemWidth,100)
+
 
   createSystem()
   noLoop()
@@ -90,7 +91,7 @@ function createSystem() {
 }
 function draw() {
   background(255)
-  translate(width/2-gravSystemWidth/2,height/2-200)
+  translate(width/2-gravSystemWidth/2,height/2.5)
   //background(250);
   //update the position
   for (var k = 0; k < 2; k++) { // increase the greater than value to increase simulation step rate
@@ -122,6 +123,7 @@ line(0,graphYOffset,graphScale.x,graphYOffset)
 line(0,-graphScale.y/2,0,graphScale.y/2)
 line(0,graphYOffset-graphScale.y/2,0,graphYOffset+graphScale.y/2)
 stroke(masses[1].color)
+strokeWeight(2)
 beginShape()
   for(i=0;i<masses[1].positionHistory.length;i++){
     curveVertex(4*i,-2*(masses[1].positionHistory[i].x-(1/3)*gravSystemWidth),2)
