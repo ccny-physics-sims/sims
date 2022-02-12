@@ -1,7 +1,7 @@
 
 let B;
-let earthSemimajor = 50.00;
-let marsSemimajor = earthSemimajor*1.5240;
+let earthSemimajor ;
+let marsSemimajor
 let deltatime = 0;
 let autoadvance = false;
 let joiner;
@@ -14,7 +14,8 @@ function setup(){
   centerSpot = createVector(width/2,height/2)
   earthEccentricity = 0//0.016;
   marsEccentricity = 0//0.0935;
-
+  earthSemimajor = .1* celestialSphereDiameter/2
+  marsSemimajor = earthSemimajor*1.5240;
   SliderLabel = createP("manual orbit control");
   SliderLabel.parent('sketch-holder');
   SliderLabel.position(30,60);
