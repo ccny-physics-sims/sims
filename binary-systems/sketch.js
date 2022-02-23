@@ -149,7 +149,7 @@ systemSelection.option('Binary 3','BIN3');
 systemSelection.option('Binary 4','BIN4');
 systemSelection.changed(loadNewSystem);
 systemSelection.parent('sketch-holder');
-systemSelection.position(20,200);
+systemSelection.position(20,170);
 
 systemSelectionLabel = createElement('p', 'Choose a Preset');
 systemSelectionLabel.parent('sketch-holder')
