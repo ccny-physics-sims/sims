@@ -109,15 +109,15 @@ function makeTableHeaders(){
 
 
   vx = createElement('p', 'V<sub>x</sub>');
-  vx.position(sliderWidth+190, controlSpacing-20);
+  vx.position(sliderWidth+180, controlSpacing-20);
   vx.parent('sketch-holder');
 
   vy = createElement('p', 'V<sub>y</sub>');
-  vy.position(sliderWidth+240, controlSpacing-20);
+  vy.position(sliderWidth+230, controlSpacing-20);
   vy.parent('sketch-holder');
 
   aColHead = createElement('p', 'a');
-  aColHead.position(sliderWidth+300, controlSpacing-20);
+  aColHead.position(sliderWidth+290, controlSpacing-20);
   aColHead.parent('sketch-holder');
 }
 
@@ -198,7 +198,7 @@ function loadNewSystem(){
   noOfBodies = count;
 
   makeTableHeaders()
-  makeNoOfBodySelector(count.toString());
+  //makeNoOfBodySelector(count.toString());
   presetToLoad = systemSelection.value();
   for (i=1;i<=count;i++){
   makeAParameterControl(i,50*i,systemSelection.value())
@@ -262,14 +262,14 @@ function makeAParameterControl(bodyNo,yheight,presetAbbreviation) {
   massTextBox[bodyNo] = createInput('');
   massTextBox[bodyNo].parent('sketch-holder');
   massTextBox[bodyNo].position(massSlider[bodyNo].x+sliderWidth+10,body[bodyNo].y+10);
-  massTextBox[bodyNo].size(80)
+  massTextBox[bodyNo].size(60)
   massTextBox[bodyNo].class('sim-textbox')
   massTextBox[bodyNo].value(massSlider[bodyNo].value());
   //massTextBox[bodyNo].input(function(){alert();})
 
   velxBox[bodyNo] = createInput('');
   velxBox[bodyNo].parent('sketch-holder');
-  velxBox[bodyNo].position(massTextBox[bodyNo].x+sliderWidth+10,body[bodyNo].y+10);
+  velxBox[bodyNo].position(massTextBox[bodyNo].x+sliderWidth+0,body[bodyNo].y+10);
   velxBox[bodyNo].size(30)
   velxBox[bodyNo].class('sim-textbox')
   if (Presets[presetAbbreviation]["velocities"][bodyNo-1] === undefined){
@@ -282,7 +282,7 @@ function makeAParameterControl(bodyNo,yheight,presetAbbreviation) {
 
   velyBox[bodyNo] = createInput('');
   velyBox[bodyNo].parent('sketch-holder');
-  velyBox[bodyNo].position(velxBox[bodyNo].x+50,body[bodyNo].y+10);
+  velyBox[bodyNo].position(velxBox[bodyNo].x+40,body[bodyNo].y+10);
   velyBox[bodyNo].size(30)
   velyBox[bodyNo].class('sim-textbox')
   if (Presets[presetAbbreviation]["velocities"][bodyNo-1] === undefined){
@@ -295,7 +295,7 @@ function makeAParameterControl(bodyNo,yheight,presetAbbreviation) {
 
   aBox[bodyNo] = createInput('');
   aBox[bodyNo].parent('sketch-holder');
-  aBox[bodyNo].position(velyBox[bodyNo].x+50,body[bodyNo].y+10);
+  aBox[bodyNo].position(velyBox[bodyNo].x+40,body[bodyNo].y+10);
   aBox[bodyNo].size(50)
   aBox[bodyNo].class('sim-textbox')
   if (Presets[presetAbbreviation]["distance"][bodyNo-1] === undefined){
