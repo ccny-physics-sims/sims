@@ -109,15 +109,15 @@ function makeTableHeaders(){
 
 
   vx = createElement('p', 'V<sub>x</sub>');
-  vx.position(sliderWidth+150, controlSpacing-20);
+  vx.position(sliderWidth+130, controlSpacing-20);
   vx.parent('sketch-holder');
 
   vy = createElement('p', 'V<sub>y</sub>');
-  vy.position(sliderWidth+190, controlSpacing-20);
+  vy.position(sliderWidth+170, controlSpacing-20);
   vy.parent('sketch-holder');
 
   aColHead = createElement('p', 'a');
-  aColHead.position(sliderWidth+250, controlSpacing-20);
+  aColHead.position(sliderWidth+230, controlSpacing-20);
   aColHead.parent('sketch-holder');
 }
 
@@ -269,7 +269,7 @@ function makeAParameterControl(bodyNo,yheight,presetAbbreviation) {
 
   velxBox[bodyNo] = createInput('');
   velxBox[bodyNo].parent('sketch-holder');
-  velxBox[bodyNo].position(massTextBox[bodyNo].x+sliderWidth+0,body[bodyNo].y+10);
+  velxBox[bodyNo].position(massTextBox[bodyNo].x+80+0,body[bodyNo].y+10);
   velxBox[bodyNo].size(30)
   velxBox[bodyNo].class('sim-textbox')
   if (Presets[presetAbbreviation]["velocities"][bodyNo-1] === undefined){
