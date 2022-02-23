@@ -64,14 +64,15 @@ function setup(){
   v1y = -12;
   massRatio = 2;
   //console.log(initialMasses[1]);
-  makeNoOfBodySelector('2')
-  noOfBodies = Number(noOfBodiesRadio.value());
+  //makeNoOfBodySelector('2')
+  noOfBodies = 2;
   //makeTableHeaders();
   makeTableHeaders()
-  makeButtons()
+
   for (i=1;i<=2;i++){
   makeAParameterControl(i,50*i,initialSystem)
   }
+  makeButtons()
   makePresetSelector();
 
   // makeParameterControls(1,40);
@@ -124,14 +125,14 @@ function makeButtons() {
   onoff = createButton("Run");
   onoff.parent('sketch-holder');
   onoff.mouseClicked(turnonoff);
-  onoff.position(width-70,20);
+  onoff.position(20,height-100);
   onoff.class("sim-button")
   onoff.style("padding",".5em")
 
   setParamsButton = createButton("Set Parameters");
   setParamsButton.parent('sketch-holder');
   setParamsButton.mouseClicked(setParams);
-  setParamsButton.position(width-150,70);
+  setParamsButton.position(20,height-50);
   setParamsButton.class("sim-button")
   setParamsButton.style("padding",".5em")
 
@@ -148,7 +149,7 @@ systemSelection.option('Binary 3','BIN3');
 systemSelection.option('Binary 4','BIN4');
 systemSelection.changed(loadNewSystem);
 systemSelection.parent('sketch-holder');
-systemSelection.position(width-150,140);
+systemSelection.position(20,200);
 
 systemSelectionLabel = createElement('p', 'Choose a Preset');
 systemSelectionLabel.parent('sketch-holder')
@@ -308,7 +309,7 @@ function makeAParameterControl(bodyNo,yheight,presetAbbreviation) {
 
 function draw(){
 background(255);
-
+translate(width/5,0)
   for (var k = 0; k < 2; k++) { // increase the greater than value to increase simulation step rate
       SolarSystem.do_physics(1.0 / 16); // increase the divisor to increase accuracy and decrease simulation speed
   }
