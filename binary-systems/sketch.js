@@ -109,15 +109,15 @@ function makeTableHeaders(){
 
 
   vx = createElement('p', 'V<sub>x</sub>');
-  vx.position(sliderWidth+180, controlSpacing-20);
+  vx.position(sliderWidth+150, controlSpacing-20);
   vx.parent('sketch-holder');
 
   vy = createElement('p', 'V<sub>y</sub>');
-  vy.position(sliderWidth+230, controlSpacing-20);
+  vy.position(sliderWidth+190, controlSpacing-20);
   vy.parent('sketch-holder');
 
   aColHead = createElement('p', 'a');
-  aColHead.position(sliderWidth+290, controlSpacing-20);
+  aColHead.position(sliderWidth+250, controlSpacing-20);
   aColHead.parent('sketch-holder');
 }
 
@@ -156,31 +156,31 @@ systemSelectionLabel.parent('sketch-holder')
 systemSelectionLabel.position(systemSelection.x,systemSelection.y-40)
 }
 
-function makeNoOfBodySelector(selectedNumber){
-  noOfBodiesRadio = createRadio();
-  noOfBodiesRadio.parent('sketch-holder');
-  noOfBodiesRadio.position(0,height-50);
-  noOfBodiesRadio.option(2,'2');
-    // radio.style('width', '60px');
-  noOfBodiesRadio.changed(function()
-  {if (noOfBodies < Number(noOfBodiesRadio.value()))
-    {addABody(noOfBodies,Number(noOfBodiesRadio.value() ) );
-    noOfBodies =  Number(noOfBodiesRadio.value() );
-    presetToLoad = "NS"+noOfBodiesRadio.value();
-    setParams();}
-    else {
-            removeAParameterControl(noOfBodies)
-      noOfBodies =  Number(noOfBodiesRadio.value() );
-      setParams()
-
-    }
-  } );
-  noOfBodiesRadio.selected(selectedNumber)
-
-  noOfBodiesRadioLabel = createElement('p', 'Number of Bodies');
-  noOfBodiesRadioLabel.parent('sketch-holder')
-  noOfBodiesRadioLabel.position(noOfBodiesRadio.x,noOfBodiesRadio.y-40)
-}
+// function makeNoOfBodySelector(selectedNumber){
+//   noOfBodiesRadio = createRadio();
+//   noOfBodiesRadio.parent('sketch-holder');
+//   noOfBodiesRadio.position(0,height-50);
+//   noOfBodiesRadio.option(2,'2');
+//     // radio.style('width', '60px');
+//   noOfBodiesRadio.changed(function()
+//   {if (noOfBodies < Number(noOfBodiesRadio.value()))
+//     {addABody(noOfBodies,Number(noOfBodiesRadio.value() ) );
+//     noOfBodies =  Number(noOfBodiesRadio.value() );
+//     presetToLoad = "NS"+noOfBodiesRadio.value();
+//     setParams();}
+//     else {
+//             removeAParameterControl(noOfBodies)
+//       noOfBodies =  Number(noOfBodiesRadio.value() );
+//       setParams()
+//
+//     }
+//   } );
+//   noOfBodiesRadio.selected(selectedNumber)
+//
+//   noOfBodiesRadioLabel = createElement('p', 'Number of Bodies');
+//   noOfBodiesRadioLabel.parent('sketch-holder')
+//   noOfBodiesRadioLabel.position(noOfBodiesRadio.x,noOfBodiesRadio.y-40)
+// }
 
 function addABody(lastExistingBodyNo,newBodyNo){
   for (i=noOfBodies+1;i<=newBodyNo;i++)
@@ -246,7 +246,7 @@ function removeParameterControls(){
 
 function makeAParameterControl(bodyNo,yheight,presetAbbreviation) {
 
-  body[bodyNo] = createElement('p', 'Body '+bodyNo);
+  body[bodyNo] = createElement('p', 'M '+bodyNo);
   body[bodyNo].position(5, controlSpacing+yheight-30);
   body[bodyNo].parent('sketch-holder');
   body[bodyNo].style('color', Presets[presetToLoad]["colors"][bodyNo-1]);
@@ -254,7 +254,7 @@ function makeAParameterControl(bodyNo,yheight,presetAbbreviation) {
 
   massSlider[bodyNo] = createSlider(1,10000,Presets[presetAbbreviation]["masses"][bodyNo-1],1);
   massSlider[bodyNo].parent('sketch-holder');
-  massSlider[bodyNo].position(controlSpacing+50, body[bodyNo].y+20);
+  massSlider[bodyNo].position(controlSpacing+20, body[bodyNo].y+20);
   massSlider[bodyNo].class("sim-slider");
   massSlider[bodyNo].size(sliderWidth,0)
   massSlider[bodyNo].input(function () {massTextBox[bodyNo].value(massSlider[bodyNo].value());});
