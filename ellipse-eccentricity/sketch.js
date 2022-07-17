@@ -21,7 +21,7 @@ function setup() {
   eccSlider = createSlider(0, .9999, 0,.0001);
   eccSlider.parent('sketch-holder');
   eccSlider.position(20, 50);
-  eccSlider.style('width', width*.9+'px');
+  eccSlider.style('width', width*.8+'px');
   eccSlider.class("sim-slider");
   eccSlider.input(sliderChange);
   eccSliderLabel = createP("Eccentricity: ");
@@ -58,20 +58,19 @@ function setup() {
   x = new Array(numberOfPoints);
   y = new Array(numberOfPoints);
 
-  a = max(200,width/5)
-  b = max(200,width/5)
+  a = max(150,width/5)
+  b = max(150,width/5)
   f = sqrt(a**2-b**2)
 
-  f1Label = createP()
+  f1Label = createP("Sun")
   f1Label.style('font-size', '20px')
   f1Label.position((width/2)+f, height/2-0)
-  katex.render('\\textrm{Sun} (F_1)',f1Label.elt)
 
 
-    centerLabel = createP()
+
+    centerLabel = createP("Center")
     centerLabel.style('font-size', '20px')
     centerLabel.position((width/2)+f-10, height/2+30)
-    katex.render('C',centerLabel.elt)
 
     for (i = 0;i<5;i++){
       makeOrbitButtons(i)
@@ -80,7 +79,7 @@ function setup() {
 }
 
 function makeOrbitButtons(i) {
-  pos = map(epresets[i],0,1,0,width*.9)
+  pos = map(epresets[i],0,1,0,width*.8)
   orbitPresetButton[i] = createButton(epresetsNames[i]);
   orbitPresetButton[i].parent('sketch-holder');
   orbitPresetButton[i].position(pos+20,eccSlider.y+50);
@@ -116,11 +115,11 @@ function draw() {
   e = eccSlider.value()
   b = sqrt((1-e**2)*a**2);
   f = sqrt(a**2-b**2)
-  translate(width/2-f,height/2)
+  translate(width/2-f,height*.6)
 
   eccSliderLabel.html("Eccentricity: "+e.toFixed(4));
-  f1Label.position((width/2)-10, height/2+90)
-  centerLabel.position((width/2)-f-10, height/2+30)
+  f1Label.position((width/2)-10, height*.6+90)
+  centerLabel.position((width/2)-f-10, height*.6+30)
 
   calcCurve()
   plotCurve()
