@@ -4,6 +4,7 @@ function setup() {
   canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent('sketch-holder');
   sliderWidth = min(width/3,200)
+  sliderVertSpace = min(height*.15,100)
   background(250);
   frameRate(30);
   textSize(18)
@@ -22,7 +23,7 @@ function setup() {
 
 
   omegaControl = createSlider(2,30,15,.1);
-  omegaControl.position(30,height*.15)
+  omegaControl.position(30,dutyCycleControl.y+sliderVertSpace)
   omegaControl.parent('sketch-holder')
   omegaControl.class("sim-slider");
   omegaControl.size(sliderWidth,0)
@@ -38,7 +39,7 @@ function draw() {
   background(255)
   stroke(0)
   //move things to the middle
-  translate(80, height / 2)
+  translate(80, height / 1.7)
   //x axis
   line(0, 0, width, 0)
   line(0,-ampMax*1.1,0,20)
