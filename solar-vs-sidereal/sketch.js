@@ -28,7 +28,7 @@ frameRate(30);
   Slider.parent('sketch-holder');
   Slider.position(30,40);
   Slider.class("sim-slider");
-  SliderLabel = createP("time advance");
+  SliderLabel = createP("Time Advance");
   SliderLabel.parent('sketch-holder');
   SliderLabel.position(30,Slider.y-50);
 
@@ -51,11 +51,16 @@ siderealDays.position(20,solarDays.y+30);
 function draw(){
 background(255)
 fill(255);
-A = min(width/4,height/4);
+A = min(width/4,height/4)*.6;
 B = Slider.value()*.01
 
 
-translate(width/2,height/2)
+translate(width/2*.5,height/2)
+push()
+fill(0)
+text("Far Star",1.0*width/2,-30);
+star2(1.0*width/2,10,30,15,5,'orange')
+pop()
 
 push()
 fill(0,0,0,0)
@@ -78,12 +83,14 @@ push()
 translate(-A*cos(B), A*sin(B));
 fill(0)
 text("Earth",-80,5);
-line(0,0,400,0)
+stroke(150)
+line(0,0,width,0)
 
 rotate(-B*32.42)
 
 image(earthImage,0,0,30,30)
-line(0,0,400,0)
+stroke(10)
+line(0,0,width,0)
 pop();
 
 solarDays.html('Sidereal Days: '+ (B*5*1.032).toFixed(2));
@@ -91,7 +98,21 @@ siderealDays.html('Solar Days: '+ (B*5).toFixed(2));
 
 }
 
-
+function star2(x, y, radius1, radius2, npoints,color) {
+  let angle = TWO_PI / npoints;
+  let halfAngle = angle / 2.0;
+  fill(color)
+  beginShape();
+  for (let a = 0; a < TWO_PI; a += angle) {
+    let sx = x + cos(a) * radius2;
+    let sy = y + sin(a) * radius2;
+    vertex(sx, sy);
+    sx = x + cos(a + halfAngle) * radius1;
+    sy = y + sin(a + halfAngle) * radius1;
+    vertex(sx, sy);
+  }
+  endShape(CLOSE);
+}
 
 
 function windowResized() {
