@@ -91,6 +91,9 @@ rotate(-B*32.42)
 image(earthImage,0,0,30,30)
 stroke(10)
 line(0,0,width,0)
+noStroke()
+fill('blue')
+text("Line of Sight",30,-10);
 pop();
 
 solarDays.html('Sidereal Days: '+ (B*5*1.032).toFixed(2));
