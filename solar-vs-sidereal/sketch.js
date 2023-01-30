@@ -89,7 +89,7 @@ line(0,0,width,0)
 rotate(-B*32.42)
 
 image(earthImage,0,0,30,30)
-stroke(10)
+stroke('blue')
 line(0,0,width,0)
 noStroke()
 fill('blue')
