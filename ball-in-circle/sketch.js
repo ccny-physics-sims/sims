@@ -36,7 +36,7 @@ function setup() {
   irrational = createButton("Irrational");
   irrational.parent('sketch-holder');
   irrational.mouseClicked(resetAndMakeIrrational);
-  irrational.position(20,50);
+  irrational.position(20,20);
   irrational.class("sim-button")
 
 
