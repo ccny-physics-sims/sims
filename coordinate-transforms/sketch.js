@@ -7,11 +7,12 @@ let running = true;
 let origin;
 let unitSpacing;
 let primedSystemColor = "#4287f5"
+
 function setup() {
   canvas=createCanvas(windowWidth,0.9*windowHeight);
   canvas.parent("sketch-holder")
 
-  origin = createVector(width/3,2*height/3)
+  origin = createVector(width/3, 2.5*height/3)
 
   onoff = createButton("start");
   onoff.mouseClicked(turnonoff);
@@ -23,15 +24,15 @@ function setup() {
 
 
 
-  vslider = createSlider(0,3,0,.01);
-  vslider.style('width', '200px');
+  vslider = createSlider(0,3,0,.1);
+  vslider.style('width', '150px');
   vslider.input(vsliderChange);
   vslider.position(50,30);
   vslider.class('sim-slider');
   vslider.parent('sketch-holder');
 
-  refvslider = createSlider(0,3,0,.01);
-  refvslider.style('width', '200px');
+  refvslider = createSlider(0,3,0,.1);
+  refvslider.style('width', '150x');
   refvslider.input(refvsliderChange);
   refvslider.position(50,vslider.y+70);
   refvslider.class('sim-slider');
