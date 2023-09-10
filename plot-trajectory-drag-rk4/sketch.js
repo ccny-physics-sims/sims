@@ -35,7 +35,7 @@ function setup() {
     canvas = createCanvas(windowWidth, windowHeight*.9);
     canvas.parent('sketch-holder');
     frameRate(30);
-
+    sliderWidth = min(300,width/3)
 
     saveButton = createButton("Save Trajectory");
     saveButton.parent('sketch-holder');
@@ -48,6 +48,7 @@ function setup() {
     lineardampingControl.parent('sketch-holder')
     lineardampingControl.class("sim-slider");
     lineardampingControl.input(sliderChange);
+    lineardampingControl.size(sliderWidth,0)
     lineardampingControlLabel = createP("Linear Damping (b = "+lineardampingControl.value().toFixed(4)+")");
     lineardampingControlLabel.position(lineardampingControl.x,lineardampingControl.y+10);
     lineardampingControlLabel.parent('sketch-holder')
@@ -58,6 +59,7 @@ function setup() {
     quaddampingControl.parent('sketch-holder')
     quaddampingControl.class("sim-slider");
     quaddampingControl.input(sliderChange);
+    quaddampingControl.size(sliderWidth,0)
     quaddampingControlLabel = createP("Quadratic Damping (c = 0)");
     quaddampingControlLabel.position(lineardampingControl.x,quaddampingControl.y+10);
     quaddampingControlLabel.parent('sketch-holder')
@@ -76,6 +78,7 @@ function setup() {
     thetaControl.parent('sketch-holder')
     thetaControl.class("sim-slider");
     thetaControl.input(sliderChange);
+    thetaControl.size(sliderWidth,0)
     thetaControlLabel = createP("Theta = 45");
     thetaControlLabel.position(lineardampingControl.x,thetaControl.y+10);
     thetaControlLabel.parent('sketch-holder')
