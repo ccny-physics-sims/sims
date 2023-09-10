@@ -8,6 +8,7 @@ function setup() {
   background(250);
   frameRate(30);
   textSize(18)
+  sliderWidth = min(300,width/3)
   //lets make an array to fill
   y = new Array(200);
   ampMax = min(200,height/4)
@@ -16,6 +17,7 @@ function setup() {
   amplitudeControl.parent('sketch-holder')
   amplitudeControl.class("sim-slider");
   amplitudeControl.input(sliderChange);
+  amplitudeControl.size(sliderWidth,0)
 
   amplitudeControlLabel = createP("Amplitude");
   amplitudeControlLabel.position(30,amplitudeControl.y);
@@ -29,7 +31,7 @@ function setup() {
   omegaControl.parent('sketch-holder')
   omegaControl.class("sim-slider");
   omegaControl.input(sliderChange);
-
+  omegaControl.size(sliderWidth,0)
   omegaControlLabel = createP();
   omegaControlLabel.position(30,omegaControl.y);
   omegaControlLabel.parent('sketch-holder')
@@ -41,11 +43,13 @@ function setup() {
   phiControl.parent('sketch-holder')
   phiControl.class("sim-slider");
   phiControl.input(sliderChange);
+  phiControl.size(sliderWidth,0)
 
   phiControlLabel = createP();
   phiControlLabel.position(30,phiControl.y);
   phiControlLabel.parent('sketch-holder')
-  katex.render('\\phi',phiControlLabel.elt)
+
+  katex.render('\\phi ='+phiControl.value().toFixed(2),phiControlLabel.elt)
 
   let posEq = createP()
   posEq.style('font-size', '20px')
@@ -65,6 +69,8 @@ function setup() {
     horizAxisLabel.style('font-size', '20px')
     horizAxisLabel.position(.8*width,height/2+80)
     katex.render('\\omega t ',horizAxisLabel.elt)
+
+    noLoop()
 }
 
 
@@ -72,7 +78,7 @@ function draw() {
   background(255)
   stroke(0)
   //move things to the middle
-  translate(80, height / 2)
+  translate(80, 2*height / 3)
   //x axis
   line(0, 0, width*.9, 0)
   line(0,-ampMax*1.1,0,ampMax*1.1)
@@ -90,7 +96,7 @@ function draw() {
   showMaxAmplitude();
   //showPeriod();
   showXTicks();
-  noLoop()
+  //noLoop()
 }
 
 function calcFunction() {
@@ -103,12 +109,14 @@ function calcFunction() {
 
 function renderPoints() {
   //this function puts ellipses at all the positions defined above.
+  push()
   noStroke()
-      fill(0);
+      fill('red');
   for (var x = 0; x < y.length; x += 1) {
     xscaled = map(x,0,y.length,0,width*.9)
     ellipse(xscaled, -y[x], 5, 5);
   }
+  pop()
 }
 
 function renderLine() {
@@ -152,10 +160,12 @@ function showXTicks(){
   line(2*TWO_PI/(.01*omega*widthScale),70,2*TWO_PI/(.01*omega*widthScale),80)
   noStroke()
   //text('2',(PI/(2*.01*omega*widthScale)+5*PI/(2*.01*omega*widthScale))/2,-30)
-  tick1.position(TWO_PI/(.01*omega*widthScale)+65,height/2+80)
-  tick2.position(2*TWO_PI/(.01*omega*widthScale)+65,height/2+80)
+  tick1.position(TWO_PI/(.01*omega*widthScale)+65,2*height/3+80)
+  tick2.position(2*TWO_PI/(.01*omega*widthScale)+65,2*height/3+80)
 }
 
 function sliderChange() {
+  katex.render('\\phi ='+phiControl.value().toFixed(2),phiControlLabel.elt)
+
   redraw()
 }
