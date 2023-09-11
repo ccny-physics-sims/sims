@@ -67,7 +67,7 @@ function setup() {
 
     horizAxisLabel = createP()
     horizAxisLabel.style('font-size', '20px')
-    horizAxisLabel.position(.8*width,height/2+80)
+    horizAxisLabel.position(.8*width,2*height/3+90)
     katex.render('\\omega t ',horizAxisLabel.elt)
 
     noLoop()
@@ -160,8 +160,8 @@ function showXTicks(){
   line(2*TWO_PI/(.01*omega*widthScale),70,2*TWO_PI/(.01*omega*widthScale),80)
   noStroke()
   //text('2',(PI/(2*.01*omega*widthScale)+5*PI/(2*.01*omega*widthScale))/2,-30)
-  tick1.position(TWO_PI/(.01*omega*widthScale)+65,2*height/3+80)
-  tick2.position(2*TWO_PI/(.01*omega*widthScale)+65,2*height/3+80)
+  tick1.position(TWO_PI/(.01*omega*widthScale)+65,2*height/3+90)
+  tick2.position(2*TWO_PI/(.01*omega*widthScale)+65,2*height/3+90)
 }
 
 function sliderChange() {
