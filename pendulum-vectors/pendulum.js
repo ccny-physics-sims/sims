@@ -15,7 +15,7 @@ function Pendulum(origin_, r_, start_) {
 
   // Function to update position
   this.update = function() {
-    var gravity = .1;                                               // Arbitrary constant
+    var gravity = .2;                                               // Arbitrary constant
     this.aAcceleration = (-1 * gravity / this.r) * (this.angle);  // Calculate acceleration (see: http://www.myphysicslab.com/pendulum1.html)
     this.aVelocity += (this.aAcceleration);                            // Increment velocity
     this.angle += (this.aVelocity);                                    // Increment angle
