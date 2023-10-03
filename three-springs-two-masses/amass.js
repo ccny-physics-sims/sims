@@ -46,6 +46,7 @@ AMass.prototype.displaySpring = function () {
   push()
   noFill()
   translate(this.position.x,this.position.y)
+  strokeWeight(2)
   //rotate()
   //rotate(PI-atan2((this.position.y-masses[this.springToShow].position.y),this.position.x-masses[this.springToShow].position.x))
     beginShape();

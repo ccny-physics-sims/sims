@@ -8,6 +8,8 @@ let graphScale;
 let graphYOffset = 120;
 let running = false;
 let kmag = .2
+let mass1color = "rgb(60, 118, 176)"
+let mass2color = "rgb(176, 64, 60)"
 function setup() {
   canvas = createCanvas(windowWidth, 0.9*windowHeight);
   canvas.parent("sketch-holder")
@@ -34,30 +36,21 @@ function setup() {
 
   radio = createRadio();
   radio.parent('sketch-holder');
+  radio.class('sim-radio')
   radio.position(windowWidth*.1,aSlider.y+50);
   radio.option("1", 'Normal Mode 1 <br/>');
   radio.option("2", 'Normal Mode 2 <br/>');
   radio.option("3", 'Random');
-
-
-
-
-
-  //radio.style('width', '200px');
-   radio.style("display","block");
-  // radio.style("clear","both");
-  // radio.class("sim-radio ")
   radio.selected("1");
-  //radio.style('width', '60px');
   radio.changed(refresh);
 
 
-  gravity = createVector(0,0)
+  //gravity = createVector(0,0)
   //frameRate(1)
   //oLoop()
-  gravSystemWidth = min(width*.9,600)
+  oscSystemWidth = min(width*.9,600)
 
-  graphScale = createVector(gravSystemWidth,100)
+  graphScale = createVector(oscSystemWidth,100)
 
 
   createSystem()
@@ -65,8 +58,8 @@ function setup() {
 }
 
 function createSystem() {
-  startPos1 = createVector((1/3)*gravSystemWidth,0)
-  startPos2 = createVector((2/3)*gravSystemWidth,0)
+  startPos1 = createVector((1/3)*oscSystemWidth,0)
+  startPos2 = createVector((2/3)*oscSystemWidth,0)
   if (radio.value() == "1"){
   vel1 = createVector(10,0);
   vel2 = createVector(10,0);
@@ -85,13 +78,13 @@ function createSystem() {
    OscillatorSystem = new SpringSystem(masses);
   //make the ball! It is an instance of the Mass object
   wallL_0 = masses.push(new AMass(createVector(0,0),createVector(0,0),createVector(0,0),1e10,30,'black',[1],1 ));
-  ball1_1 = masses.push(new AMass(startPos1,vel1,createVector(0,0),1,15,'red',[0,2],2 ));
-  ball2_2 = masses.push(new AMass(startPos2,vel2,createVector(0,0),1,15,'blue',[1,3],3 ));
-  wallR_3 = masses.push(new AMass(createVector(gravSystemWidth,0),createVector(0,0),createVector(0,0),1e10,30,'black',[2],null ));
+  ball1_1 = masses.push(new AMass(startPos1,vel1,createVector(0,0),1,15,mass2color,[0,2],2 ));
+  ball2_2 = masses.push(new AMass(startPos2,vel2,createVector(0,0),1,15,mass1color,[1,3],3 ));
+  wallR_3 = masses.push(new AMass(createVector(oscSystemWidth,0),createVector(0,0),createVector(0,0),1e10,30,'black',[2],null ));
 }
 function draw() {
   background(255)
-  translate(width/2-gravSystemWidth/2,height/2.5)
+  translate(width/2-oscSystemWidth/2,height/2.5)
   //background(250);
   //update the position
   for (var k = 0; k < 2; k++) { // increase the greater than value to increase simulation step rate
@@ -126,14 +119,14 @@ stroke(masses[1].color)
 strokeWeight(2)
 beginShape()
   for(i=0;i<masses[1].positionHistory.length;i++){
-    curveVertex(4*i,-2*(masses[1].positionHistory[i].x-(1/3)*gravSystemWidth),2)
+    curveVertex(4*i,-2*(masses[1].positionHistory[i].x-(1/3)*oscSystemWidth),2)
   }
   endShape()
   stroke(masses[2].color)
   beginShape()
   for(i=0;i<masses[1].positionHistory.length;i++){
 
-curveVertex(4*i,-2*(masses[2].positionHistory[i].x-(2/3)*gravSystemWidth)+graphYOffset,2)
+curveVertex(4*i,-2*(masses[2].positionHistory[i].x-(2/3)*oscSystemWidth)+graphYOffset,2)
 }
   endShape()
   pop()

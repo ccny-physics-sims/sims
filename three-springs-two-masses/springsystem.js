@@ -14,29 +14,15 @@ SpringSystem.prototype.compute_forces = function() {
 
         for (var j = 0; j < howManyInteractions; j++) {
             var p2 = masses[this.theBodies[i].interactions[j]];
-          //  console.log(this.theBodies[i].interactions);
-          //  console.log(p,p2);
-            //console.log(p2.color);
-            //var d = p5.Vector.sub(p.position, p2.position);
-            //var delx = (p.position.x - p2.position.x)-200
-            var delx = abs(p.position.x - p2.position.x)-gravSystemWidth/3;
+ 
+            var delx = abs(p.position.x - p2.position.x)-oscSystemWidth/3;
             var signx = Math.sign(p.position.x - p2.position.x)
             var dely = abs(p.position.y - p2.position.y);
             var signy = Math.sign(p.position.y - p2.position.y)
-            //console.log(delx)
-          //   var norm = Math.sqrt(1 + d.magSq());
-          //   var mag = gravity / (norm * norm * norm);
-          // //var norm = d.mag();
-          //   p.acceleration.sub(p5.Vector.mult(d,(mag * p2.mass)));
-          //   p2.acceleration.add(p5.Vector.mult(d,(mag * p.mass)));
-          //var mag = .00000010;
-           //kmag = .2;
-            // p.acceleration.sub(p5.Vector.mult(d,(mag * p2.mass)));
-            // p2.acceleration.add(p5.Vector.mult(d,(mag * p.mass)));
+           
 
             p.acceleration.sub(p5.Vector.mult(createVector(delx*signx,dely*signy),(kmag/p.mass)));
-            //p2.acceleration.add(p5.Vector.mult(createVector(delx*sign,0),(mag/p2.mass)));
-            //console.log(mag);
+
 
         }
     }
