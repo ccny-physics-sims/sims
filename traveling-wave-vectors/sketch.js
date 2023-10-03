@@ -41,7 +41,7 @@ function setup() {
 
     omegaSliderLabel = createP();
     omegaSliderLabel.parent('sketch-holder');
-    omegaSliderLabel.html('Change Wave Speed');
+    omegaSliderLabel.html('Change Wave Velocity');
     omegaSliderLabel.position(20,omegaSlider.y+10);
 
 
@@ -78,7 +78,7 @@ function draw() {
   }
   fill(0)
   textSize(24);
-  text("Wave Speed",width/2-50,height/3-60)
+  text("Wave Velocity",width/2-70,height/3-60)
 }
 
 function addAVector(){
