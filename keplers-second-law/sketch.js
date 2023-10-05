@@ -51,7 +51,7 @@ function setup(){
   orbitCenter = createVector(width/2,height*.6)
 
   aVector = new Arrow(createVector(orbitCenter.x,orbitCenter.y-h),createVector(0,0));
-  aVector.color = color('red');
+  aVector.color = color('#F65850');
   aVector.grab = false;
   aVector.draggable = false;
   aVector.showComponents = false;
@@ -64,7 +64,7 @@ function draw(){
   count++;
   background(255);
   push();
-  fill('yellow');
+  fill('#DBD129');
   stroke('black');
   planet = ellipse(orbitCenter.x,orbitCenter.y,20,20);
   pop();
@@ -74,7 +74,20 @@ function draw(){
   aVector.target.y = orbitCenter.y - h+.5*speedSlider.value()*sin(angleSlider.value()*Math.PI/180)
   aVector.update();
   aVector.display();
+  lengthOfVector = createVector(aVector.target.x-aVector.origin.x,aVector.target.y-aVector.origin.y)
 
+  push()
+  noStroke()
+  fill(100)
+  
+  
+  
+  translate(aVector.origin.x,aVector.origin.y-20)
+  translate(lengthOfVector.x/2,lengthOfVector.y/2)
+  
+  
+  text("Initial Velocity", 0,0)
+  pop()
   fill(150);
   noStroke();
   //image(planet, width/2-60, height/2-60);
@@ -142,7 +155,7 @@ Orbiter.prototype.drawOrbiter = function(){
       }
 
       if(this.VertzOfAreas.length>20){
-      fill('blue');
+      fill('#2C7EF5');
       beginShape();
       vertex(orbitCenter.x,orbitCenter.y)
 
