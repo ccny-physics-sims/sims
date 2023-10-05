@@ -20,24 +20,24 @@ function setup() {
 
   onoff = createButton("start");
   onoff.mouseClicked(turnonoff);
-  onoff.position(windowWidth*.1,10);
+  onoff.position(windowWidth*.8,10);
   onoff.class("sim-button");
   onoff.parent("sketch-holder")
   sliderWidth = min(width/3,200)
   aSlider = createSlider(.1,2,1,.01);
   aSlider.parent('sketch-holder')
   aSlider.size(sliderWidth,0);
-  aSlider.position(onoff.x,onoff.y+100)
+  aSlider.position(20,20)
   aSlider.input(sliderChange);
   aSlider.class("sim-slider");
   aSliderLabel = createP("k = "+aSlider.value());
   aSliderLabel.parent("sketch-holder")
-  aSliderLabel.position(aSlider.x,aSlider.y-50)
+  aSliderLabel.position(aSlider.x,aSlider.y+10)
 
   radio = createRadio();
   radio.parent('sketch-holder');
   radio.class('sim-radio')
-  radio.position(windowWidth*.1,aSlider.y+50);
+  radio.position(aSlider.x,aSlider.y+50);
   radio.option("1", 'Normal Mode 1 <br/>');
   radio.option("2", 'Normal Mode 2 <br/>');
   radio.option("3", 'Random');
