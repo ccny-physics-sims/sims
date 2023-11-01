@@ -28,7 +28,8 @@ let modMinDepth = 150;
 
 function setup(){
   //frameRate(20);
-  createCanvas(windowHeight, windowHeight);
+  canvas = createCanvas(windowWidth, windowHeight*.9);
+  canvas.parent('sketch-holder');
   masses = Array.from({length: 3}, () => Math.floor(random(50,250)));
   xvels = [0,0,0]
   yvels = [0,0,0]
