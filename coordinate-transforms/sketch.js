@@ -128,9 +128,10 @@ function draw() {
   eventGroup1.show(transFrame2.hexColor)
 
   transFrame2.update(refSpeed)
+  
   transFrame2.show()
 
-
+  
     transFrame1.update(0)
     transFrame1.show()
   // eventGroup2.update(0)
@@ -200,25 +201,34 @@ class TranslatingReferenceFrame {
     endShape()
     fill(lineColor)
     noStroke()
+    if (this.speed > 0){
+      var yoffset = 10
+    }
+    else {
+      var yoffset = 0
+    }
     for (var i = 0;i<50;i++){
 
     rect(unitSpacing*i*this.speed-5,-i*unitSpacing-0.5,10,2)
     stroke(200,200,200,50)
+    
     line(0,-i*unitSpacing,width,-i*unitSpacing)
+    //translate(0,yoffset)
     line(i*unitSpacing,0,i*unitSpacing,-height)
     }
     stroke(lineColor)
+  
     beginShape()
       for (var i = -50;i<50;i++){
       //ellipse(i*20,0,3)
-      curveVertex(-i*unitSpacing,0);
+      curveVertex(-i*unitSpacing,yoffset);
       }
     endShape()
     fill(lineColor)
     noStroke()
     for (var i = 0;i<50;i++){
-
-    rect(i*unitSpacing,-5,1,10)
+      
+    rect(i*unitSpacing,-5+yoffset,1,8)
   }
     // push()
     // rotate(-atan2(this.speed,1))
