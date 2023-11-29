@@ -82,9 +82,31 @@ function draw() {
   background(250);
   //makeAxis();
   stroke(200)
+  primeSpeed = vslider.value()
   if (mouseY>100){
     line(mouseX,mouseY,origin.x,mouseY)
     line(mouseX,mouseY,mouseX,origin.y)
+
+    push()
+    translate(mouseX,mouseY)
+    rotate(-atan2(primeSpeed,c)+PI)
+    alpha = atan2(primeSpeed,c);
+    betaA = HALF_PI-2*alpha;
+    gamma = PI-this.alpha-betaA;
+    timeLineLength = ((mouseX+mouseY*tan(alpha))*sin(gamma))/sin(betaA)
+    stroke("#e4ebf6")
+    line(0,0,timeLineLength,0)
+    pop()
+
+    push()
+    translate(mouseX,mouseY)
+    rotate(-HALF_PI+alpha)
+    rotate(PI)
+    spaceLineLength = ((mouseY+mouseX*tan(alpha))*sin(gamma))/sin(betaA)
+    stroke("#e4ebf6")
+    line(0,0,spaceLineLength,0)
+    pop()
+    //line(mouseX,mouseY,mouseX*vslider.value(),origin.y)
 
 }
 vsliderLabel.html("Speed of Primed System: "+vslider.value()+" <i>c</i>")
@@ -106,7 +128,7 @@ primetlabel.position(-20+origin.x+(origin.y)*atan2(vslider.value(),c),50)
   noFill()
 
 
-  primeSpeed = vslider.value()
+  //primeSpeed = vslider.value()
   for (let event of events) {
 
     event.show();
