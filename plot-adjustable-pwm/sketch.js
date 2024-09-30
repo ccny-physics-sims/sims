@@ -58,6 +58,8 @@ function draw() {
   noStroke()
   text('time',width*.8,20)
   text('Output',2*width/3-25,-height/2.5+40)
+  text('Average',2*width/4-25,-height/2.5+40)
+
   push()
   stroke(0)
   strokeWeight(2)
@@ -71,10 +73,17 @@ function draw() {
   fill('red')
   }
   else {
-    fill('white')
+    fill('black')
   }
   
   circle(2*width/3,-height/2.5,40)
+  pop()
+ 
+  push()
+  stroke(0)
+  fill( color('hsb(0, 100%, '+dutyCycle+'%)') );
+  
+  circle(width/2,-height/2.5,40)
   pop()
 
 
