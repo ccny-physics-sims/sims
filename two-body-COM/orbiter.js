@@ -12,10 +12,22 @@ Orbiter.prototype.display = function(){
   push();
   noStroke()
   fill(this.color,100,100)
-  ellipse(this.position.x, this.position.y, this.radius*2, this.radius*2)
+  if (diff.checked()){
+  ellipse(this.position.x-com.x, this.position.y-com.y, this.radius*2, this.radius*2)
+  }
+  else {
+    ellipse(this.position.x, this.position.y, this.radius*2, this.radius*2)
+  }
   pop();
   this.c++
+  if (diff.checked()){
+  if(this.c % 2 == 0){
+    Trails.push(new TrailDot(createVector(this.position.x-com.x, this.position.y-com.y),1000,this.color));
+  }
+  }
+  else {
   if(this.c % 2 == 0){
     Trails.push(new TrailDot(createVector(this.position.x, this.position.y),1000,this.color));
   }
+}
 }

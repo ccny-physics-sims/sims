@@ -55,6 +55,7 @@ diff  = createCheckbox('Center of Mass Frame?', false);
 diff.parent('sketch-holder');
 diff.style('color','black')
 diff.position (20,reset.y+60)
+diff.changed(clearTrails);
 
 showVectors  = createCheckbox('Show Vectors?', true);
 showVectors.parent('sketch-holder');
@@ -72,17 +73,19 @@ function MakeMasses() {
 function draw(){
 background(255);
 
-  for (var k = 0; k < 4; k++) { // increase the greater than value to increase simulation step rate
-      SolarSystem.do_physics(1.0 / 8); // increase the divisor to increase accuracy and decrease simulation speed
+  for (var k = 0; k < 8; k++) { // increase the greater than value to increase simulation step rate
+      SolarSystem.do_physics(1.0 / 16); // increase the divisor to increase accuracy and decrease simulation speed
   }
   COM();
     if (diff.checked()){
-  origin = createVector(width/2-com.x,height/2-com.y)
+  //origin = createVector(width/2-com.x,height/2-com.y)
+  origin = createVector(width/2,height/2)
 }
 else {
   origin = createVector(width/2,height/2)
 }
-translate(origin.x,origin.y)
+  translate(origin.x,origin.y)
+
   for (i=0;i<orbiters.length;i++){
     orbiters[i].display();
   }
@@ -91,7 +94,10 @@ translate(origin.x,origin.y)
 
   for (var i = Trails.length-1; i >= 0; i--) {
     var p = Trails[i];
+    push()
+    //translate(-com.x,-com.y)
     p.run();
+    pop()
     if (p.isDead()) {
       //remove the TrailDot
       Trails.splice(i, 1);
@@ -107,6 +113,12 @@ translate(origin.x,origin.y)
     }
   }
 push()
+if (diff.checked()){
+  stroke(211,37,71)
+  }
+  else {
+    stroke(0,0,0)
+  }
 //translate(origin.x,origin.y)
 line(-width/2,0,width/2,0)
 line(0,-height/2,0,height/2)
@@ -114,32 +126,62 @@ pop()
 
 push();
 noFill(0)
-stroke(211,37,71)
+if (diff.checked()){
+stroke(0,0,0)
+}
+else {
+  stroke(211,37,71)
+}
 strokeWeight(1)
 line(com.x-1000,com.y,com.x+1000,com.y)
 line(com.x,com.y-1000,com.x,com.y+1000)
 pop();
 
-r1Vector.origin = createVector(0,0);
-r1Vector.target = orbiters[0].position;
-r1Vector.update();
+push()
+if (diff.checked()){
+  r1Vector.origin = createVector(0,0);
+  r1Vector.target = createVector(orbiters[0].position.x-com.x,orbiters[0].position.y-com.y);
+  r1Vector.update();
+
+  r2Vector.origin = createVector(0,0);
+  r2Vector.target = createVector(orbiters[1].position.x-com.x,orbiters[1].position.y-com.y);
+  r2Vector.update();
+  }
+
+else {
+  r1Vector.origin = createVector(0,0);
+  r1Vector.target = orbiters[0].position;
+  r1Vector.update();
+
+  r2Vector.origin = createVector(0,0);
+  r2Vector.target = orbiters[1].position;
+  r2Vector.update();
+
+  rVector.origin = orbiters[0].position;
+  rVector.target = orbiters[1].position;
+  rVector.update();
 
 
-r2Vector.origin = createVector(0,0);
-r2Vector.target = orbiters[1].position;
-r2Vector.update();
+}
+
+//r1Vector.origin = createVector(0,0);
 
 
-rVector.origin = orbiters[0].position;
-rVector.target = orbiters[1].position;
-rVector.update();
+
+
+
+
+
 
 
 if (showVectors.checked()){
 r1Vector.display();
 r2Vector.display();
+if (!diff.checked()){
 rVector.display();
 }
+}
+pop()
 distance = com.dist(createVector(0,0))
 if (distance > width/2){
 resetSketch()
@@ -168,7 +210,9 @@ function COM(){
 
 }
 
-
+function clearTrails() {
+  Trails = [];
+}
 function resetSketch(){
   //clear(0)
   Trails = [];
