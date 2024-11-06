@@ -13,6 +13,7 @@ let uffy = []
 let energy
 let tooclose = false;
 var SolarSystem;
+let running = true;
 function setup(){
   frameRate(30);
   canvas = createCanvas(windowWidth, 0.9*windowHeight);
@@ -20,7 +21,7 @@ function setup(){
   speedSliderLabel = createP("Speed");
   speedSliderLabel.parent('sketch-holder');
   speedSliderLabel.position(30,0);
-  speedSlider = createSlider(0, 50,20 ,.1);
+  speedSlider = createSlider(0, 50,20 ,.01);
   speedSlider.parent('sketch-holder');
   speedSlider.position(30,20);
   speedSlider.class("sim-slider");
@@ -36,6 +37,7 @@ function setup(){
   angleSliderLabel = createP("Direction");
   angleSliderLabel.parent('sketch-holder');
   angleSliderLabel.position(30,60);
+
   distanceSliderLabel = createP("Distance");
   distanceSliderLabel.parent('sketch-holder');
   distanceSliderLabel.position(30,140);
@@ -57,7 +59,17 @@ function setup(){
   ueffLabel.style('font-size','2em')
   ueffLabel.style('color','red')
   //energyLabel.position(30,140);
+  onoff = createButton("Pause");
+onoff.parent('sketch-holder');
+onoff.position(distanceSlider.x,distanceSlider.y+70);
+onoff.class("sim-button");
+onoff.mousePressed(turnonoff);
 
+// reset = createButton("Reset");
+// reset.parent('sketch-holder');
+// reset.position(20,onoff.y+50);
+// reset.class("sim-button");
+// reset.mousePressed(resetSketch);
   h = distanceSlider.value()
 
   orbitCenter = createVector(width/2,height/2)
@@ -108,11 +120,7 @@ for (var k = 0; k < 4; k++) { // increase the greater than value to increase sim
   h = distanceSlider.value()
 distance = orbiters[0].position.dist(orbiters[1].position);
 
-littler = p5.Vector.sub(orbiters[1].position, orbiters[0].position);
-linearMomentum  = p5.Vector.mult(orbiters[1].velocity, orbiters[1].mass);
-angularMomentum = p5.Vector.cross(littler,linearMomentum );
-//angularMomentum = p5.Vector.cross(littler,p5.Vector.mult(orbiters[1].velocity, reducedMass))
-angularMomentumScalar = angularMomentum.magSq()
+
 
 aVector.origin.x = orbitCenter.x+h;
 aVector.origin.y = orbitCenter.y;
@@ -155,7 +163,13 @@ if(tooclose){
 
 }
 
-
+function calcAngMomentum() {
+  littler = p5.Vector.sub(orbiters[1].position, orbiters[0].position);
+linearMomentum  = p5.Vector.mult(orbiters[1].velocity, orbiters[1].mass);
+angularMomentum = p5.Vector.cross(littler,linearMomentum );
+//angularMomentum = p5.Vector.cross(littler,p5.Vector.mult(orbiters[1].velocity, reducedMass))
+angularMomentumScalar = angularMomentum.magSq()
+}
 function calcEffPot(){
   //console.log('calcEffPot');
 
@@ -243,6 +257,7 @@ function tracePath(){
 function launchOrbiter(){
   //trajectory = [];
   //Orbiters = [];
+  
   orbiters.pop();
   orbitersT.pop();
      // for ( i = Orbiters.length-1; i >= 0; i--){
@@ -258,9 +273,35 @@ function launchOrbiter(){
 
   //orbiters.push(new Orbiter(orbitCenter.x, orbitCenter.y - h, speedSlider.value()*cos(angleSlider.value()*Math.PI/180), speedSlider.value()*sin(angleSlider.value()*Math.PI/180)));
   //a = orbiters[1];
+  calcAngMomentum();
   tracePath()
   calcEffPot()
   angleSliderLabel.html("Direction: "+str(angleSlider.value()-180))
+}
+
+function resetSketch(){
+  //clear(0)
+  Trails = [];
+  orbiters = [];
+  COMTrails = []
+  launchOrbiter()
+}
+
+function turnonoff() {
+  // and of course it's nice to be able to stop it if things get crazy
+  if (!running) {
+    running = true;
+    loop();
+    onoff.html("Pause");
+    return
+  }
+
+  if (running) {
+    running = false;
+    noLoop()
+    onoff.html("Start");
+    return
+  }
 }
 
 function windowResized() {
