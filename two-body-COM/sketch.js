@@ -68,6 +68,8 @@ function MakeMasses() {
 
  mass1 = orbiters.push(new Orbiter(createVector(100,-200),createVector(v1,v1),createVector(0,0),100, 353));
  mass2 = orbiters.push(new Orbiter(createVector(200,-20),createVector(-v1,0),createVector(0,0),100*massRatio, 320));
+
+
 }
 
 function draw(){
@@ -77,13 +79,7 @@ background(255);
       SolarSystem.do_physics(1.0 / 16); // increase the divisor to increase accuracy and decrease simulation speed
   }
   COM();
-    if (diff.checked()){
-  //origin = createVector(width/2-com.x,height/2-com.y)
-  origin = createVector(width/2,height/2)
-}
-else {
-  origin = createVector(width/2,height/2)
-}
+
   translate(origin.x,origin.y)
 
   for (i=0;i<orbiters.length;i++){
@@ -191,17 +187,17 @@ resetSketch()
 
 function COM(){
   //displays the center of mass of the system
-  m1 = createVector(0,0)
+  ComPosition = createVector(0,0)
 
   totalMass=0;
 
 
   for(i=0;i<orbiters.length;i++){
     totalMass=totalMass+orbiters[i].mass;
-    m1 = p5.Vector.add(m1,p5.Vector.mult(orbiters[i].position,orbiters[i].mass))
+    ComPosition = p5.Vector.add(ComPosition,p5.Vector.mult(orbiters[i].position,orbiters[i].mass))
   }
 
-  com = p5.Vector.div(m1,totalMass);
+  com = p5.Vector.div(ComPosition,totalMass);
 
   if(frameCount % 20 == 0){
     COMTrails.push(new TrailDot(createVector(com.x, com.y),1000,211));
