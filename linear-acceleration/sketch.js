@@ -53,7 +53,7 @@ function draw() {
    bg.update();
    bg.display();
 
-   text('Change Acceleration: ',20,30,150,20);
+   text('Change Acceleration: ',20,60,150,20);
 
 
   rectMode(CORNER);
