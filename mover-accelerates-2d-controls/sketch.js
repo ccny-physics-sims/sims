@@ -8,6 +8,7 @@ let joystick_center_x;
 let joystick_center_y;
 let joystick_radius;
 let p;
+let running = true;
 
 function preload() {
   accelLabel = loadImage("a.svg");
@@ -47,7 +48,7 @@ function setup() {
 
   accelVec = new Arrow(basePosition,p5.Vector.add(center,ball.acceleration))
   accelVec.color="purple";
-  accelVec.grab = false;
+  accelVec.grab = true;
   accelVec.draggable = false;
   accelVec.showComponents = false;
   accelVec.width = 10;
@@ -59,14 +60,16 @@ function setup() {
   p = createP('');
   if (isMobileDevice){
   p.html('press here to change acceleration')
+  p.position(joystick_center_x-120, ((height / 4) * 3.5));
+
   }
   else
-  {
-    p.html('use the arrow keys to change the acceleration')
+  { 
+    p.position(width*.1, ((height / 4) * 3.5));
+    p.html('use the arrow keys to change the acceleration <br> Spacebar Pauses motion <br>Drag the tip of the acceleration vector while paused to change its magnitude and direction')
   }
-  p.position(joystick_center_x-120, ((height / 4) * 3.5));
   p.style('align', 'center');
-  p.style('color', 'red');
+  p.style('color', 'black');
   
 }
 
@@ -108,6 +111,13 @@ function draw() {
   //     accel.x = rotationY*.01;
   // }
 
+  if (accelVec.isDragging == true){
+    ball.acceleration.x = (accelVec.target.x-accelVec.origin.x)/10000
+    ball.acceleration.y = (accelVec.target.y-accelVec.origin.y)/10000
+  }
+  
+     
+
   if (isMobileDevice){
   push();
   translate(joystick_center_x, joystick_center_y);
@@ -134,10 +144,21 @@ function draw() {
     }
   }
   }
+
+  if (running) {
   ball.update();
+  }
   ball.display();
  
   
+}
+
+function keyReleased() {
+  if (keyCode === 32) {
+    //background(255)
+    //noLoop()
+    toggleMotion()
+};
 }
 
 function aTouch(touch_x, touch_y) {
@@ -186,6 +207,17 @@ function aTouch(touch_x, touch_y) {
   }
  
 }
+
+function toggleMotion() {
+  if (running == true) {
+    running = false;
+  }
+  else if (running == false) {
+    running = true;
+  }
+}
+  
+
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
