@@ -8,6 +8,11 @@
   <style>
   body {
     font-family:Helvetica, Arial, Sans-serif;
+    -webkit-touch-callout: none; /* Safari */
+        -webkit-user-select: none; /* Chrome */     
+           -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; 
   }
   canvas {
 
@@ -26,7 +31,11 @@
   
   <!-- let's get our sketch! -->
   <script language="javascript" src="../../science-library/lib/science.js"></script>
-
+  <script language=""javascript">
+  document.addEventListener("gesturestart", function(e) {
+  e.preventDefault();
+    });
+  </script>
   <script language="javascript" src="sketch.js"></script>
 
   <!-- this line removes any default padding and style. you might only need one of these values set. -->
@@ -38,7 +47,7 @@
 
 <body>
   <a href="https://sciencesims.com"><img class="logo" src="../../img/scisims-profile-clipped-to-circle.png" alt="sciencesims" ></a>
-  <h3 class="simTitle">2d kinematics - Velocity and Acceleration</h3>
+  <h3 class="simTitle">Velocity and Acceleration Vectors</h3>
   <a href="../../simdocs/mover-accelerates-2d-controls"><img class="helpButton" src="../../img/q-mark.png" alt="help" >  </a>
 <div id="sketch-holder">
   <!-- Our sketch will go here! -->

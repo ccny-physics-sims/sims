@@ -1,10 +1,19 @@
-const touch = matchMedia('(hover: none)').matches;
+//const touch = matchMedia('(hover: none)').matches;
 
+let details = navigator.userAgent;
+let regexp = /android|iphone|kindle|ipad/i;
+let isMobileDevice = regexp.test(details);
+
+let joystick_center_x;
+let joystick_center_y;
+let joystick_radius;
+let p;
 
 function preload() {
   accelLabel = loadImage("a.svg");
   velLabel = loadImage("v.svg");
 }
+
 
 function setup() {
 
@@ -13,6 +22,7 @@ function setup() {
   canvas.parent('sketch-holder');
 
 
+ 
 
   velocity = createVector(.3,0);
   acceleration = createVector(0,0);
@@ -23,7 +33,7 @@ function setup() {
   ball.outline = 'black';
   ball.tailFill = ball.color;
   ball.tailStroke = ball.color;
-  ball.tailLength = 40;
+  ball.tailLength = 80;
   ball.tailSpacing = 10;
 
 
@@ -43,6 +53,21 @@ function setup() {
   accelVec.width = 10;
 
 
+  joystick_center_x = width / 2;
+  joystick_center_y = (height / 4) * 3;
+  joystick_radius = height / 6;
+  p = createP('');
+  if (isMobileDevice){
+  p.html('press here to change acceleration')
+  }
+  else
+  {
+    p.html('use the arrow keys to change the acceleration')
+  }
+  p.position(joystick_center_x-120, ((height / 4) * 3.5));
+  p.style('align', 'center');
+  p.style('color', 'red');
+  
 }
 
 function draw() {
@@ -77,14 +102,89 @@ function draw() {
   if (keyIsDown(DOWN_ARROW)){
     ball.acceleration.y+=.0002;
   }
-  if (touch) {
-      //Conditional script here
-      accel.y = rotationX*.01;
-      accel.x = rotationY*.01;
+  // if (touch) {
+  //     //Conditional script here
+  //     accel.y = rotationX*.01;
+  //     accel.x = rotationY*.01;
+  // }
+
+  if (isMobileDevice){
+  push();
+  translate(joystick_center_x, joystick_center_y);
+  rotate(QUARTER_PI);
+  stroke(150)
+  strokeWeight(3);
+  line(-joystick_radius, 0, joystick_radius, 0);
+  rotate(HALF_PI);
+  line(-joystick_radius, 0, joystick_radius, 0);
+  noFill();
+  circle(0, 0, joystick_radius * 2);
+  fill(0)
+  
+  pop();
+  push()
+  noStroke()
+  fill('red')
+  // textAlign(CENTER);
+  // text('press here to change acceleration',joystick_center_x, joystick_center_y+50)
+  pop()
+  if (touches.length == 1 || touches.length == 2) {
+    for (let touch of touches) {
+      aTouch(touch.x, touch.y);
+    }
+  }
   }
   ball.update();
   ball.display();
+ 
+  
+}
 
+function aTouch(touch_x, touch_y) {
+  let deg;
+  p.html('')
+  // calculate joystick rotation degrees
+  push();
+  translate(joystick_center_x, joystick_center_y);
+  deg = floor(degrees(atan2(touch_y - joystick_center_y, touch_x - joystick_center_x)));
+  pop();
+
+  if (dist(joystick_center_x, joystick_center_y, touch_x, touch_y) < joystick_radius) {
+    if (deg > -135 && deg < -45) {
+      //sprite_y--;
+      ball.acceleration.y -=.0002;
+      fill(180)
+      arc(joystick_center_x, joystick_center_y, joystick_radius*2, joystick_radius*2, 5*PI/4, 7*PI/4);
+
+      //moving_vertically = true;
+    } else if (deg < 135 && deg > 45) {
+      ball.acceleration.y +=.0002;
+      fill(180)
+      arc(joystick_center_x, joystick_center_y, joystick_radius*2, joystick_radius*2, PI/4, 3*PI/4);
+
+      //moving_vertically = true;
+    } else if (deg > -45 && deg < 45) {
+      ball.acceleration.x +=.0002;
+      fill(180)
+      arc(joystick_center_x, joystick_center_y, joystick_radius*2, joystick_radius*2, -PI/4, PI/4);
+    } else if (deg < -135 || deg > 135) {
+      ball.acceleration.x -=.0002;
+      fill(180)
+      arc(joystick_center_x, joystick_center_y, joystick_radius*2, joystick_radius*2, 3*PI/4, 5*PI/4);
+
+    }
+
+    // draw joystick
+    // push();
+    // fill("black");
+    // rectMode(CENTER);
+    // rect(touch_x, touch_y, 20, 20);
+    // line(joystick_center_x, joystick_center_y, touch_x, touch_y);
+    // pop();
+  } else {
+    
+  }
+ 
 }
 
 function windowResized() {
