@@ -12,27 +12,29 @@ function preload() {
 
 function setup() {
   running = true;
-  canvas = createCanvas(600,1000);
+  canvas = createCanvas(windowWidth, windowHeight*.9);
   canvas.parent('sketch-holder');
   frameRate(20);
-  onoff = createButton("Pause");
-  onoff.parent('sketch-holder')
-  onoff.position(width-100,50);
-  onoff.class("sim-button blue slim");
-  onoff.mousePressed(turnonoff);
+
 
   goUpButton = createButton("GO UP");
   goUpButton.parent('sketch-holder');
   goUpButton.position(width-100,20);
-  goUpButton.class("sim-button blue slim");
+  goUpButton.class("sim-button");
+
+  onoff = createButton("Pause");
+  onoff.parent('sketch-holder')
+  onoff.position(width-100,goUpButton.y+50);
+  onoff.class("sim-button");
+  onoff.mousePressed(turnonoff);
 
   goDownButton = createButton("GO DOWN");
   goDownButton.parent('sketch-holder');
-  goDownButton.position(width-100,80);
-  goDownButton.class("sim-button blue slim");
+  goDownButton.position(width-100,onoff.y+50);
+  goDownButton.class("sim-button");
 
 
-  pos = createVector(width-150,ground)
+  pos = createVector(width/2+150,ground)
   vel = createVector(0,0);
   accel = createVector(0,0);
   //make the ball! It is an instance of the mover object
