@@ -22,7 +22,7 @@ function setup() {
   canvas = createCanvas(windowWidth,.9*windowHeight)
   canvas.parent('sketch-holder');
 
-
+  makeButtons()
  
 
   velocity = createVector(.3,0);
@@ -55,26 +55,33 @@ function setup() {
 
 
   joystick_center_x = width / 2;
-  joystick_center_y = (height / 4) * 3;
-  joystick_radius = height / 6;
+  joystick_center_y = (height / 4) * 3.3;
+  joystick_radius = height / 7;
   p = createP('');
   if (isMobileDevice){
-  p.html('press here to change acceleration')
-  p.position(joystick_center_x-120, ((height / 4) * 3.5));
+  p.html('press here to <br> change acceleration')
+  p.position(joystick_center_x-64, ((height / 4) * 3.5));
+  p.style('color','#f58a42')
+  // p.style('border', 'thin solid black')
+  // p.style('padding', '5px')
+  // p.style('background','#d1e8ff')
 
   }
   else
   { 
-    p.position(width*.1, ((height / 4) * 3.5));
-    p.html('use the arrow keys to change the acceleration <br> Spacebar Pauses motion <br>Drag the tip of the acceleration vector while paused to change its magnitude and direction')
+    p.position(width*.03, ((height / 4) * 3.8));
+    p.html('Use the arrow keys to change the acceleration <br> Spacebar Pauses motion <br>Drag the tip of the acceleration vector while paused to change its magnitude and direction')
+    p.style('border', 'thin solid black')
+    p.style('padding', '5px')
+    p.style('background','#d1e8ff')
   }
   p.style('align', 'center');
-  p.style('color', 'black');
+  //p.style('color', 'black');
   
 }
 
 function draw() {
-  background(225);
+  background(240);
   ball.wrapEdges();
   //ball.giveItAnAcceleration(createVector(sin(frameCount/100)*cos(frameCount/80)*.005,-cos(frameCount/200)*.005));
 
@@ -153,6 +160,30 @@ function draw() {
   
 }
 
+function makeButtons() {
+  onoff = createButton("Stop");
+  onoff.parent('sketch-holder');
+  onoff.mouseClicked(toggleMotion);
+  onoff.position(width*.03,.04*height);
+  onoff.class("sim-button")
+  onoff.style("padding",".5em")
+
+  resetMover = createButton("Reset");
+  resetMover.parent('sketch-holder');
+  resetMover.mouseClicked(resetSketch);
+  resetMover.position(onoff.x,onoff.y+50);
+  resetMover.class("sim-button")
+  resetMover.style("padding",".5em")
+
+  // setParamsButton = createButton("Set Parameters");
+  // setParamsButton.parent('sketch-holder');
+  // setParamsButton.mouseClicked(setParams);
+  // setParamsButton.position(20,height-50);
+  // setParamsButton.class("sim-button")
+  // setParamsButton.style("padding",".5em")
+
+}
+
 function keyReleased() {
   if (keyCode === 32) {
     //background(255)
@@ -211,12 +242,17 @@ function aTouch(touch_x, touch_y) {
 function toggleMotion() {
   if (running == true) {
     running = false;
+    onoff.html("Start");
   }
   else if (running == false) {
     running = true;
+    onoff.html("Stop");
   }
 }
   
+function resetSketch() {
+  setup()
+}
 
 
 function windowResized() {
