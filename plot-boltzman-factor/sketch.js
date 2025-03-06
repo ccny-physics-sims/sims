@@ -55,9 +55,9 @@ function draw() {
   background(255)
   stroke(0)
   //move things to the middle
-  translate(80, height / 2)
+  translate(width/3, height / 2)
   //x axis
-  line(0, 0, width*.9, 0)
+  line(0, 0, width*.5, 0)
   line(0,-ampMax*1.1,0,ampMax*1.1)
   widthScale = y.length/(width*.9);
   energy = ampMax;
@@ -68,7 +68,7 @@ function draw() {
   renderPoints();
   //display connected line
   renderLine();
-
+  text('Energy ->',width/4,+50)
   //showMaxAmplitude();
   //showPeriod();
   //showXTicks();
@@ -87,8 +87,8 @@ function renderPoints() {
   //this function puts ellipses at all the positions defined above.
   noStroke()
       fill(0);
-  for (var x = 0; x < y.length; x += 1) {
-    xscaled = map(x,0,y.length,0,width*.9)
+  for (var x = 0; x < y.length; x += 2) {
+    xscaled = map(x,0,y.length,0,width*.5)
     ellipse(xscaled, -y[x], 5, 5);
   }
 }
@@ -102,41 +102,17 @@ function renderLine() {
 
   beginShape();
   for (var x = 0; x < y.length; x += 1) {
-    xscaled = map(x,0,y.length,0,width*.9)
+    xscaled = map(x,0,y.length,0,width*.5)
     curveVertex(xscaled, -y[x]);
   }
   endShape();
   pop();
 }
-function showMaxAmplitude(){
-  stroke(0)
-  line(0,-energy,10,-energy)
-  line(0,energy,10,energy)
-  noStroke()
-  text('C',-40,-abs(energy)+5)
-  text('-C ',-40,abs(energy)+5)
-}
 
-function showPeriod(){
-  stroke(0)
-  translate(0,-80)
-  line(PI/(2*.01*temperature*widthScale),0,PI/(2*.01*temperature*widthScale),-30)
-  line(5*PI/(2*.01*temperature*widthScale),0,5*PI/(2*.01*temperature*widthScale),-30)
-  line(PI/(2*.01*temperature*widthScale),-15,5*PI/(2*.01*temperature*widthScale),-15)
-  noStroke()
-  text('T (period)',(PI/(2*temperature*widthScale)+5*PI/(2*.01*temperature*widthScale))/2,-30)
-}
 
-function showXTicks(){
-  stroke(0)
-  translate(0,-80)
-  line(TWO_PI/(.01*temperature*widthScale),70,TWO_PI/(.01*temperature*widthScale),80)
-  line(2*TWO_PI/(.01*temperature*widthScale),70,2*TWO_PI/(.01*temperature*widthScale),80)
-  noStroke()
-  //text('2',(PI/(2*.01*omega*widthScale)+5*PI/(2*.01*omega*widthScale))/2,-30)
-  tick1.position(TWO_PI/(.01*temperature*widthScale)+65,height/2+80)
-  tick2.position(2*TWO_PI/(.01*temperature*widthScale)+65,height/2+80)
-}
+
+
+
 
 function sliderChange() {
   redraw()
