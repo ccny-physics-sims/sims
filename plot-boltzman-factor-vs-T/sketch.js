@@ -16,7 +16,7 @@ function setup() {
 
 
 
-  temperatureControl = createSlider(10000,1000000,10000,1);
+  temperatureControl = createSlider(1,10,1,1);
   temperatureControl.position(30,70)
   temperatureControl.parent('sketch-holder')
   temperatureControl.class("sim-slider");
@@ -25,7 +25,7 @@ function setup() {
   temperatureControlLabel = createP();
   temperatureControlLabel.position(30,temperatureControl.y+20);
   temperatureControlLabel.parent('sketch-holder')
-  katex.render('\T',temperatureControlLabel.elt)
+  katex.render('\Energy',temperatureControlLabel.elt)
 
 
 
@@ -61,14 +61,14 @@ function draw() {
   line(0,-ampMax*1.1,0,ampMax*1.1)
   widthScale = y.length/(width*.9);
   energy = ampMax;
-  temperature = temperatureControl.value();
+  energyLevel = temperatureControl.value();
   //calculate this points
   calcFunction();
   //display discrete points
   renderPoints();
   //display connected line
   renderLine();
-  text('Energy ->',width/4,+50)
+  text('Temperature ->',width/4,+50)
   push()
   rotate(-3.1415/2)
   text('Count',width/10,-20)
@@ -82,7 +82,7 @@ function draw() {
 function calcFunction() {
   //this function fills the aray with values
   for (var x = 0; x < y.length; x += 1) {
-    y[x] = 100*exp((-x*1) / (kBoltzman*temperature))
+    y[x] = 100*exp((-energyLevel*1) / (kBoltzman*(x*200)))
   }
 
 }
