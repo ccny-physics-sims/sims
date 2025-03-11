@@ -251,7 +251,9 @@ function toggleMotion() {
 }
   
 function resetSketch() {
+  removeElements();
   setup()
+  running = true;
 }
 
 
