@@ -52,17 +52,17 @@ function setup() {
 function draw() {
   background(250);
   //makeAxis();
-line(0,height/2,width,height/2)
-line(width/2,0,width/2,height)
+  line(0,height/2,width,height/2)
+  line(width/2,0,width/2,height)
   translate(origin.x,origin.y)
   c1 = color('rgba(0, 0, 255, .5)');
   fill(c1)
-rect(0, 0, width/4, width/4);
+  rect(0, 0, width/4, width/4);
   shearAmount = shearslider.value()
-shearX(-shearAmount);
-c2 = color('rgba(0, 100, 255, .5)');
-fill(c2)
-rect(0, 0, width/4,  width/4);
+  shearX(-shearAmount);
+  c2 = color('rgba(0, 100, 255, .5)');
+  fill(c2)
+  rect(0, 0, width/4,  width/4);
 
 }
 
