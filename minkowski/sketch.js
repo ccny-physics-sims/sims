@@ -248,6 +248,7 @@ class primeAxis {
       push()
       fill(250)
       ellipse(0,0,17,17)
+      rotate(-atan2(this.speed,1))
       rotate(i*.2)
       line(0,0,0,-6)
       pop()
